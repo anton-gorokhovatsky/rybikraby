@@ -4,7 +4,7 @@ function rowTypograph(text) {
   return text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0').replace(/[ \t]+—[ \t]+/g,'\u00a0— ');
 }
 
-function tokyoRow({products, orderButton, footer}) {
+function tokyoRow({products, footer, contactUrl}) {
   const lettering = (key, text) => {
     const art = oksLettering[key];
     return `<span class="row-lettering" style="--lettering-width:${art.inkWidth/1000}"><span class="row-readable">${text}</span><svg viewBox="${art.inkLeft} 0 ${art.inkWidth} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
@@ -40,7 +40,7 @@ function tokyoRow({products, orderButton, footer}) {
   return `
     <header class="site-header row-header">
       <a class="wordmark" href="#main" aria-label="Рыба и крабы, начало">РЫБА И КРАБЫ</a>
-      <nav aria-label="Навигация сайта"><a href="#caviar">Икра</a><a href="#guide">За прилавком</a>${orderButton('question','Написать Юре','header-contact')}</nav>
+      <nav aria-label="Навигация сайта"><a href="#caviar">Икра</a><a href="#guide">За прилавком</a><a class="button header-contact" href="${contactUrl}" target="_blank" rel="noopener">Написать Юре <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main" class="row-main" tabindex="-1">
       <section class="row-hero" aria-labelledby="hero-title">
@@ -53,17 +53,22 @@ function tokyoRow({products, orderButton, footer}) {
         </div>
       </section>
       <section class="row-caviar" id="caviar" tabindex="-1" aria-labelledby="caviar-title">
-        <div class="row-section-heading"><h2 id="caviar-title">${lettering('caviar','Красная икра')}</h2><div class="row-section-intro"><p class="row-availability">Наличие, фасовку и цену уточним перед заказом.</p><a class="row-reference" href="https://t.me/ikrabov/190" target="_blank" rel="noopener">О вкусах — в канале ${arrow}</a></div></div>
+        <div class="row-section-heading"><h2 id="caviar-title">${lettering('caviar','Красная икра')}</h2><a class="row-reference" href="https://t.me/ikrabov/190" target="_blank" rel="noopener">О различиях — в канале ${arrow}</a></div>
         <div class="row-lots">
-          <div class="row-lots-labels" aria-hidden="true"><span></span><span>Зерно</span><span>Вкус</span></div>
-          ${products.map(p=>`<article class="row-lot"><div class="row-lot-name"><h3>${lettering(p.id,p.name)}</h3></div><dl><div><dt>Зерно</dt><dd>${p.grain}</dd></div><div><dt>Вкус</dt><dd>${p.flavor}</dd></div></dl>${orderButton(p.id,'Выбрать','','Выбрать '+p.title.replace('Икра','икру'))}</article>`).join('')}
+          ${products.map(p=>`<article class="row-lot"><h3>${lettering(p.id,p.name)}</h3><dl><div><dt class="row-readable">Зерно</dt><dd>${p.grain} зерно</dd></div><div><dt class="row-readable">Вкус</dt><dd>${p.flavor}</dd></div></dl></article>`).join('')}
         </div>
-        <div class="row-caviar-help">${orderButton('help','Помогите выбрать')}</div>
+        <a class="row-order-link" href="${contactUrl}" target="_blank" rel="noopener">Обсудить заказ <span aria-hidden="true">↗</span></a>
       </section>
       <section class="row-guide" id="guide" tabindex="-1" aria-labelledby="guide-title">
-        <h2 id="guide-title">${lettering('counter','За&nbsp;прилавком')}</h2>
-        <div class="row-counter">${player({id:'row-counter-video',label:'Прилавок, видео от 14 октября 2026 года',src:'market-counter.mp4',poster:'market-counter-frame.png',source:'https://t.me/ikrabov/217',date:'14.10.2026',duration:14.23})}</div>
-        <div class="row-guide-action"><p>Расскажите, что любите и что собираетесь приготовить.</p>${orderButton('question','Написать Юре','primary')}</div>
+        <div class="row-guide-content">
+          <h2 id="guide-title">${lettering('counter','За&nbsp;прилавком')}</h2>
+          <p>Наличие, фасовку и цену уточним в переписке.</p>
+          <a class="row-order-link" href="${contactUrl}" target="_blank" rel="noopener">Написать в Telegram <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="row-counter">
+          <div class="row-counter-picture"><img src="assets/market-counter-frame.png" alt="Банки икры и рыба на прилавке — кадр из канала «Рыба и крабы»" width="405" height="632" loading="lazy"></div>
+          <figcaption><a class="row-reference" href="https://t.me/ikrabov/217" target="_blank" rel="noopener">14.10.2026 · в канале ${arrow}</a></figcaption>
+        </figure>
       </section>
-    </main>${footer('РЫБА И КРАБЫ',true)}`;
+    </main>${footer()}`;
 }
