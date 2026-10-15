@@ -7,7 +7,7 @@ function rowTypograph(text) {
 function tokyoRow({products, orderButton, footer}) {
   const lettering = (key, text) => {
     const art = oksLettering[key];
-    return `<span class="row-lettering" style="--lettering-width:${art.width/1000}"><span class="row-readable">${text}</span><svg viewBox="0 0 ${art.width} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
+    return `<span class="row-lettering" style="--lettering-width:${art.inkWidth/1000}"><span class="row-readable">${text}</span><svg viewBox="${art.inkLeft} 0 ${art.inkWidth} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
   };
   const arrow = '<span aria-hidden="true">↗</span>';
   const player = ({id, label, src, poster, source, date, duration, round=false, captions=''}) => `
