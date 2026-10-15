@@ -1,4 +1,4 @@
-/* A separate composition. The earlier Tokyo variants remain in app.js. */
+/* Third version: product, Oks lettering and Yuri. */
 function rowTypograph(text) {
   const shortWord = /(^|\s)([ВвСсКкУуОоИиАа]|[Пп]о|[Нн]а|[Ии]з|[Зз]а|[Сс]о|[Оо]т|[Дд]о|[Нн]е|[Нн]о|[Оо]б|[Пп]од|[Пп]ри|[Дд]ля|[Бб]ез|[Нн]ад|[Пп]еред|[Чч]ерез|[Мм]ежду)[ \t]+(?=\S)/g;
   return text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0').replace(/[ \t]+—[ \t]+/g,'\u00a0— ');
@@ -47,7 +47,8 @@ function tokyoRow({products, orderButton, footer}) {
         <img class="row-hero-image" src="assets/caviar-grain.jpg" width="600" height="800" alt="Красная икра крупным планом — фотография из канала «Рыба и крабы»" fetchpriority="high">
         <div class="row-hero-top"><span>Розница и опт</span><span>Москва</span></div>
         <div class="row-hero-content">
-          <div class="row-hero-copy"><h1 id="hero-title"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></h1><div class="row-hero-start"><a class="button" href="#caviar">Выбрать икру <span aria-hidden="true">↓</span></a></div></div>
+          <h1 id="hero-title"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></h1>
+          <div class="row-hero-start"><a class="button" href="#caviar">Выбрать икру <span aria-hidden="true">↓</span></a></div>
           <aside class="row-yura" aria-label="Видеосообщение Юры">${player({id:'row-yura-video',label:'Юра, архивное видео от 30 мая 2026 года',src:'yura-message.mp4',poster:'yura-message.jpg',source:'https://t.me/ikrabov/185',date:'30.05.2026',duration:58.31,round:true,captions:'yura-message.ru.vtt'})}</aside>
         </div>
       </section>
