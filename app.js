@@ -9,7 +9,7 @@
   ];
   const contactUrl = 'https://t.me/Yuraikra';
   const footer = () => `<footer class="site-footer row-footer"><a class="row-reference" href="https://t.me/ikrabov" target="_blank" rel="noopener">Telegram-канал <span aria-hidden="true">↗</span></a><a class="row-reference" href="${contactUrl}" target="_blank" rel="noopener">Оптовый запрос <span aria-hidden="true">↗</span></a></footer>`;
-  Object.assign(document.body.dataset,{direction:'tokyo',version:'3',type:'oks',menu:'glass'});
+  Object.assign(document.body.dataset,{direction:'tokyo',version:'3',type:'oks',menu:'glass',dialogue:''});
   document.getElementById('app').innerHTML=tokyoRow({products,footer,contactUrl});
   const textNodes=document.createTreeWalker(document.getElementById('app'),NodeFilter.SHOW_TEXT);
   while(textNodes.nextNode()) textNodes.currentNode.textContent=rowTypograph(textNodes.currentNode.textContent);
@@ -23,7 +23,7 @@
       const box=section.getBoundingClientRect();
       return box.top<=probe && box.bottom>probe;
     });
-    menu.dataset.surface=document.body.dataset.light==='day' && surface?.matches('.row-caviar,.row-footer')?'paper':'dark';
+    menu.dataset.surface=document.body.dataset.light==='day' && surface?.matches('.row-caviar,.row-footer,.dialogue-section:not(.dialogue-dark)')?'paper':'dark';
     menu.dataset.overLettering=String(menuHeadings.some(heading=>{
       const box=heading.getBoundingClientRect();
       return box.top<rect.bottom && box.bottom>rect.top;

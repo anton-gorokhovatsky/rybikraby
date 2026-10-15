@@ -40,5 +40,17 @@
     "accessed": "2026-10-15",
     "note": "27 русских реплик по звуку yura-message.mp4. Локальное распознавание faster-whisper (small и large-v3-turbo), сопоставление двух результатов, редактура пунктуации и разбиения фраз. Это автоматическая расшифровка, без ручной аудиоредакторской вычитки. Исходные результаты сохранены в docs/research/2026-10-15.",
     "bytes": 2267
+  },
+  {
+    "file": "dialogue/sources.json",
+    "accessed": "2026-10-15",
+    "note": "Twelve complete videos selected from the public channel and personal saved stories. Source URL, original date, audio, duration and SHA-256 listed in this ledger. Page copy is an editorial adaptation, not a verbatim conversation or a current stock list. No actual private chat messages published."
+  },
+  {
+    "file": "dialogue/one-fish-three-uses.jpg",
+    "source": "https://t.me/Yuraikra",
+    "date": "2025-01-14",
+    "accessed": "2026-10-15",
+    "note": "Documentary crop of the personal saved story showing salmon portions and the original labels. Screenshot, not a downloaded photo original. No generative edits."
   }
 ]
