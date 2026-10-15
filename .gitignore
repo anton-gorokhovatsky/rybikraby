@@ -1,0 +1,9 @@
+# Local research and comparisons are not part of the public site.
+/AGENTS.md
+/docs/
+/prototypes/
+/scripts/
+/_site/
+/version.json
+.DS_Store
+__pycache__/

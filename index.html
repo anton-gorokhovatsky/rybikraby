@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Рыба, красная икра и морепродукты в Москве. Сравните вкусы и обсудите выбор с Юрой. Розница и опт.">
+  <title>Рыба и крабы — икра и морепродукты в Москве</title>
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="assets/fonts/golostext.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=1">
+  <link rel="stylesheet" href="tokyo-row.css?v=1">
+  <script src="oks-lettering.js?v=1" defer></script>
+  <script src="tokyo-row.js?v=1" defer></script>
+  <script src="app.js?v=1" defer></script>
+  <script src="market-player.js?v=1" defer></script>
+</head>
+<body data-site="true">
+  <a class="skip-link" href="#main">К содержанию</a>
+  <div id="app"></div>
+  <noscript><main class="no-script"><h1>Рыба и крабы</h1><p>Икра и морепродукты в Москве. <a href="https://t.me/Yuraikra">Обсудить выбор с Юрой в Telegram</a>.</p></main></noscript>
+  <dialog id="order-dialog" aria-labelledby="order-title" aria-describedby="order-intro">
+    <div class="order-shell">
+      <div class="order-heading"><span class="eyebrow">Лично Юре · @Yuraikra</span><button class="close-dialog" type="button" aria-label="Закрыть обращение">Закрыть <span aria-hidden="true">×</span></button></div>
+      <h2 id="order-title">Выбрали? Обсудим.</h2>
+      <p id="order-intro">Юра уточнит наличие, фасовку, цену и доставку. Здесь подготовим сообщение для Telegram.</p>
+      <form id="order-form">
+        <label for="order-choice">Какая икра интересует</label>
+        <select id="order-choice" name="product">
+          <option value="help">Помогите выбрать</option>
+          <option value="nerka">Икра нерки</option>
+          <option value="gorbusha">Икра горбуши</option>
+          <option value="keta">Икра кеты</option>
+        </select>
+        <label for="order-amount">Количество <span>если уже определились</span></label>
+        <input id="order-amount" name="amount" type="text" maxlength="80" placeholder="Например, хочу попробовать небольшую баночку">
+        <label for="order-note">Пожелания <span>необязательно</span></label>
+        <textarea id="order-note" name="note" rows="2" maxlength="1000" placeholder="Куда доставить, к какой дате, какой вкус любите"></textarea>
+        <div class="message-box"><span class="eyebrow">Ваше сообщение</span><p id="message-preview"></p></div>
+        <a id="telegram-draft" class="button primary" href="https://t.me/Yuraikra" target="_blank" rel="noopener">Продолжить в Telegram <span aria-hidden="true">↗</span></a>
+        <div class="copy-row"><button id="copy-message" class="text-button" type="button">Скопировать текст</button><p id="copy-status" role="status" aria-live="polite"></p></div>
+        <p class="order-footnote">Откроется чат с подготовленным текстом. Отправку вы подтвердите в Telegram. Если текст не перенёсся, его можно скопировать.</p>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>

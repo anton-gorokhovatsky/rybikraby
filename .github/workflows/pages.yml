@@ -1,0 +1,61 @@
+name: Publish GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - name: Check JavaScript and prepare the third version
+        run: |
+          node --check app.js
+          node --check tokyo-row.js
+          node --check oks-lettering.js
+          node --check market-player.js
+          python3 - <<'PY'
+          import os, shutil, json, hashlib, re
+          from pathlib import Path
+          output = Path('_site')
+          output.mkdir(exist_ok=True)
+          names = ['index.html', 'styles.css', 'tokyo-row.css', 'app.js', 'tokyo-row.js', 'oks-lettering.js', 'market-player.js', '.nojekyll']
+          for name in names:
+              shutil.copyfile(name, output / name)
+          shutil.copytree('assets', output / 'assets', dirs_exist_ok=True)
+          html = (output / 'index.html').read_text()
+          for name in names:
+              if name.endswith(('.css', '.js')):
+                  digest = hashlib.sha256((output / name).read_bytes()).hexdigest()[:12]
+                  html = re.sub(r'((?:src|href)="' + re.escape(name) + r')(?:\?[^" ]*)?"', rf'\1?v={digest}"', html)
+          (output / 'index.html').write_text(html)
+          (output / 'version.json').write_text(json.dumps({'commit': os.environ['GITHUB_SHA'], 'version': 3}, indent=2) + '\n')
+          assert not any(p.suffix == '.otf' for p in output.rglob('*'))
+          PY
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4
