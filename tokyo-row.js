@@ -4,7 +4,7 @@ function rowTypograph(text) {
   return text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0').replace(/[ \t]+—[ \t]+/g,'\u00a0— ');
 }
 
-function tokyoRow({products, footer, contactUrl}) {
+function tokyoRow({products, contactUrl}) {
   const lettering = (key, text) => {
     const art = oksLettering[key];
     return `<span class="row-lettering" style="--lettering-width:${art.inkWidth/1000}"><span class="row-readable">${text}</span><svg viewBox="${art.inkLeft} 0 ${art.inkWidth} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
@@ -39,17 +39,17 @@ function tokyoRow({products, footer, contactUrl}) {
     </figure>`;
   const stories = {
     hello:{duration:59.585521,round:true,source:'https://t.me/ikrabov/148',date:'17.10.2025',title:'Рыба, икра и крабы'},
-    'caviar-choice':{duration:49.450521,round:true,source:'https://t.me/ikrabov/149',date:'17.10.2025',title:'Соль, консистенция и бюджет',copy:'В конкретной партии важны соль и консистенция. И бюджет тоже: варианты можно подобрать разные.'},
-    'caviar-tasting':{duration:60.054583,source:'https://t.me/Yuraikra/s/776',date:'09.06.2026',title:'Пробуем нерку',copy:'Июнь, первая нерка сезона. Пробуем соль и смотрим на зерно.'},
-    'fish-start':{duration:57.695062,round:true,source:'https://t.me/ikrabov/88',date:'21.12.2024',title:'С чего началась рыба',copy:'С интереса к рынку и желания самому работать с рыбой и ножом.'},
-    'fish-work':{duration:31.515854,round:true,source:'https://t.me/ikrabov/107',date:'13.01.2025',title:'Режем, вакуумируем, солим',copy:'Сёмга и форель на складе. Обсудим, какая рыба подойдёт и в каком виде она тебе нужна.'},
-    'fish-cutting':{duration:23.7,source:'https://t.me/ikrabov/112',date:'25.01.2025',title:'Разделка сёмги',copy:'',captions:false},
-    'crab-table':{duration:38.44625,source:'https://t.me/Yuraikra/s/777',date:'09.06.2026',title:'Мясо краба для салата',copy:'Салатное мясо — ещё один способ добавить краба к столу. В записи — ассортимент и цены июня 2026 года.'},
-    scallop:{duration:60.066667,source:'https://t.me/Yuraikra/s/761',date:'18.04.2026',title:'Гребешок в раковине',copy:'Крупный парной гребешок с Сахалина. Открываем раковину и смотрим, что внутри.'},
-    urchin:{duration:38.2,source:'https://t.me/ikrabov/179',date:'02.04.2026',title:'Икра морского ежа',copy:'Баночки по 100 г в термоупаковке. Так эта партия приехала на склад в апреле.'},
-    crab:{duration:6.333333,source:'https://t.me/ikrabov/57',date:'11.11.2024',title:'Краб крупным планом',copy:''},
-    'with-yakov':{duration:55.97,round:true,source:'https://t.me/ikrabov/197',date:'07.06.2026',title:'На кухне с Яковом',copy:'Пробуем рыбу на гриле вместе с поваром Яковом. Запись перед июньским событием.'},
-    counter:{duration:14.233333,source:'https://t.me/ikrabov/217',date:'14.10.2026',title:'И всё это — с настроением',copy:''}
+    'caviar-choice':{duration:49.450521,round:true,source:'https://t.me/ikrabov/149',date:'17.10.2025',title:'Теперь — соль и бюджет',copy:'Вид рыбы — только начало. У разных партий отличаются соль и консистенция. Юра пробует икру сам и подбирает варианты под разный бюджет.'},
+    'caviar-tasting':{duration:60.054583,source:'https://t.me/Yuraikra/s/776',date:'09.06.2026',title:'Поэтому сначала пробуем',copy:'Июнь 2026-го: первая нерка нового сезона. Юра открывает банку, пробует соль и показывает зерно.'},
+    'fish-start':{duration:57.695062,round:true,source:'https://t.me/ikrabov/88',date:'21.12.2024',title:'Всё началось с рынка',copy:'В декабре 2024-го Юра насмотрелся на работу рыбных рядов и решил сам заняться охлаждённой рыбой. Хотелось работать руками — с рыбой и ножом.'},
+    'fish-work':{duration:31.515854,round:true,source:'https://t.me/ikrabov/107',date:'13.01.2025',title:'В январе — уже на складе',copy:'После декабрьского решения — первые рабочие дни с сёмгой и форелью. Теперь рыбу режут, вакуумируют и солят.'},
+    'fish-cutting':{duration:23.7,source:'https://t.me/ikrabov/112',date:'25.01.2025',title:'Одна сёмга — несколько блюд',copy:'Стейки — пожарить. Филе — посолить. Голову и обрезь — на бульон. На фото Юра сам разложил и подписал части рыбы: с будущего блюда и стоит начинать выбор.',captions:false},
+    'crab-table':{duration:38.44625,source:'https://t.me/Yuraikra/s/777',date:'09.06.2026',title:'А для салата — мясо опилио',copy:'Кроме крупных кусков, есть салатное мясо. В этой записи Юра показывает опилио и рассказывает об ассортименте. Цена и условия относятся к июню 2026 года.'},
+    scallop:{duration:60.066667,source:'https://t.me/Yuraikra/s/761',date:'18.04.2026',title:'Теперь откроем гребешка',copy:'Он приехал с Сахалина ещё в раковине. Юра открывает одну прямо на складе — можно разглядеть продукт до приготовления.'},
+    urchin:{duration:38.2,source:'https://t.me/ikrabov/179',date:'02.04.2026',title:'А у ежа — своя икра',copy:'Здесь икра уже в баночках по 100 г. Юра показывает термоупаковку, в которой приехала апрельская партия.'},
+    crab:{duration:6.333333,source:'https://t.me/ikrabov/57',date:'11.11.2024',title:'Краб — крупным планом',copy:'Для подачи крупными кусками и для салата можно выбирать разное мясо.'},
+    'with-yakov':{duration:55.97,round:true,source:'https://t.me/ikrabov/197',date:'07.06.2026',title:'Со склада — к грилю',copy:'Вместе с поваром Яковом Юра пробует рыбу на огне и обсуждает блюда с чавычей. Готовятся к событию 12 июня 2026-го.'},
+    counter:{duration:14.233333,source:'https://t.me/ikrabov/217',date:'14.10.2026',title:'И снова — за рыбой',copy:'Осенью — обратно на склад. Рыба, полный прилавок и Юра со своим настроением.'}
   };
   const storyPlayer = key => {
     const s=stories[key];
@@ -76,28 +76,38 @@ function tokyoRow({products, footer, contactUrl}) {
       </section>
       <section class="row-caviar dialogue-caviar" id="caviar" tabindex="-1" aria-labelledby="caviar-title">
         <div class="row-section-heading"><h2 id="caviar-title">${lettering('caviar','Красная икра')}</h2><a class="row-reference" href="https://t.me/ikrabov/190" target="_blank" rel="noopener">О различиях — в канале ${arrow}</a></div>
+        <p class="dialogue-question">Начнём со вкуса.</p>
         <div class="row-lots">
           ${products.map(p=>`<article class="row-lot"><h3>${lettering(p.id,p.name)}</h3><dl><div><dt class="row-readable">Зерно</dt><dd>${p.grain} зерно</dd></div><div><dt class="row-readable">Вкус</dt><dd>${p.flavor}</dd></div></dl></article>`).join('')}
         </div>
-        <p class="dialogue-batch-note">А соль, консистенцию и фасовку уточним по конкретной партии.</p>
         <div class="dialogue-stories">${story('caviar-choice')}${story('caviar-tasting')}</div>
-        <div class="dialogue-turn"><a class="dialogue-reply" href="#fish">А с рыбой поможешь? <span aria-hidden="true">↓</span></a></div>
+        <div class="dialogue-turn"><a class="dialogue-reply" href="#fish">А рыбу к ужину? <span aria-hidden="true">↓</span></a></div>
       </section>
       <section class="dialogue-section dialogue-dark" id="fish" tabindex="-1" aria-labelledby="fish-title">
-        <div class="dialogue-fish-intro">
-          <div class="dialogue-section-copy"><h2 id="fish-title">${lettering('fish','Рыба')}</h2><p class="dialogue-question">Пожарить, посолить или сварить?</p><p>Начнём с того, что хочешь приготовить. Одна рыба — и несколько разных историй на кухне.</p></div>
+        <div class="dialogue-section-copy"><h2 id="fish-title">${lettering('fish','Рыба')}</h2><p class="dialogue-question">Тогда решим, что готовим.</p><p>Пожарить, посолить или сварить? От блюда зависит, какую часть рыбы выбрать.</p></div>
+        <div class="dialogue-stories">${story('fish-start')}${story('fish-work')}</div>
+        <div class="dialogue-fish-cutting">
+          ${story('fish-cutting')}
           <figure class="dialogue-fish-picture"><img src="assets/dialogue/one-fish-three-uses.jpg" width="834" height="1030" alt="Разделанная сёмга в лотках. Подписи Юры: «Это пожарить» возле стейков, «Это посолить» возле филе, «Это сварить» возле головы и обрези." loading="lazy"><figcaption><a class="row-reference" href="https://t.me/Yuraikra" target="_blank" rel="noopener">Из истории Юры · 14.01.2025 ${arrow}</a></figcaption></figure>
         </div>
-        <div class="dialogue-stories">${story('fish-start')}${story('fish-work')}${story('fish-cutting')}<div class="dialogue-turn dialogue-next"><a class="dialogue-reply" href="#seafood">А кроме рыбы? <span aria-hidden="true">↓</span></a></div></div>
+        <div class="dialogue-turn"><a class="dialogue-reply" href="#seafood">А что ещё к столу? <span aria-hidden="true">↓</span></a></div>
       </section>
       <section class="dialogue-section" id="seafood" tabindex="-1" aria-labelledby="seafood-title">
-        <div class="dialogue-section-copy"><h2 id="seafood-title">${lettering('crabs','И крабы')}</h2><p class="dialogue-question">А ещё гребешок и морской ёж.</p><p>Посмотрим поближе: Юра открывает, пробует и показывает продукт со всех сторон.</p></div>
-        <div class="dialogue-stories">${story('crab-table')}${story('scallop')}${story('urchin')}${story('crab')}</div>
-        <div class="dialogue-turn"><a class="dialogue-reply" href="#counter">А что будем готовить? <span aria-hidden="true">↓</span></a></div>
+        <div class="dialogue-section-copy"><h2 id="seafood-title">${lettering('crabs','И крабы')}</h2></div>
+        <div class="dialogue-stories">${story('crab')}${story('crab-table')}${story('scallop')}${story('urchin')}</div>
+        <div class="dialogue-turn"><a class="dialogue-reply" href="#counter">А сам готовишь? <span aria-hidden="true">↓</span></a></div>
       </section>
       <section class="dialogue-section dialogue-dark" id="counter" tabindex="-1" aria-labelledby="counter-title">
-        <div class="dialogue-section-copy"><h2 id="counter-title">${lettering('counter','За прилавком')}</h2></div>
-        <div class="dialogue-stories dialogue-ending-grid">${story('with-yakov')}${story('counter')}<div class="dialogue-contact-copy"><p class="dialogue-question">Что хочешь к своему столу?</p><p>Расскажи Юре, что любишь и что задумал приготовить. Наличие, фасовку, цену и получение обсудите в переписке.</p><a class="dialogue-reply dialogue-contact" href="${contactUrl}" target="_blank" rel="noopener">Написать Юре ${arrow}</a></div></div>
+        <div class="dialogue-section-copy"><h2 id="counter-title">${lettering('counter','За прилавком')}</h2><p class="dialogue-question">Собраться и приготовить.</p></div>
+        <div class="dialogue-stories">${story('with-yakov')}${story('counter')}</div>
       </section>
-    </main>${footer()}`;
+    </main>
+    <footer class="row-footer dialogue-footer" id="contact" tabindex="-1" aria-labelledby="contact-title">
+      <div class="dialogue-footer-conversation">
+        <div class="dialogue-footer-order"><h2 id="contact-title">Что приготовим?</h2><p>Напиши, что хочется к столу, на сколько человек и к какому дню. С Юрой обсудите наличие, фасовку, цену и получение.</p><a class="dialogue-footer-link" href="${contactUrl}" target="_blank" rel="noopener"><span>Написать Юре</span> ${arrow}</a></div>
+        <div class="dialogue-footer-channel"><h3>Поступления и дегустации</h3><a class="row-order-link" href="https://t.me/ikrabov" target="_blank" rel="noopener">Читать @ikrabov ${arrow}</a></div>
+      </div>
+      <p class="dialogue-footer-brand"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></p>
+      <div class="dialogue-footer-meta"><p>Москва · розница и опт</p><a class="row-reference" href="#main">К началу <span aria-hidden="true">↑</span></a></div>
+    </footer>`;
 }

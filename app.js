@@ -8,13 +8,12 @@
     {id:'keta', name:'Кета', grain:'Крупное', flavor:'Нежный, со сливочным оттенком'}
   ];
   const contactUrl = 'https://t.me/Yuraikra';
-  const footer = () => `<footer class="site-footer row-footer"><a class="row-reference" href="https://t.me/ikrabov" target="_blank" rel="noopener">Telegram-канал <span aria-hidden="true">↗</span></a><a class="row-reference" href="${contactUrl}" target="_blank" rel="noopener">Оптовый запрос <span aria-hidden="true">↗</span></a></footer>`;
   Object.assign(document.body.dataset,{direction:'tokyo',version:'3',type:'oks',menu:'glass',dialogue:''});
-  document.getElementById('app').innerHTML=tokyoRow({products,footer,contactUrl});
+  document.getElementById('app').innerHTML=tokyoRow({products,contactUrl});
   const textNodes=document.createTreeWalker(document.getElementById('app'),NodeFilter.SHOW_TEXT);
   while(textNodes.nextNode()) textNodes.currentNode.textContent=rowTypograph(textNodes.currentNode.textContent);
   const menu=document.querySelector('.row-header');
-  const menuHeadings=[...document.querySelectorAll('.row-main h1,.row-main h2,.row-main h3')];
+  const menuHeadings=[...document.querySelectorAll('.row-main h1,.row-main h2,.row-main h3,.dialogue-footer-brand')];
   const menuSurfaces=[...document.querySelectorAll('.row-main>section,.row-footer')];
   const syncMenuSurface=()=>{
     const rect=menu.getBoundingClientRect();
