@@ -34,7 +34,7 @@ function tokyoRow({products, contactUrl}) {
         <input class="row-player-seek" type="range" min="0" max="${duration}" step="0.1" value="0" aria-label="Позиция: ${label}" aria-controls="${id}" disabled>
         <p class="row-player-status" role="status" aria-live="polite"></p>
       </div>
-      <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span data-player-caption>Архив · ${date}</span>&nbsp;${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Автоматические субтитры: ${label}" aria-controls="${id}-captions" aria-pressed="true" hidden><span aria-hidden="true">CC</span></button>`:''}</figcaption>
+      <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span class="row-link-label" data-player-caption>Архив · ${date}</span>&nbsp;${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Автоматические субтитры: ${label}" aria-controls="${id}-captions" aria-pressed="true" hidden><span aria-hidden="true">CC</span></button>`:''}</figcaption>
       ${captions?`<p class="row-player-subtitles" id="${id}-captions" data-subtitles aria-live="off" hidden></p>`:''}
     </figure>`;
   const stories = {
@@ -64,7 +64,7 @@ function tokyoRow({products, contactUrl}) {
     <main id="main" class="row-main" tabindex="-1">
       <section class="row-hero dialogue-hero" aria-labelledby="hero-title">
         <img class="row-hero-image" src="assets/caviar-grain.jpg" width="600" height="800" alt="Красная икра крупным планом — фотография из канала «Рыба и крабы»" fetchpriority="high">
-        <div class="row-hero-top"><span>Розница и опт</span><span>Москва</span></div>
+        <div class="row-hero-top"><span>Розница и опт</span><span data-market-place>Москва</span></div>
         <div class="row-hero-content">
           <h1 id="hero-title"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></h1>
           <div class="dialogue-intro">
@@ -75,7 +75,7 @@ function tokyoRow({products, contactUrl}) {
         </div>
       </section>
       <section class="row-caviar dialogue-caviar" id="caviar" tabindex="-1" aria-labelledby="caviar-title">
-        <div class="row-section-heading"><h2 id="caviar-title">${lettering('caviar','Красная икра')}</h2><a class="row-reference" href="https://t.me/ikrabov/190" target="_blank" rel="noopener">О различиях — в канале ${arrow}</a></div>
+        <div class="row-section-heading"><h2 id="caviar-title">${lettering('caviar','Красная икра')}</h2><a class="row-reference" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">О различиях — в канале</span> ${arrow}</a></div>
         <p class="dialogue-question">Начнём со вкуса.</p>
         <div class="row-lots">
           ${products.map(p=>`<article class="row-lot"><h3>${lettering(p.id,p.name)}</h3><dl><div><dt class="row-readable">Зерно</dt><dd>${p.grain} зерно</dd></div><div><dt class="row-readable">Вкус</dt><dd>${p.flavor}</dd></div></dl></article>`).join('')}
@@ -88,7 +88,7 @@ function tokyoRow({products, contactUrl}) {
         <div class="dialogue-stories">${story('fish-start')}${story('fish-work')}</div>
         <div class="dialogue-fish-cutting">
           ${story('fish-cutting')}
-          <figure class="dialogue-fish-picture"><img src="assets/dialogue/one-fish-three-uses.jpg" width="834" height="1030" alt="Разделанная сёмга в лотках. Подписи Юры: «Это пожарить» возле стейков, «Это посолить» возле филе, «Это сварить» возле головы и обрези." loading="lazy"><figcaption><a class="row-reference" href="https://t.me/Yuraikra" target="_blank" rel="noopener">Из истории Юры · 14.01.2025 ${arrow}</a></figcaption></figure>
+          <figure class="dialogue-fish-picture"><a href="assets/dialogue/one-fish-three-uses.jpg" target="_blank" rel="noopener" aria-label="Рассмотреть части сёмги в полном размере — откроется в новой вкладке"><img src="assets/dialogue/one-fish-three-uses.jpg" width="834" height="1030" alt="Разделанная сёмга в лотках. Подписи Юры: «Это пожарить» возле стейков, «Это посолить» возле филе, «Это сварить» возле головы и обрези." loading="lazy"></a><figcaption><a class="row-reference" href="https://t.me/Yuraikra" target="_blank" rel="noopener"><span class="row-link-label">Из истории Юры · 14.01.2025</span> ${arrow}</a></figcaption></figure>
         </div>
         <div class="dialogue-turn"><a class="dialogue-reply" href="#seafood">А что ещё к столу? <span aria-hidden="true">↓</span></a></div>
       </section>
@@ -104,10 +104,10 @@ function tokyoRow({products, contactUrl}) {
     </main>
     <footer class="row-footer dialogue-footer" id="contact" tabindex="-1" aria-labelledby="contact-title">
       <div class="dialogue-footer-conversation">
-        <div class="dialogue-footer-order"><h2 id="contact-title">Что приготовим?</h2><p>Напиши, что хочется к столу, на сколько человек и к какому дню. С Юрой обсудите наличие, фасовку, цену и получение.</p><a class="dialogue-footer-link" href="${contactUrl}" target="_blank" rel="noopener"><span>Написать Юре</span> ${arrow}</a></div>
-        <div class="dialogue-footer-channel"><h3>Поступления и дегустации</h3><a class="row-order-link" href="https://t.me/ikrabov" target="_blank" rel="noopener">Читать @ikrabov ${arrow}</a></div>
+        <div class="dialogue-footer-order"><h2 id="contact-title">Что приготовим?</h2><p>Напиши, что хочется к столу, на сколько человек и к какому дню. С Юрой обсудите наличие, фасовку, цену и получение.</p><a class="dialogue-footer-link" href="${contactUrl}" target="_blank" rel="noopener"><span class="row-link-label">Написать Юре</span> ${arrow}</a></div>
+        <div class="dialogue-footer-channel"><h3>Поступления и дегустации</h3><a class="row-order-link" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Читать @ikrabov</span> ${arrow}</a></div>
       </div>
       <p class="dialogue-footer-brand"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></p>
-      <div class="dialogue-footer-meta"><p>Москва · розница и опт</p><a class="row-reference" href="#main">К началу <span aria-hidden="true">↑</span></a></div>
+      <div class="dialogue-footer-meta"><p>Москва · розница и опт</p></div>
     </footer>`;
 }

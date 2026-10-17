@@ -27,17 +27,13 @@
     const lots=root.querySelector('.row-lots').outerHTML;
     const fishPicture=root.querySelector('.dialogue-fish-picture').outerHTML;
     const footer=root.querySelector('.dialogue-footer');
-    const origin=document.createElement('p');
-    origin.className='cp-origin';
-    origin.textContent=prose('Разговор составлен по архивным записям Юры. Даты и цены в видео относятся к моменту съёмки.');
-    footer.querySelector('.dialogue-footer-brand').before(origin);
     return `${header}<main id="main" class="row-main" tabindex="-1">${hero}
       <section id="caviar" class="cp-scene cp-caviar row-caviar" tabindex="-1" aria-labelledby="caviar-title">
         <div class="cp-caviar-copy">
           ${title('caviar')}
           ${paragraph('Начнём со вкуса.','cp-answer')}
           ${lots}
-          <a class="row-reference cp-source" href="https://t.me/ikrabov/190" target="_blank" rel="noopener">О различиях — в канале <span aria-hidden="true">↗</span></a>
+          <a class="row-reference cp-source" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">О различиях — в канале</span> <span aria-hidden="true">↗</span></a>
           <div class="cp-exchange">
             ${question('А если я не разбираюсь?')}
             ${voice('caviar-choice','Я пробую икру сам. Подберём по соли, консистенции и твоему бюджету.')}

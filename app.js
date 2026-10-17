@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const params = new URLSearchParams(location.search);
-  const lightMode = ['day','evening'].includes(params.get('light')) ? params.get('light') : 'auto';
+  const lightMode = params.get('light') || 'auto';
   const products = [
     {id:'nerka', name:'Нерка', grain:'Мелкое', flavor:'Выразительный, с лёгкой горчинкой'},
     {id:'gorbusha', name:'Горбуша', grain:'Среднее', flavor:'Классический, без выраженной горчинки'},
@@ -39,13 +39,7 @@
   },{passive:true});
   syncMenuSpace();
   new ResizeObserver(syncMenuSpace).observe(menu);
-  function updateLight() {
-    const hour=Number(new Intl.DateTimeFormat('en-GB',{hour:'2-digit',hourCycle:'h23',timeZone:'Europe/Moscow'}).format(new Date()));
-    document.body.dataset.light=lightMode==='auto'?(hour>=7&&hour<19?'day':'evening'):lightMode;
-    syncMenuSurface();
-  }
-  updateLight();
-  if(lightMode==='auto') setInterval(updateLight,30000);
+  MarketLight.start({mode:lightMode,onChange:syncMenuSurface});
 
   document.querySelectorAll(`a[href="${contactUrl}"]`).forEach(link=>link.addEventListener('click',()=>{
     document.querySelectorAll('video').forEach(video=>{ if(!video.paused) video.pause(); });

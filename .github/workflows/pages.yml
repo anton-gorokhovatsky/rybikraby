@@ -23,6 +23,7 @@ jobs:
           node --check app.js
           node --check tokyo-row.js
           node --check composition.js
+          node --check market-light.js
           node --check oks-lettering.js
           node --check market-player.js
           python3 - <<'PY'
@@ -30,7 +31,7 @@ jobs:
           from pathlib import Path
           output = Path('_site')
           output.mkdir(exist_ok=True)
-          names = ['index.html', 'styles.css', 'tokyo-row.css', 'composition.css', 'app.js', 'tokyo-row.js', 'composition.js', 'oks-lettering.js', 'market-player.js', '.nojekyll']
+          names = ['index.html', 'styles.css', 'tokyo-row.css', 'composition.css', 'app.js', 'tokyo-row.js', 'composition.js', 'market-light.js', 'oks-lettering.js', 'market-player.js', '.nojekyll']
           for name in names:
               shutil.copyfile(name, output / name)
           shutil.copytree('assets', output / 'assets', dirs_exist_ok=True)
