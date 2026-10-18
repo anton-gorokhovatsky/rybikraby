@@ -59,7 +59,7 @@ function tokyoRow({products, contactUrl}) {
   return `
     <header class="site-header row-header">
       <a class="wordmark" href="#main" aria-label="Рыба и крабы, начало">РЫБА И КРАБЫ</a>
-      <nav aria-label="Навигация сайта"><a href="#caviar">Икра</a><a href="#fish">Рыба</a><a class="button header-contact" href="${contactUrl}" target="_blank" rel="noopener">Написать Юре <span aria-hidden="true">↗</span></a></nav>
+      <nav aria-label="Навигация сайта"><a href="#caviar"><span class="row-nav-label">Икра</span></a><a href="#fish"><span class="row-nav-label">Рыба</span></a><a class="header-contact" href="${contactUrl}" target="_blank" rel="noopener"><span class="row-nav-label">Написать Юре</span> <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main" class="row-main" tabindex="-1">
       <section class="row-hero dialogue-hero" aria-labelledby="hero-title">
