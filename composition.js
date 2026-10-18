@@ -34,14 +34,16 @@
           ${paragraph('Начнём со вкуса.','cp-answer')}
           ${lots}
           <a class="row-reference cp-source" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">О различиях — в канале</span> <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="cp-caviar-conversation">
           <div class="cp-exchange">
             ${question('А если я не разбираюсь?')}
             ${voice('caviar-choice','Я пробую икру сам. Подберём по соли, консистенции и твоему бюджету.')}
           </div>
-        </div>
-        <div class="cp-product cp-caviar-product">
-          ${paragraph('Вот, пробую нерку нового сезона. Открываю банку и показываю зерно.','cp-product-answer')}
-          ${player('caviar-tasting')}
+          <div class="cp-product cp-caviar-product">
+            ${paragraph('Вот, пробую нерку нового сезона. Открываю банку и показываю зерно.','cp-product-answer')}
+            ${player('caviar-tasting')}
+          </div>
         </div>
       </section>
 

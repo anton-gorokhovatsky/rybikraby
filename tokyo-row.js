@@ -7,6 +7,7 @@ function rowTypograph(text, allowLongWordWrap=false) {
 }
 
 function tokyoRow({products, contactUrl}) {
+  const brandStyle = `--row-brand-width:${(oksLettering.fish.inkWidth + 180 + oksLettering.crabs.inkWidth)/1000};--row-brand-line-width:${oksLettering.crabs.inkWidth/1000}`;
   const lettering = (key, text) => {
     const art = oksLettering[key];
     return `<span class="row-lettering" style="--lettering-width:${art.inkWidth/1000}"><span class="row-readable">${text}</span><svg viewBox="${art.inkLeft} 0 ${art.inkWidth} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
@@ -60,15 +61,15 @@ function tokyoRow({products, contactUrl}) {
   const story = key => `<article class="dialogue-story">${storyPlayer(key)}<div class="dialogue-story-copy"><h3>${stories[key].title}</h3>${stories[key].copy?`<p>${stories[key].copy}</p>`:''}</div></article>`;
   return `
     <header class="site-header row-header">
-      <a class="wordmark" href="#main" aria-label="Рыба и крабы, начало">РЫБА И КРАБЫ</a>
+      <a class="wordmark" href="#main" aria-label="Рыба и крабы, начало"><img class="row-brand-mark" src="assets/brand/favicon-48.32a9d3ead51c.png" width="24" height="24" alt=""><span class="row-wordmark-name">РЫБА И КРАБЫ</span></a>
       <nav aria-label="Навигация сайта"><a href="#caviar"><span class="row-nav-label">Икра</span></a><a href="#fish"><span class="row-nav-label">Рыба</span></a><a class="header-contact" href="${contactUrl}" target="_blank" rel="noopener"><span class="row-nav-label">Написать Юре</span> <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main" class="row-main" tabindex="-1">
       <section class="row-hero dialogue-hero" aria-labelledby="hero-title">
-        <img class="row-hero-image" src="assets/caviar-grain.jpg" width="600" height="800" alt="Красная икра крупным планом — фотография из канала «Рыба и крабы»" fetchpriority="high">
+        <img class="row-hero-image" src="assets/caviar-grain.jpg?v=24a67b08018f" width="960" height="1280" alt="Красная икра крупным планом — фотография из канала «Рыба и крабы»" fetchpriority="high">
         <div class="row-hero-top"><span>Розница и опт</span><span data-market-place>Москва</span></div>
         <div class="row-hero-content">
-          <h1 id="hero-title"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></h1>
+          <h1 id="hero-title" style="${brandStyle}"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></h1>
           <div class="dialogue-intro">
             <aside class="row-yura" aria-label="Юра о рыбе и икре">${storyPlayer('hello')}</aside>
             <div class="dialogue-greeting"><p class="dialogue-hello">Привет, мой друг.</p><p>Я Юра. Помогу выбрать рыбу, икру и крабов к твоему столу.</p></div>
@@ -107,9 +108,16 @@ function tokyoRow({products, contactUrl}) {
     <footer class="row-footer dialogue-footer" id="contact" tabindex="-1" aria-labelledby="contact-title">
       <div class="dialogue-footer-conversation">
         <div class="dialogue-footer-order"><h2 id="contact-title">Что приготовим?</h2><p>Напиши, что хочется к столу, на сколько человек и к какому дню. С Юрой обсудите наличие, фасовку, цену и получение.</p><a class="dialogue-footer-link" href="${contactUrl}" target="_blank" rel="noopener"><span class="row-link-label">Написать Юре</span> ${arrow}</a></div>
-        <div class="dialogue-footer-channel"><h3>Поступления и дегустации</h3><a class="row-order-link" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Читать @ikrabov</span> ${arrow}</a></div>
+        <div class="dialogue-footer-details">
+          <address class="dialogue-footer-contacts">
+            <a class="row-order-link dialogue-footer-phone" href="tel:+79688005000"><span class="row-link-label">+7&nbsp;968 800-50-00</span></a>
+            <a class="row-order-link" href="mailto:rybaikraby@gmail.com"><span class="row-link-label">rybaikraby<wbr>@gmail.com</span></a>
+            <a class="row-reference" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%20124%D0%90" target="_blank" rel="noopener"><span class="row-link-label">Москва, Дмитровское шоссе, 124А</span> ${arrow}</a>
+          </address>
+          <div class="dialogue-footer-channel"><h3>Поступления и дегустации</h3><a class="row-order-link" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Читать @ikrabov</span> ${arrow}</a></div>
+        </div>
       </div>
-      <p class="dialogue-footer-brand"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></p>
-      <div class="dialogue-footer-meta"><p>Москва · розница и опт</p></div>
+      <p class="dialogue-footer-brand" style="${brandStyle}"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></p>
+      <div class="dialogue-footer-meta"><p>ИП Федосеенков Юрий Геннадьевич</p><p class="dialogue-footer-registration"><span>ИНН 741205199390</span><span>ОГРНИП 324745600201772</span></p></div>
     </footer>`;
 }

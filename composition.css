@@ -34,7 +34,10 @@ body[data-composition] .cp-scene.dialogue-dark { background:#162a39; }
 body[data-composition] .cp-scene .row-player:not(.row-player-round) {
   width:min(100%,max(176px,calc(max(120px,100svh - var(--row-menu-height,64px) - 18rem) * .5625)));
 }
-body[data-composition] .cp-caviar { display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:var(--cp-layout-gap);align-items:start; }
+body[data-composition] .cp-caviar { display:block; }
+.cp-caviar-copy { max-width:1120px; }
+.cp-caviar-conversation { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--cp-layout-gap);align-items:start;margin-top:var(--cp-topic-gap); }
+.cp-caviar-conversation .cp-exchange { margin-top:0; }
 .cp-caviar .cp-answer { margin-top:24px;font-size:2.25rem; }
 .cp-caviar .row-lots { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px; }
 .cp-caviar .row-lot h3 { font-size:clamp(42px,4.4vw,64px); }
@@ -77,19 +80,19 @@ html.cp-keyboard { scroll-behavior:auto!important; }
   .cp-scene .row-player:not(.row-player-round) video { width:100%;height:100%;object-fit:contain; }
 }
 @media (max-width:1100px) {
-  .cp-caviar .row-lots { grid-template-columns:1fr;gap:24px; }
+  .cp-caviar .row-lots { grid-template-columns:repeat(3,minmax(0,1fr));gap:24px; }
   .cp-caviar .row-lot { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9.5rem),1fr));gap:16px;align-items:first baseline; }
   .cp-caviar .row-lot dl { margin-top:0; }
   .cp-caviar .row-lot h3 { font-size:52px; }
 }
 @media (max-width:760px) {
   body[data-composition] { --cp-scene-gap:56px;--cp-layout-gap:32px;--cp-voice-size:1.25rem;--cp-copy-size:1.125rem;--cp-topic-gap:48px; }
-  body[data-composition] .cp-caviar,.cp-shells-grid,.cp-counter-layout { grid-template-columns:minmax(0,1fr); }
+  body[data-composition] .cp-caviar,.cp-caviar-conversation,.cp-shells-grid,.cp-counter-layout { grid-template-columns:minmax(0,1fr); }
   .cp-title h2 { font-size:min(120px,calc(100cqi / var(--cp-lettering))); }
   .cp-scene-heading { margin-bottom:28px; }
   .cp-question { font-size:1.375rem; }
   .cp-answer,.cp-caviar .cp-answer { font-size:2.125rem; }
-  .cp-caviar .row-lots { margin-top:28px;gap:24px; }
+  .cp-caviar .row-lots { grid-template-columns:1fr;margin-top:28px;gap:24px; }
   .cp-caviar .row-lot { gap:12px 20px; }
   .cp-caviar .row-lot h3 { font-size:46px; }
   .cp-caviar .row-lot dd { font-size:1rem; }
