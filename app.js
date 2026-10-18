@@ -11,7 +11,10 @@
   Object.assign(document.body.dataset,{direction:'tokyo',version:'3',type:'oks',menu:'glass',dialogue:''});
   document.getElementById('app').innerHTML=tokyoRow({products,contactUrl});
   const textNodes=document.createTreeWalker(document.getElementById('app'),NodeFilter.SHOW_TEXT);
-  while(textNodes.nextNode()) textNodes.currentNode.textContent=rowTypograph(textNodes.currentNode.textContent);
+  while(textNodes.nextNode()) {
+    const node=textNodes.currentNode;
+    node.textContent=rowTypograph(node.textContent,node.parentElement.matches('.cp-question'));
+  }
   const menu=document.querySelector('.row-header');
   const menuHeadings=[...document.querySelectorAll('.row-main h1,.row-main h2,.row-main h3,.dialogue-footer-brand')];
   const menuSurfaces=[...document.querySelectorAll('.row-main>section,.row-footer')];
