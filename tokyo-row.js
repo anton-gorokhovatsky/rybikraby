@@ -1,7 +1,10 @@
 /* Third version: product, Oks lettering and Yuri. */
 function rowTypograph(text, allowLongWordWrap=false) {
   const shortWord = /(^|\s)([ВвСсКкУуОоИиАа]|[Пп]о|[Нн]а|[Ии]з|[Зз]а|[Сс]о|[Оо]т|[Дд]о|[Нн]е|[Нн]о|[Оо]б|[Пп]од|[Пп]ри|[Дд]ля|[Бб]ез|[Нн]ад|[Пп]еред|[Чч]ерез|[Мм]ежду)[ \t]+(?=\S)/g;
-  const formatted=text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0').replace(/[ \t]+—[ \t]+/g,'\u00a0— ');
+  const month = '(?:января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря)';
+  const formatted=text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0')
+    .replace(new RegExp(`\\b(\\d{1,2})[ \\t]+(${month})(?=[\\s.,!?]|$)`,'gi'),'$1\u00a0$2')
+    .replace(/[ \t]+—[ \t]+/g,'\u00a0— ');
   // Large questions need this escape at text zoom; ordinary prose keeps its grouping.
   return allowLongWordWrap?formatted.replace(/\u00a0(?=\p{L}{10,})/gu,' '):formatted;
 }
@@ -51,7 +54,7 @@ function tokyoRow({products, contactUrl}) {
     scallop:{duration:60.066667,source:'https://t.me/Yuraikra/s/761',date:'18.04.2026',title:'Теперь откроем гребешка',copy:'Он приехал с Сахалина ещё в раковине. Юра открывает одну прямо на складе — можно разглядеть продукт до приготовления.'},
     urchin:{duration:38.2,source:'https://t.me/ikrabov/179',date:'02.04.2026',title:'А у ежа — своя икра',copy:'Здесь икра уже в баночках по 100 г. Юра показывает термоупаковку, в которой приехала апрельская партия.'},
     crab:{duration:6.333333,source:'https://t.me/ikrabov/57',date:'11.11.2024',title:'Краб — крупным планом',copy:'Для подачи крупными кусками и для салата можно выбирать разное мясо.'},
-    'with-yakov':{duration:55.97,round:true,source:'https://t.me/ikrabov/197',date:'07.06.2026',title:'Со склада — к грилю',copy:'Вместе с поваром Яковом Юра пробует рыбу на огне и обсуждает блюда с чавычей. Готовятся к событию 12 июня 2026-го.'},
+    'with-yakov':{duration:55.97,round:true,source:'https://t.me/ikrabov/197',date:'07.06.2026',title:'Со склада — к грилю',copy:'Вместе с поваром Яковом Юра пробует рыбу на мангале и обсуждает блюда с чавычей.'},
     counter:{duration:14.233333,source:'https://t.me/ikrabov/217',date:'14.10.2026',title:'И снова — за рыбой',copy:'Осенью — обратно на склад. Рыба, полный прилавок и Юра со своим настроением.'}
   };
   const storyPlayer = key => {
@@ -114,7 +117,7 @@ function tokyoRow({products, contactUrl}) {
             <a class="row-order-link" href="mailto:rybaikraby@gmail.com"><span class="row-link-label">rybaikraby<wbr>@gmail.com</span></a>
             <a class="row-reference" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%20124%D0%90" target="_blank" rel="noopener"><span class="row-link-label">Москва, Дмитровское шоссе, 124А</span> ${arrow}</a>
           </address>
-          <div class="dialogue-footer-channel"><h3>Поступления и дегустации</h3><a class="row-order-link" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Читать @ikrabov</span> ${arrow}</a></div>
+          <a class="row-order-link dialogue-footer-channel" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Поступления и дегустации в Telegram</span> ${arrow}</a>
         </div>
       </div>
       <p class="dialogue-footer-brand" style="${brandStyle}"><span>${lettering('fish','Рыба')}</span> <span>${lettering('crabs','и&nbsp;крабы')}</span></p>
