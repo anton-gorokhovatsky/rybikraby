@@ -1,7 +1,9 @@
 /* Third version: product, Oks lettering and Yuri. */
 function rowTypograph(text) {
   const shortWord = /(^|\s)([ВвСсКкУуОоИиАа]|[Пп]о|[Нн]а|[Ии]з|[Зз]а|[Сс]о|[Оо]т|[Дд]о|[Нн]е|[Нн]о|[Оо]б|[Пп]од|[Пп]ри|[Дд]ля|[Бб]ез|[Нн]ад|[Пп]еред|[Чч]ерез|[Мм]ежду)[ \t]+(?=\S)/g;
-  return text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0').replace(/[ \t]+—[ \t]+/g,'\u00a0— ');
+  return text.replace(shortWord,'$1$2\u00a0').replace(shortWord,'$1$2\u00a0').replace(/[ \t]+—[ \t]+/g,'\u00a0— ')
+    // Keep long words breakable from their preposition at narrow widths and text zoom.
+    .replace(/\u00a0(?=\p{L}{10,})/gu,' ');
 }
 
 function tokyoRow({products, contactUrl}) {
