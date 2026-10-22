@@ -46,16 +46,16 @@ function tokyoRow({products, contactUrl}) {
   const stories = {
     hello:{duration:59.585521,round:true,source:'https://t.me/ikrabov/148',date:'17.10.2025',title:'Рыба, икра и крабы'},
     'caviar-choice':{duration:49.450521,round:true,poster:'dialogue/caviar-choice-selected.jpg',source:'https://t.me/ikrabov/149',date:'17.10.2025',title:'Теперь — соль и бюджет',copy:'Вид рыбы — только начало. У разных партий отличаются соль и консистенция. Юра пробует икру сам и подбирает варианты под разный бюджет.'},
-    'caviar-tasting':{duration:60.054583,source:'https://t.me/Yuraikra/s/776',date:'09.06.2026',title:'Поэтому сначала пробуем',copy:'Июнь 2026-го: первая нерка нового сезона. Юра открывает банку, пробует соль и показывает зерно.'},
+    'caviar-tasting':{duration:60.054583,poster:'dialogue/caviar-tasting-detail.jpg',source:'https://t.me/Yuraikra/s/776',date:'09.06.2026',title:'Поэтому сначала пробуем',copy:'Июнь 2026-го: первая нерка нового сезона. Юра открывает банку, пробует соль и показывает зерно.'},
     'fish-start':{duration:57.695062,round:true,source:'https://t.me/ikrabov/88',date:'21.12.2024',title:'Всё началось с рынка',copy:'В декабре 2024-го Юра насмотрелся на работу рыбных рядов и решил сам заняться охлаждённой рыбой. Хотелось работать руками — с рыбой и ножом.'},
     'fish-work':{duration:31.515854,round:true,source:'https://t.me/ikrabov/107',date:'13.01.2025',title:'В январе — уже на складе',copy:'После декабрьского решения — первые рабочие дни с сёмгой и форелью. Теперь рыбу режут, вакуумируют и солят.'},
     'fish-cutting':{duration:23.7,source:'https://t.me/ikrabov/112',date:'25.01.2025',title:'Одна сёмга — несколько блюд',copy:'Стейки — пожарить. Филе — посолить. Голову и обрезь — на бульон. На фото Юра сам разложил и подписал части рыбы: с будущего блюда и стоит начинать выбор.',captions:false},
-    'crab-table':{duration:38.44625,source:'https://t.me/Yuraikra/s/777',date:'09.06.2026',title:'А для салата — мясо опилио',copy:'Кроме крупных кусков, есть салатное мясо. В этой записи Юра показывает опилио и рассказывает об ассортименте. Цена и условия относятся к июню 2026 года.'},
-    scallop:{duration:60.066667,source:'https://t.me/Yuraikra/s/761',date:'18.04.2026',title:'Теперь откроем гребешка',copy:'Он приехал с Сахалина ещё в раковине. Юра открывает одну прямо на складе — можно разглядеть продукт до приготовления.'},
-    urchin:{duration:38.2,source:'https://t.me/ikrabov/179',date:'02.04.2026',title:'А у ежа — своя икра',copy:'Здесь икра уже в баночках по 100 г. Юра показывает термоупаковку, в которой приехала апрельская партия.'},
+    'crab-table':{duration:38.44625,poster:'dialogue/crab-table-detail.jpg',source:'https://t.me/Yuraikra/s/777',date:'09.06.2026',title:'А для салата — мясо опилио',copy:'Кроме крупных кусков, есть салатное мясо. В этой записи Юра показывает опилио и рассказывает об ассортименте. Цена и условия относятся к июню 2026 года.'},
+    scallop:{duration:60.066667,poster:'dialogue/scallop-detail.jpg',source:'https://t.me/Yuraikra/s/761',date:'18.04.2026',title:'Теперь откроем гребешка',copy:'Крупный гребешок с Сахалина. Юра открывает банку прямо на складе — можно разглядеть продукт до приготовления.'},
+    urchin:{duration:38.2,poster:'dialogue/urchin-detail.jpg',source:'https://t.me/ikrabov/179',date:'02.04.2026',title:'А у ежа — своя икра',copy:'Здесь икра уже в баночках по 100 г. Юра показывает термоупаковку, в которой приехала апрельская партия.'},
     crab:{duration:6.333333,source:'https://t.me/ikrabov/57',date:'11.11.2024',title:'Краб — крупным планом',copy:'Для подачи крупными кусками и для салата можно выбирать разное мясо.'},
     'with-yakov':{duration:55.97,round:true,source:'https://t.me/ikrabov/197',date:'07.06.2026',title:'Со склада — к грилю',copy:'Вместе с поваром Яковом Юра пробует рыбу на мангале и обсуждает блюда с чавычей.'},
-    counter:{duration:14.233333,source:'https://t.me/ikrabov/217',date:'14.10.2026',title:'И снова — за рыбой',copy:'Осенью — обратно на склад. Рыба, полный прилавок и Юра со своим настроением.'}
+    counter:{duration:14.233333,poster:'dialogue/counter-detail.jpg',source:'https://t.me/ikrabov/217',date:'14.10.2026',title:'И снова — за рыбой',copy:'Осенью — обратно на склад. Рыба, полный прилавок и Юра со своим настроением.'}
   };
   const storyPlayer = key => {
     const s=stories[key];

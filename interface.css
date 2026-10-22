@@ -26,8 +26,8 @@ body[data-seasonal] .cp-exchange { margin-top:var(--space-layout); }
 body[data-seasonal] .cp-caviar-conversation .cp-exchange { margin-top:0; }
 body[data-seasonal] .cp-source { margin-top:var(--space-copy); }
 body[data-seasonal] :is(.cp-source,.season-feature .row-reference,.season-photo figcaption,.fish-uses-source) { font-size:var(--type-caption); }
-body[data-seasonal] .cp-shells-grid { align-items:start;row-gap:var(--space-copy); }
-body[data-seasonal] .cp-shell { display:grid;grid-template-rows:subgrid;grid-row:span 3; }
+body[data-seasonal] .cp-shells-grid { max-width:calc(2 * var(--player-feature-width) + var(--cp-layout-gap));align-items:start;row-gap:var(--space-copy); }
+body[data-seasonal] .cp-shell { --player-portrait-width:var(--player-feature-width);display:grid;grid-template-rows:subgrid;grid-row:span 3; }
 body[data-seasonal] .cp-shell>.cp-copy { margin-top:0; }
 body[data-seasonal] .cp-shell>.row-player { margin-top:0; }
 body[data-seasonal] :is(.cp-product-answer,.cp-shell>.cp-copy) { max-width:var(--player-portrait-width); }

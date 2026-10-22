@@ -44,7 +44,7 @@
           <div class="cp-product cp-caviar-product">
             <div class="cp-story-intro">
               <h3 class="cp-story-heading">${prose('Первые девять килограммов')}</h3>
-              ${paragraph('4 июня 2026-го в канале сообщили о первой икре нерки с Камчатки. В июньском видео Юра пробует новую нерку уже в Москве.','cp-product-answer')}
+              ${paragraph('4 июня 2026-го в канале объявили о девяти килограммах первой икры нерки с Камчатки. В июньском видео Юра пробует новую нерку уже в Москве.','cp-product-answer')}
               <div class="cp-story-sources">${reference('https://t.me/ikrabov/192','Начало сезона в канале')}</div>
             </div>
             ${player('caviar-tasting')}
@@ -103,7 +103,7 @@
           <div class="cp-shells-grid">
             <article class="cp-shell">
               <h3>Гребешок с Сахалина</h3>
-              ${paragraph('Юра открывает раковину — и говорит о запахе, который жаль не передать через экран. Этот гребешок приехал с Сахалина.')}
+              ${paragraph('Юра открывает банку — и говорит о запахе, который жаль не передать через экран. Внутри — крупный гребешок с Сахалина.')}
               ${player('scallop')}
             </article>
             <article class="cp-shell">
@@ -131,7 +131,7 @@
           <div class="cp-product cp-counter-product">
             <div class="cp-story-intro">
               <h3 class="cp-story-heading">${prose('У прилавка — свой саундтрек')}</h3>
-              ${paragraph('Рыбный обзор превращается в маленький музыкальный номер. Четырнадцать секунд Юриного настроения.','cp-product-answer')}
+              ${paragraph('«Всё будет не как у всех» — подпись к этому ролику в канале. Дальше Юра поёт о рыбе прямо за прилавком.','cp-product-answer')}
             </div>
             ${player('counter')}
           </div>

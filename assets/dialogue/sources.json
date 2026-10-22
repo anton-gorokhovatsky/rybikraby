@@ -50,14 +50,20 @@
     "duration": 60.049675,
     "captions": "caviar-tasting.ru.vtt",
     "file": "dialogue/caviar-tasting.mp4",
-    "poster": "dialogue/caviar-tasting.jpg",
+    "poster": "dialogue/caviar-tasting-detail.jpg",
     "bytes": 23343653,
     "sha256": "08c1cf409535f42dca028c93504cda870aac266d3f284373de829234740cea36",
     "complete": true,
     "audio": true,
     "decode_to_end": true,
     "method": "Complete personal story downloaded with Telegram Web A; H.264 web copy, full original AAC audio, no cuts",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "poster_frame": {
+      "time_seconds": 3,
+      "source_video": "dialogue/caviar-tasting.mp4",
+      "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
+      "selected": "2026-10-22"
+    }
   },
   {
     "key": "fish-start",
@@ -122,32 +128,44 @@
     "duration": 38.454717,
     "captions": "crab-table.ru.vtt",
     "file": "dialogue/crab-table.mp4",
-    "poster": "dialogue/crab-table.jpg",
+    "poster": "dialogue/crab-table-detail.jpg",
     "bytes": 11519130,
     "sha256": "e71b3d09a265f9baa924a49dd8605ada3e57f27b9c12a0c4e7a9256a1df021ad",
     "complete": true,
     "audio": true,
     "decode_to_end": true,
     "method": "Complete personal story downloaded with Telegram Web A; H.264 web copy, full original AAC audio, no cuts",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "poster_frame": {
+      "time_seconds": 22,
+      "source_video": "dialogue/crab-table.mp4",
+      "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
+      "selected": "2026-10-22"
+    }
   },
   {
     "key": "scallop",
-    "title": "Гребешок в раковине",
+    "title": "Гребешок с Сахалина",
     "source": "https://t.me/Yuraikra/s/761",
     "date": "2026-04-18",
     "round": false,
     "duration": 60.066667,
     "captions": "scallop.ru.vtt",
     "file": "dialogue/scallop.mp4",
-    "poster": "dialogue/scallop.jpg",
+    "poster": "dialogue/scallop-detail.jpg",
     "bytes": 22139749,
     "sha256": "0256890ecf9f675601be0ed48873d87b00c6bc4db99e1f5835491a8636578db2",
     "complete": true,
     "audio": true,
     "decode_to_end": true,
     "method": "Complete personal story downloaded with Telegram Web A; H.264 web copy, full original AAC audio, no cuts",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "poster_frame": {
+      "time_seconds": 21,
+      "source_video": "dialogue/scallop.mp4",
+      "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
+      "selected": "2026-10-22"
+    }
   },
   {
     "key": "urchin",
@@ -158,14 +176,20 @@
     "duration": 38.2,
     "captions": "urchin.ru.vtt",
     "file": "dialogue/urchin.mp4",
-    "poster": "dialogue/urchin.jpg",
+    "poster": "dialogue/urchin-detail.jpg",
     "bytes": 14609678,
     "sha256": "b524c2268e24f49e0ce2cd964c14e30be309bb02c20f363e334ea918f6c3d8aa",
     "complete": true,
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "poster_frame": {
+      "time_seconds": 22,
+      "source_video": "dialogue/urchin.mp4",
+      "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
+      "selected": "2026-10-22"
+    }
   },
   {
     "key": "crab",
@@ -212,13 +236,19 @@
     "duration": 14.233333,
     "captions": "counter.ru.vtt",
     "file": "dialogue/counter.mp4",
-    "poster": "dialogue/counter.jpg",
+    "poster": "dialogue/counter-detail.jpg",
     "bytes": 4757773,
     "sha256": "59e752693891ceb3095fb898e5d0ddf15d4dc5572fbd5a1cc6a0da89a859cc17",
     "complete": true,
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "poster_frame": {
+      "time_seconds": 7,
+      "source_video": "dialogue/counter.mp4",
+      "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
+      "selected": "2026-10-22"
+    }
   }
 ]
