@@ -26,11 +26,12 @@
     "duration": 49.450521,
     "captions": "caviar-choice.ru.vtt",
     "file": "dialogue/caviar-choice.mp4",
-    "poster": "dialogue/caviar-choice-24s.jpg",
+    "poster": "dialogue/caviar-choice-selected.jpg",
     "poster_frame": {
-      "time_seconds": 24.5,
+      "time_seconds": 15.768333,
       "method": "Frame extracted from the same unchanged video at native 400 x 400 resolution; JPEG encoding only, no retouching",
-      "selected": "2026-10-22"
+      "selected": "2026-10-22",
+      "selection": "Frame matched to the screenshot explicitly selected by the user on 2026-10-22"
     },
     "bytes": 6653112,
     "sha256": "4c2c52a56b785c11cefa15f3ad764f2d4160a21948f77132895df1f1f5ba03bc",

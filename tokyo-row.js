@@ -45,7 +45,7 @@ function tokyoRow({products, contactUrl}) {
     </figure>`;
   const stories = {
     hello:{duration:59.585521,round:true,source:'https://t.me/ikrabov/148',date:'17.10.2025',title:'Рыба, икра и крабы'},
-    'caviar-choice':{duration:49.450521,round:true,poster:'dialogue/caviar-choice-24s.jpg',source:'https://t.me/ikrabov/149',date:'17.10.2025',title:'Теперь — соль и бюджет',copy:'Вид рыбы — только начало. У разных партий отличаются соль и консистенция. Юра пробует икру сам и подбирает варианты под разный бюджет.'},
+    'caviar-choice':{duration:49.450521,round:true,poster:'dialogue/caviar-choice-selected.jpg',source:'https://t.me/ikrabov/149',date:'17.10.2025',title:'Теперь — соль и бюджет',copy:'Вид рыбы — только начало. У разных партий отличаются соль и консистенция. Юра пробует икру сам и подбирает варианты под разный бюджет.'},
     'caviar-tasting':{duration:60.054583,source:'https://t.me/Yuraikra/s/776',date:'09.06.2026',title:'Поэтому сначала пробуем',copy:'Июнь 2026-го: первая нерка нового сезона. Юра открывает банку, пробует соль и показывает зерно.'},
     'fish-start':{duration:57.695062,round:true,source:'https://t.me/ikrabov/88',date:'21.12.2024',title:'Всё началось с рынка',copy:'В декабре 2024-го Юра насмотрелся на работу рыбных рядов и решил сам заняться охлаждённой рыбой. Хотелось работать руками — с рыбой и ножом.'},
     'fish-work':{duration:31.515854,round:true,source:'https://t.me/ikrabov/107',date:'13.01.2025',title:'В январе — уже на складе',copy:'После декабрьского решения — первые рабочие дни с сёмгой и форелью. Теперь рыбу режут, вакуумируют и солят.'},
