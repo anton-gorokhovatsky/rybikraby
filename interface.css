@@ -65,7 +65,16 @@ body[data-seasonal] .cp-supper-note { max-width:var(--player-feature-width);marg
   body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice' 'story'; }
   body[data-seasonal] .season-summer-opening { grid-template-columns:minmax(0,1fr);grid-template-areas:'copy' 'story'; }
 }
-body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-areas:'choice'; }
+body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'choice reading';max-width:none; }
+.season-reading-note { max-width:48ch;margin-top:var(--space-layout); }
+body[data-seasonal] .season-reading-note h3 { margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em;text-wrap:pretty; }
+body[data-seasonal] .season-reading-note p { margin:var(--space-copy) 0 0;font-size:var(--type-body);line-height:1.5;text-wrap:pretty; }
+body[data-seasonal] .season-reading-note .row-reference { min-height:44px;margin-top:var(--space-inline);font-size:var(--type-caption);color:var(--muted); }
+body[data-seasonal] .cp-caviar-conversation>.season-reading-note { grid-area:reading;align-self:start;margin-top:0; }
+body[data-seasonal] .cp-counter-reply>.season-reading-note { max-width:var(--player-feature-width); }
+@media(max-width:760px) {
+  body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-columns:minmax(0,1fr);grid-template-areas:'choice' 'reading'; }
+}
 body[data-seasonal] .dialogue-hello { font-size:var(--type-invitation);line-height:1.15; }
 body[data-seasonal] .dialogue-greeting>p+p { font-size:var(--type-body);line-height:1.5; }
 body[data-seasonal] .dialogue-reply { font-size:var(--type-control);line-height:1.4; }
@@ -166,11 +175,10 @@ body[data-seasonal] .cp-cutting>.row-player { width:100%;max-width:var(--player-
 body[data-seasonal] .season-table-story h3 { grid-column:1/-1;margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em; }
 body[data-seasonal] .season-table-story p { max-width:48ch;margin:0;font-size:var(--type-body);line-height:1.5;color:var(--muted);text-wrap:pretty; }
 body[data-seasonal] .season-table-story .season-story-lead { max-width:42ch;font-size:var(--type-voice);line-height:1.4;color:var(--ink);letter-spacing:-.02em; }
-/* Each passage keeps its own source/action in reading order. Shared rows retain
-   the accepted desktop text and link baselines; mobile keeps the pairs intact. */
+/* The literary passage keeps its source before the contemporary continuation
+   on mobile. Both passages share their first text baseline on desktop. */
 .season-story-part { display:grid;grid-template-rows:subgrid;grid-row:span 2;align-items:first baseline;justify-items:start;min-width:0; }
 body[data-seasonal] .season-story-part .row-reference { min-height:44px;font-size:var(--type-caption);color:var(--muted); }
-body[data-seasonal] .season-story-part .row-order-link { min-height:44px;font-size:var(--type-body);font-weight:400;line-height:1.4; }
 @container fish-scene (width < 44rem) {
   body[data-seasonal] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'cutting' 'photo'; }
   .fish-uses { width:min(100%,42rem); }
@@ -197,7 +205,7 @@ body[data-seasonal] .row-main { container:page-reading / inline-size; }
 @container page-reading (width < 12rem) {
   body[data-seasonal] .cp-scene { --type-answer:var(--type-answer-narrow); }
   body[data-seasonal] .cp-scene :is(.cp-copy,.cp-question,.cp-voice-answer,.cp-product-answer,.cp-story-heading,.row-lot dd,.cp-video-note-title,.cp-video-note-description),
-  body[data-seasonal] .season-table-story p { hyphens:auto;hyphenate-limit-chars:8 3 3; }
+  body[data-seasonal] :is(.season-table-story p,.season-reading-note p,.season-reading-note h3) { hyphens:auto;hyphenate-limit-chars:8 3 3; }
 }
 
 /* Play is primary, sound is secondary. The triangle's centroid is almost

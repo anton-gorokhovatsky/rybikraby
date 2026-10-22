@@ -64,6 +64,75 @@
     return `<a class="row-reference${dated ? ' row-reference-dated' : ''}" href="${url}" target="_blank" rel="noopener"><span class="row-link-label">${content}</span> <span aria-hidden="true">↗</span></a>`;
   };
 
+  // These are attributed editorial readings, separate from Yuri's own words
+  // and the dated history of each product. No borrowed translation is quoted.
+  const tasteReadings = {
+    autumn: {
+      title: 'Сначала — рассмотреть.',
+      body: 'У Танидзаки поднимают крышку тёмной лаковой чаши: белый рис, облако пара. Ещё не попробовал, а вкус уже занимает всё внимание. С икрой тоже хочется задержаться на этом мгновении: посмотреть на свет в зерне, набрать немного на ложку. И только потом — попробовать.',
+      source: 'Танидзаки, «Похвала тени»',
+      url: 'https://tricycle.org/magazine/tasting-darkness/'
+    },
+    summer: {
+      title: 'А день уже стал лучше.',
+      body: 'Хемингуэй закончил рассказ и заказал устриц с белым вином. Морской вкус, холодный глоток — и вместо усталости уже хочется строить планы. У первой ложки новой икры свой короткий момент: ещё не обсуждаешь соль и зерно, просто пробуешь.',
+      source: 'Хемингуэй, «Праздник, который всегда с тобой»',
+      url: 'https://www.simonandschuster.com/books/A-Moveable-Feast/Ernest-Hemingway/9780684824994'
+    },
+    winter: {
+      title: 'Пока пекутся блины.',
+      body: 'У Шмелёва Масленица приходит с оттепелью, запахом берёзового дыма и блинов. На столе — сёмга и икра, вокруг — знакомые голоса. В такой памяти остаётся и вкус, и человек, который переворачивал блины у плиты. А у вас кто их печёт?',
+      source: 'Шмелёв, «Лето Господне», «Масленица»',
+      url: 'https://ru.wikisource.org/wiki/Лето_Господне_(Шмелёв)'
+    },
+    newyear: {
+      title: 'Проголодаться от разговора.',
+      body: 'В чеховской «Сирене» секретарь рассказывает о селёдке, кулебяке и стерляди. Председатель портит лист за листом, слушатели не выдерживают и уезжают обедать. Еды ещё нет перед глазами, а разговор уже сделал своё дело. Хорошо, когда рядом есть человек, который умеет так рассказывать о вкусе.',
+      source: 'Чехов, «Сирена»',
+      url: 'https://ru.wikisource.org/wiki/Сирена_(Чехов)'
+    }
+  };
+  tasteReadings.spring = tasteReadings.autumn;
+  const cookingReadings = {
+    autumn: {
+      title: 'Море и земля — в одной кастрюле.',
+      body: 'У Неруды рыба проходит путь от штормового чилийского моря до кухни. Чеснок, золотистый лук, креветки; в конце — сливки. В его оде рыбной похлёбке к столу приходят вместе вкусы моря и земли.',
+      continuation: 'У сёмги на нашей кухне будет свой путь. Пока филе солится, из головы и обрези можно варить бульон. Запотевает окно, пахнет луком. Пробуешь с ложки — и решаешь, добавить ли ещё перца.',
+      source: 'Пабло Неруда, ода рыбной похлёбке',
+      url: 'https://cultura.fundacionneruda.org/2023/06/oda-al-caldillo-de-congrio/'
+    },
+    winter: {
+      title: 'С мороза — к горячей миске.',
+      body: 'В «Моби Дике» Измаил и Квикег приезжают на Нантакет замёрзшими и голодными. В трактире им подают похлёбку с моллюсками. Над мисками поднимается пар; друзья съедают всё и пробуют ещё одну — с треской.',
+      continuation: 'В такой вечер хочется отогреть ладони, отломить хлеба и придвинуть миску поближе. Для домашнего рыбного супа пригодятся голова и обрезь сёмги. Пусть на плите тихо кипит, пока все добираются домой.',
+      source: 'Мелвилл, «Моби Дик», глава «Похлёбка»',
+      url: 'https://www.gutenberg.org/files/2701/2701-h/2701-h.htm#link2HCH0015'
+    },
+    spring: {
+      title: 'Море тоже умеет светиться.',
+      body: 'У Куприна в «Листригонах» ночью светится вода: за рыбой тянутся серебристые следы, вёсла оставляют сияющие полосы. Опускаешь руку за борт — и огоньки остаются на пальцах. Обычная рыбацкая ночь становится чудом.',
+      continuation: 'У Куприна — Балаклава и ночная ловля. У Юры — Петербург и корюшка, пахнущая огурцами. Две разные истории о том, как рыба остаётся в памяти вместе с целым городом.',
+      source: 'Куприн, «Листригоны», «Воровство»',
+      url: 'https://lib.ru/LITRA/KUPRIN/listrygo.txt'
+    }
+  };
+  cookingReadings.summer = cookingReadings.autumn;
+  cookingReadings.newyear = cookingReadings.autumn;
+  const tableReading = {
+    title: 'Когда ужин — подарок.',
+    body: 'Бабетта у Карен Бликсен выигрывает десять тысяч франков и тратит их на один ужин. Наконец можно приготовить так, как она умеет. Весь вечер — её работа, её вкус, её подарок людям, у которых она нашла дом.',
+    source: 'Карен Бликсен, «Пир Бабетты»',
+    url: 'https://litteratursiden.dk/analyser/blixen-karen-babettes-gaestebud'
+  };
+  const readingNote = (id, reading) => {
+    const note = document.createElement('aside');
+    note.className = 'season-reading-note';
+    note.id = id;
+    note.setAttribute('aria-labelledby', `${id}-title`);
+    note.innerHTML = `<h3 id="${id}-title">${text(reading.title)}</h3><p>${text(reading.body)}</p>${link(reading.url, reading.source)}`;
+    return note;
+  };
+
   tokyoRow = options => {
     const page = document.createElement('template');
     page.innerHTML = accepted(options);
@@ -138,6 +207,8 @@
       opening.append(copy, tasting);
       caviar.prepend(opening);
     }
+    const tasteReading = readingNote('taste-reading', tasteReadings[key]);
+    (key === 'summer' ? caviar.querySelector('.cp-caviar-conversation') : caviar.querySelector('.cp-caviar-product')).append(tasteReading);
     const fishPicture = root.querySelector('.dialogue-fish-picture');
     const uses = document.createElement('div');
     uses.className = 'fish-uses';
@@ -150,24 +221,19 @@
       ['fillets', 'Посолить', 'Два куска филе сёмги из той же фотографии', 547, 1349]
     ].map(([part, label, alt, width, height]) => `<figure class="fish-use fish-use-${part}"><figcaption>${label}</figcaption><a href="assets/fish-${part}.png" target="_blank" rel="noopener" aria-label="${label}: рассмотреть рыбу в полном размере"><img src="assets/fish-${part}.png" width="${width}" height="${height}" alt="${alt}" loading="lazy"></a></figure>`).join('') + `<div class="fish-uses-source">${link('https://t.me/Yuraikra', 'Из истории Юры · 14.01.2025')}</div>`;
     fishPicture.replaceWith(uses);
-    if (key === 'autumn') {
-      // One sourced association at the table. Editorial narration stays outside
-      // Yuri's speech; the modern meal is an idea, not a historical recipe.
-      const story = document.createElement('aside');
-      story.className = 'season-table-story';
-      story.id = 'fish-table';
-      story.setAttribute('aria-labelledby', 'fish-table-title');
-      story.innerHTML = `<h3 id="fish-table-title">${text('А к ухе — пирог?')}</h3>
-        <div class="season-story-part">
-          <p class="season-story-lead">${text('У Гиляровского расстегай у Тестова режут «розанчиком» — на узкие ломтики от середины к румяным краям. Так и хочется поставить пирог посреди стола и позвать всех к обеду.')}</p>
-          ${link('https://ru.wikisource.org/wiki/Москва_и_москвичи_(Гиляровский)/Трактиры', 'Гиляровский, «Москва и москвичи»')}
-        </div>
-        <div class="season-story-part">
-          <p>${text('А дома можно взять сёмгу: филе — в начинку, голову и обрезь — на бульон. Попроси Юру подобрать рыбу для такого стола.')}</p>
-          <a class="row-order-link" href="https://t.me/Yuraikra" target="_blank" rel="noopener"><span class="row-link-label">${text('Спросить Юру о рыбе')}</span> <span aria-hidden="true">↗</span></a>
-        </div>`;
-      fish.querySelector('.cp-fish-layout').after(story);
-    }
+    const cooking = cookingReadings[key];
+    const story = document.createElement('aside');
+    story.className = 'season-table-story';
+    story.id = 'fish-table';
+    story.setAttribute('aria-labelledby', 'fish-table-title');
+    story.innerHTML = `<h3 id="fish-table-title">${text(cooking.title)}</h3>
+      <div class="season-story-part">
+        <p class="season-story-lead">${text(cooking.body)}</p>
+        ${link(cooking.url, cooking.source)}
+      </div>
+      <div class="season-story-part"><p>${text(cooking.continuation)}</p></div>`;
+    fish.querySelector('.cp-fish-layout').after(story);
+    root.querySelector('.cp-counter-reply').append(readingNote('table-reading', tableReading));
     // The same stroke and em-size follow the text in every link family.
     root.querySelectorAll('a>span[aria-hidden="true"]').forEach(span => {
       const direction = span.textContent.trim();
