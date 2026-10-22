@@ -54,7 +54,7 @@ body[data-seasonal] .row-action-arrow { align-self:flex-start;margin-block-start
 body[data-seasonal] .row-reference-dated>.row-link-label { display:flex;flex-wrap:wrap;align-items:first baseline;gap:.25em .75em; }
 .row-reference-dated time { white-space:nowrap; }
 body[data-seasonal] :is(.header-contact,.dialogue-reply,.dialogue-footer-link,.row-order-link) { gap:.75em; }
-body[data-seasonal] .dialogue-reply { align-items:center;min-width:0;max-width:100%;min-height:48px;padding:.67em min(1em,24px) .83em;border-radius:18px 18px 4px 18px;line-height:1.25; }
+body[data-seasonal] .dialogue-reply { align-items:center;min-width:0;max-width:100%;min-height:48px;--reply-inset:max(.75em,calc((48px - 1lh) / 2));padding:calc(var(--reply-inset) - .08em) min(1em,24px) calc(var(--reply-inset) + .08em);border-radius:18px 18px 4px 18px;line-height:1.25; }
 body[data-seasonal] .dialogue-reply .dialogue-action-label { min-width:0;font-size:inherit;line-height:inherit;overflow-wrap:anywhere; }
 body[data-seasonal] .dialogue-reply .row-action-arrow { align-self:center;margin-block-start:0; }
 @supports (corner-shape:superellipse(1.6)) {
