@@ -26,36 +26,44 @@ body[data-seasonal] .cp-exchange { margin-top:var(--space-layout); }
 body[data-seasonal] .cp-caviar-conversation .cp-exchange { margin-top:0; }
 body[data-seasonal] .cp-source { margin-top:var(--space-copy); }
 body[data-seasonal] :is(.cp-source,.season-feature .row-reference,.season-photo figcaption,.fish-uses-source) { font-size:var(--type-caption); }
-body[data-seasonal] .cp-shells-grid { max-width:calc(2 * var(--player-feature-width) + var(--cp-layout-gap));align-items:start;row-gap:var(--space-copy); }
-body[data-seasonal] .cp-shell { --player-portrait-width:var(--player-feature-width);display:grid;grid-template-rows:subgrid;grid-row:span 3; }
+body[data-seasonal] .cp-shells-grid { grid-template-columns:minmax(0,1fr);align-items:start;gap:var(--space-layout); }
+body[data-seasonal] .cp-shell { --player-portrait-width:var(--player-feature-width); }
 body[data-seasonal] .cp-shell>.cp-copy { margin-top:0; }
 body[data-seasonal] .cp-shell>.row-player { margin-top:0; }
 body[data-seasonal] :is(.cp-product-answer,.cp-shell>.cp-copy) { max-width:var(--player-portrait-width); }
 body[data-seasonal] .cp-story-heading { max-width:26ch;margin:0;font-size:var(--type-question);font-weight:400;line-height:1.25;letter-spacing:-.02em;text-wrap:pretty; }
 body[data-seasonal] .cp-story-intro { max-width:var(--player-portrait-width);margin-bottom:var(--space-group); }
 body[data-seasonal] .cp-story-intro .cp-product-answer { margin:var(--space-copy) 0 0; }
-body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice tasting' 'story tasting';row-gap:var(--space-layout); }
+body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice story';row-gap:var(--space-layout); }
 body[data-seasonal] .cp-caviar-conversation>.cp-exchange { grid-area:choice; }
-body[data-seasonal] :is(.cp-caviar-conversation,.season-summer-opening) .cp-caviar-product { display:contents; }
-body[data-seasonal] .cp-caviar-product>.cp-story-intro { grid-area:story;max-width:41ch;margin-bottom:0; }
-body[data-seasonal] .cp-caviar-product>.row-player { grid-area:tasting; }
-body[data-seasonal] .season-summer-opening { grid-template-areas:'copy tasting' 'story tasting';gap:var(--space-layout) var(--cp-layout-gap); }
+body[data-seasonal] :is(.cp-caviar-conversation,.season-summer-opening) .cp-caviar-product { display:block;grid-area:story; }
+body[data-seasonal] .cp-caviar-product>.cp-story-intro { max-width:41ch;margin-bottom:var(--space-group); }
+body[data-seasonal] .season-summer-opening { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'copy story';gap:var(--space-layout) var(--cp-layout-gap); }
 body[data-seasonal] .season-summer-opening>.cp-caviar-copy { grid-area:copy; }
-body[data-seasonal] .season-summer-opening .cp-caviar-product>.row-player { justify-self:end; }
+body[data-seasonal] .season-summer-opening .cp-story-intro { margin-top:var(--space-layout); }
+body[data-seasonal] .season-summer-opening .cp-video-note-description { display:none; }
+body[data-seasonal] .season-comparison { margin-top:var(--space-layout); }
+body[data-seasonal] .season-comparison .row-lots { grid-template-columns:minmax(0,1fr);margin-top:0; }
+body[data-seasonal] .season-comparison .row-lot { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9.5rem),1fr));gap:var(--space-copy) var(--space-group);align-items:start; }
+body[data-seasonal] .season-comparison .row-lot h3 { margin-top:-.06em; }
+body[data-seasonal] .season-comparison .row-lot dl { margin-top:0; }
 .cp-story-sources { display:flex;flex-wrap:wrap;align-items:first baseline;gap:0 var(--space-group);margin-top:var(--space-inline); }
 body[data-seasonal] :is(.cp-story-sources,.cp-story-attribution) .row-reference { min-height:44px;font-size:var(--type-caption);color:var(--muted); }
 .cp-story-attribution { margin:var(--space-inline) 0 0; }
-body[data-seasonal] .cp-work { display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);gap:var(--space-layout) var(--cp-layout-gap);align-items:start; }
+body[data-seasonal] .cp-work { display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);grid-template-areas:'story portrait' 'next portrait';gap:var(--space-layout) var(--cp-layout-gap);align-items:start;margin:0 0 var(--space-topic); }
+body[data-seasonal] .cp-work-story { grid-area:story; }
+body[data-seasonal] .cp-work-portrait { grid-area:portrait;--player-width:var(--player-feature-width); }
+body[data-seasonal] .cp-work-next { grid-area:next; }
 body[data-seasonal] .cp-work-story .cp-question { margin-left:0; }
 body[data-seasonal] .cp-work-story .cp-copy { max-width:41ch; }
-body[data-seasonal] .cp-work .cp-voices { gap:var(--space-group); }
-body[data-seasonal] .cp-work .cp-voice { display:grid;grid-template-rows:subgrid;grid-row:span 2;gap:var(--space-group);container-type:normal; }
-body[data-seasonal] .cp-work .cp-voice>.row-player { width:100%;max-width:var(--player-width); }
+body[data-seasonal] .cp-work .cp-voice { display:flex;flex-direction:column;gap:var(--space-group);container-type:normal; }
+body[data-seasonal] .cp-work .cp-voice-answer { flex:none;max-width:34ch; }
+body[data-seasonal] .cp-work .cp-voice>.row-player { flex:none;width:100%;max-width:var(--player-width); }
 body[data-seasonal] .cp-work .cp-voice .row-player-subtitles { width:100%; }
 body[data-seasonal] .cp-supper-note { max-width:var(--player-feature-width);margin-top:var(--space-layout); }
 @media(max-width:760px) {
-  body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice' 'story' 'tasting'; }
-  body[data-seasonal] .season-summer-opening { grid-template-areas:'copy' 'story' 'tasting'; }
+  body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice' 'story'; }
+  body[data-seasonal] .season-summer-opening { grid-template-columns:minmax(0,1fr);grid-template-areas:'copy' 'story'; }
 }
 body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-areas:'choice'; }
 body[data-seasonal] .dialogue-hello { font-size:var(--type-invitation);line-height:1.15; }
@@ -92,6 +100,44 @@ body[data-seasonal] .dialogue-start .dialogue-action-label { display:inline;over
 body[data-seasonal] .dialogue-start .row-action-arrow { float:right;margin-inline-start:.75em;margin-block-start:calc((1lh - 1em) / 2); }
 body[data-seasonal] .cp-voice-answer { max-width:none; }
 body[data-seasonal] .cp-voice-copy { flex:1 1 20ch;min-width:0; }
+
+/* Five optional video notes give context before expansion. They use the same
+   original posters and player controls, with no playback on opening. */
+body[data-seasonal] .cp-video-note { min-width:0;container:video-note / inline-size;--note-preview:clamp(7rem,10vw,8.5rem);--player-portrait-width:var(--player-feature-width); }
+body[data-seasonal] .cp-video-note>summary { display:grid;grid-template-columns:minmax(0,1fr) var(--note-preview);gap:var(--space-group);align-items:start;list-style:none;cursor:pointer; }
+.cp-video-note>summary::-webkit-details-marker { display:none; }
+.cp-video-note-copy { display:block;min-width:0; }
+body[data-seasonal] .cp-video-note-title { display:block;font-size:var(--type-question);line-height:1.25;letter-spacing:-.02em;text-wrap:pretty; }
+body[data-seasonal] .cp-video-note-description { display:block;max-width:36ch;margin-top:var(--space-copy);font-size:var(--type-body);line-height:1.5; }
+body[data-seasonal] .cp-video-note-meta { display:block;margin-top:var(--space-copy);font-size:var(--type-caption);line-height:1.4;color:var(--muted); }
+body[data-seasonal] .cp-video-note-action { display:inline-flex;gap:var(--space-inline);align-items:center;min-height:44px;font-size:var(--type-caption);line-height:1.4;text-decoration:underline;text-underline-offset:.22em; }
+.cp-video-note-action svg { flex:none;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+.cp-video-note-poster { display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover; }
+.cp-video-note-round .cp-video-note-poster { aspect-ratio:1;border-radius:50%; }
+.cp-video-note .cp-note-open { display:none; }
+.cp-video-note[open] .cp-note-closed { display:none; }
+.cp-video-note[open] .cp-note-open { display:inline; }
+.cp-video-note[open] .cp-video-note-action svg { transform:rotate(180deg); }
+.cp-video-note[open]>summary { grid-template-columns:minmax(0,1fr); }
+.cp-video-note[open]>summary .cp-video-note-poster { display:none; }
+.cp-video-note-body { margin-top:var(--space-copy); }
+body[data-seasonal] .cp-video-note-body>.row-player { width:100%;max-width:var(--player-feature-width); }
+body[data-seasonal] .cp-video-note>summary:focus-visible { outline:2px solid var(--ink);outline-offset:6px; }
+@container video-note (width < 18rem) {
+  body[data-seasonal] .cp-video-note>summary { grid-template-columns:minmax(0,1fr); }
+  .cp-video-note-poster { width:min(100%,var(--note-preview)); }
+}
+@media(hover:hover) and (pointer:fine) {
+  .cp-video-note>summary:hover .cp-video-note-action { text-decoration-thickness:2px; }
+}
+body[data-seasonal] .cp-crab-layout { grid-template-areas:'reply tasting' 'product tasting' 'shells tasting';grid-template-rows:auto auto 1fr;gap:var(--space-layout) var(--cp-layout-gap); }
+body[data-seasonal] .cp-crab-tasting { --player-portrait-width:var(--player-feature-width); }
+body[data-seasonal] .cp-crab-tasting>.row-player { width:100%; }
+body[data-seasonal] .cp-crab-product { align-self:start; }
+body[data-seasonal] .cp-shells { grid-area:shells;margin-top:0; }
+body[data-seasonal] :is(.cp-crab-reply,.cp-counter-reply,.cp-shells)>.cp-question { margin-left:0; }
+body[data-seasonal] .cp-counter-product { --player-portrait-width:var(--player-feature-width); }
+body[data-seasonal] .cp-counter-reply .cp-answer { max-width:18ch; }
 
 /* Compact pieces share a column; the full fillet balances both of them.
    Cutting and photographs share a starting line and keep their sources. */
@@ -130,14 +176,14 @@ body[data-seasonal] .season-story-links .row-order-link { min-height:44px;font-s
   body[data-seasonal] .cp-fish-reply>.cp-copy { grid-column:1; }
   .season-table-story,.season-story-links { grid-template-columns:minmax(0,1fr); }
 }
-@container fish-scene (width < 64rem) {
-  body[data-seasonal] .cp-work { grid-template-columns:minmax(0,1fr); }
-}
 @container fish-scene (width < 38rem) {
   .fish-uses { grid-template-columns:minmax(0,1fr);grid-template-areas:'steaks' 'broth' 'fillets' 'source';gap:var(--space-layout); }
 }
 @container fish-scene (width < 44rem) {
   body[data-seasonal] .cp-voices { grid-template-columns:minmax(0,1fr); }
+}
+@container fish-scene (width < 54rem) {
+  body[data-seasonal] .cp-work { grid-template-columns:minmax(0,1fr);grid-template-areas:'story' 'portrait' 'next'; }
 }
 
 /* One responsive answer role for every scene. A rem-based field responds to
@@ -145,7 +191,7 @@ body[data-seasonal] .season-story-links .row-order-link { min-height:44px;font-s
 body[data-seasonal] .row-main { container:page-reading / inline-size; }
 @container page-reading (width < 12rem) {
   body[data-seasonal] .cp-scene { --type-answer:var(--type-answer-narrow); }
-  body[data-seasonal] .cp-scene :is(.cp-copy,.cp-question,.cp-voice-answer,.cp-product-answer,.cp-story-heading,.row-lot dd),
+  body[data-seasonal] .cp-scene :is(.cp-copy,.cp-question,.cp-voice-answer,.cp-product-answer,.cp-story-heading,.row-lot dd,.cp-video-note-title,.cp-video-note-description),
   body[data-seasonal] .season-table-story p { hyphens:auto;hyphenate-limit-chars:8 3 3; }
 }
 
@@ -163,6 +209,7 @@ body[data-seasonal] .row-player-time>span { display:none; }
 body[data-seasonal] .row-player-time>[data-remaining] { display:inline;font-size:inherit;opacity:1;color:inherit; }
 body[data-seasonal] .row-player-time>[data-remaining]::before { content:none; }
 body[data-seasonal] .row-player-controls { margin-top:16px; }
+body[data-seasonal] .row-player video { scroll-margin-top:calc(var(--row-menu-height,64px) + var(--space-copy)); }
 body[data-seasonal] .row-player-meta .row-reference { font-size:var(--type-caption); }
 body[data-seasonal] .row-player-meta { display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px;align-items:first baseline; }
 body[data-seasonal] .row-player-meta .row-reference { display:inline-flex;gap:.5em;width:auto;max-width:100%;align-items:flex-start; }
@@ -205,7 +252,9 @@ html.season-restoring { scroll-behavior:auto!important; }
   body[data-seasonal] { --type-question:1.375rem;--type-control:1rem;--space-topic:3rem; }
   body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:100%;max-width:var(--player-portrait-width); }
   body[data-seasonal] .cp-shells-grid { row-gap:var(--space-copy); }
-  body[data-seasonal] .cp-shell+.cp-shell { margin-top:var(--space-layout); }
+  body[data-seasonal] .cp-shell+.cp-shell { margin-top:0; }
+  body[data-seasonal] .cp-video-note>summary { gap:var(--space-copy); }
+  body[data-seasonal] .cp-crab-layout { grid-template-areas:'reply' 'tasting' 'product' 'shells';grid-template-rows:auto; }
   body[data-seasonal] .dialogue-footer-details { margin-top:32px; }
   body[data-seasonal] .dialogue-footer-contacts { flex-direction:column;align-items:flex-start;gap:4px; }
   /* Oks' visible caps are shorter than its em. Tighten both sign lines as one

@@ -153,5 +153,46 @@
       "method": "Короткая письменная цитата из подписи к ролику; восстановлена ё и нормализовано раздельное написание. Не цитата из автоматической расшифровки."
     },
     "limits": "Все 12 MP4, их звук и VTT сохранены. Стоп-кадры не ретушировались и не генерировались; происхождение и время записаны в dialogue/sources.json."
+  },
+  "story_hierarchy_2026_10_22": {
+    "scope": "Editorial hierarchy and page rhythm within the accepted Oks/Golos, seasonal palettes, real media and first-screen composition.",
+    "principal_sequence": [
+      "Introduction and choice",
+      "How Yuri began and learned to work with fish",
+      "One salmon and the home table",
+      "Shared tastings, cooking and music",
+      "Direct contact"
+    ],
+    "supplementary_video_notes": [
+      "caviar-tasting",
+      "fish-work",
+      "crab",
+      "scallop",
+      "urchin"
+    ],
+    "presentation": "Five native details notes preserve the original full players. Short text and the existing poster are visible before opening. Opening never starts playback; closing pauses and retains position.",
+    "summer_exception": "The first-nerka tasting opens by default because it is the summer edition principal story. Its date, first-party story and comparison remain alongside it.",
+    "origin_detail": {
+      "source": "https://t.me/ikrabov/41",
+      "source_date": "2024-09-27",
+      "used": "The author describes collecting requests for nearly seventy kilograms of smelt by that evening, before having held the fish.",
+      "limits": "Requests, not a claim that those deliveries were completed. Editorial paraphrase, not a direct quotation."
+    },
+    "challenge_context": {
+      "source": "https://t.me/ikrabov/108",
+      "source_date": "2025-01-14",
+      "video_date": "2025-01-13",
+      "limits": "The declared fifty-fish challenge and a work video from that period; not a claim the fifty fish were completed or that this video records the challenge."
+    },
+    "preserved": [
+      "Accepted hero",
+      "Selected caviar-choice frame at 15.768333 seconds",
+      "All twelve original MP4 files and captions",
+      "All original source links and archive dates",
+      "Salmon cutouts and full-size image links",
+      "Direct Telegram contact",
+      "Footer seasonal previews"
+    ],
+    "transformations": "Existing posters also appear as small CSS-cropped thumbnails in closed notes. Full source aspect ratios are retained in opened players. No new images, retouch, audio editing or video trimming."
   }
 }

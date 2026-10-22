@@ -118,6 +118,12 @@
     video.addEventListener('pause', () => { if(!video.error) setStatus(''); update(); });
     video.addEventListener('ended', () => { setStatus(''); update(); });
     video.addEventListener('error', () => { setStatus('error'); update(); });
+    // Closing an optional note must never leave an invisible video playing.
+    // Reopening preserves the visitor's position and waits for Play again.
+    const note = player.closest('.cp-video-note');
+    if(note) note.addEventListener('toggle', () => {
+      if(!note.open) { starting = false; video.pause(); setStatus(video.error?'error':''); update(); }
+    });
     ['timeupdate','volumechange','seeked'].forEach(event => video.addEventListener(event, update));
     video.controls = false;
     controls.hidden = false;
@@ -126,4 +132,12 @@
   document.querySelectorAll('[data-order]').forEach(button => button.addEventListener('click', () => {
     players.forEach(player => player.querySelector('video').pause());
   }));
+  const revealLinkedVideo = () => {
+    const id = location.hash.slice(1);
+    const target = id && document.getElementById(id);
+    const note = target && target.closest('.cp-video-note');
+    if(note && !note.open) { note.open = true; target.scrollIntoView({block:'start',behavior:'instant'}); }
+  };
+  window.addEventListener('hashchange',revealLinkedVideo);
+  revealLinkedVideo();
 })();

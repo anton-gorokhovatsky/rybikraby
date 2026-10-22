@@ -118,17 +118,25 @@
         <figcaption>${link('https://t.me/ikrabov/123', 'В канале · 26.03.2025')}</figcaption>
       </figure>`;
       fish.querySelector('.cp-scene-heading').after(feature);
+      setText('.cp-work-story>.cp-question', 'И что было дальше?');
+      setText('.cp-work-story>.cp-copy', 'В тот первый день Юра собрал заявок почти на семьдесят килограммов корюшки. Он ещё не держал рыбу в руках, но уже решил попробовать себя в рыбном деле.');
     }
     if (key === 'summer') {
       const tasting = caviar.querySelector('.cp-caviar-product');
+      // The first tasting is the summer's principal story, rather than an
+      // optional archive note in the other seasons.
+      tasting.querySelector('.cp-video-note').open = true;
       const opening = document.createElement('div');
       opening.className = 'season-summer-opening';
       const copy = caviar.querySelector('.cp-caviar-copy');
       const comparison = document.createElement('div');
       comparison.className = 'season-comparison';
       comparison.append(copy.querySelector('.row-lots'), copy.querySelector('.cp-source'));
+      // The summer's facts and comparison fill the text column beside the
+      // full tasting. Keep the tall image from stranding an empty column.
+      copy.append(tasting.querySelector('.cp-story-intro'), comparison);
       opening.append(copy, tasting);
-      caviar.prepend(opening, comparison);
+      caviar.prepend(opening);
     }
     const fishPicture = root.querySelector('.dialogue-fish-picture');
     const uses = document.createElement('div');

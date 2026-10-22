@@ -22,6 +22,19 @@
     const question=text=>`<p class="cp-question">${prose(text)}</p>`;
     const paragraph=(text,style='cp-copy')=>`<p class="${style}">${prose(text)}</p>`;
     const voice=(key,text)=>`<div class="cp-voice">${paragraph(text,'cp-voice-answer')}${player(key)}</div>`;
+    // Supplementary footage remains here in full. Its short, visible note lets
+    // a reader follow the story without walking through another tall player.
+    const videoNote=(key,label,description)=>{
+      const original=root.querySelector(`#story-${key}`).closest('.row-player');
+      const video=original.querySelector('video');
+      const seconds=Math.floor(Number(original.dataset.duration));
+      const duration=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
+      const date=original.querySelector('[data-player-caption]').textContent.replace(/^Архив · /,'');
+      return `<details class="cp-video-note${original.classList.contains('row-player-round')?' cp-video-note-round':''}">
+        <summary><span class="cp-video-note-copy"><span class="cp-video-note-title">${prose(label)}</span><span class="cp-video-note-description">${prose(description)}</span><span class="cp-video-note-meta">${date} · ${duration}</span><span class="cp-video-note-action"><span class="cp-note-closed">Открыть видео</span><span class="cp-note-open">Свернуть видео</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></span></span><img class="cp-video-note-poster" src="${video.getAttribute('poster')}" width="${video.getAttribute('width')}" height="${video.getAttribute('height')}" loading="lazy" alt=""></summary>
+        <div class="cp-video-note-body">${player(key)}</div>
+      </details>`;
+    };
     const reference=(url,label)=>`<a class="row-reference" href="${url}" target="_blank" rel="noopener"><span class="row-link-label">${prose(label)}</span><span aria-hidden="true">↗</span></a>`;
     const hero=root.querySelector('.row-hero').outerHTML;
     const header=root.querySelector('.row-header').outerHTML;
@@ -47,13 +60,30 @@
               ${paragraph('4 июня 2026-го в канале объявили о девяти килограммах первой икры нерки с Камчатки. В июньском видео Юра пробует новую нерку уже в Москве.','cp-product-answer')}
               <div class="cp-story-sources">${reference('https://t.me/ikrabov/192','Начало сезона в канале')}</div>
             </div>
-            ${player('caviar-tasting')}
+            ${videoNote('caviar-tasting','Проба новой нерки','Юра пробует икру и показывает зерно вблизи.')}
           </div>
         </div>
       </section>
 
       <section id="fish" class="cp-scene cp-fish dialogue-section dialogue-dark" tabindex="-1" aria-labelledby="fish-title">
         <div class="cp-scene-heading">${title('fish')}</div>
+        <div class="cp-work">
+          <div class="cp-work-story">
+            ${question('С чего всё началось?')}
+            <blockquote class="cp-answer">${prose('«Меня так прёт от этого»')}</blockquote>
+            <p class="cp-story-attribution">${reference('https://t.me/ikrabov/90','Юра, декабрь 2024')}</p>
+            ${paragraph('В майском Петербурге Юра вышел из дома на запах огурцов — так пахла корюшка. К вечеру собрал заявок почти на семьдесят килограммов, хотя ещё не держал эту рыбу в руках.')}
+            ${paragraph('Спустя несколько лет захотел сам работать с рыбой и ножом — и пошёл учиться разделке.')}
+            <div class="cp-story-sources">${reference('https://t.me/ikrabov/41','История первой корюшки')}</div>
+          </div>
+          <div class="cp-work-portrait">
+            ${voice('fish-start','Декабрь 2024-го. Юра решает самому заняться охлаждённой рыбой.')}
+          </div>
+          <div class="cp-work-next">
+            ${videoNote('fish-work','Пятьдесят рыб — своими руками','В январе 2025-го Юра объявил себе такой челлендж. На видео того времени — работа на складе: режем, вакуумируем, солим.')}
+            <div class="cp-story-sources">${reference('https://t.me/ikrabov/108','Пост о челлендже')}</div>
+          </div>
+        </div>
         <div class="cp-fish-layout">
           <div class="cp-fish-reply">
             ${question('А рыбу к ужину?')}
@@ -66,23 +96,6 @@
           </div>
           ${fishPicture}
         </div>
-        <div class="cp-work">
-          <div class="cp-work-story">
-            ${question('Ты сам этим занимаешься?')}
-            <blockquote class="cp-answer">${prose('«Меня так прёт от этого»')}</blockquote>
-            <p class="cp-story-attribution">${reference('https://t.me/ikrabov/90','Юра, декабрь 2024')}</p>
-            ${paragraph('Всё началось с запаха корюшки в майском Петербурге. Спустя несколько лет Юра увлёкся работой рыбных рядов и пошёл учиться разделке.')}
-            ${paragraph('В январе 2025-го объявил себе челлендж: почистить и разделать пятьдесят рыб своими руками. В канале остались первые попытки и рабочие дни на складе.')}
-            <div class="cp-story-sources">
-              ${reference('https://t.me/ikrabov/41','Первая корюшка')}
-              ${reference('https://t.me/ikrabov/108','Челлендж на пятьдесят рыб')}
-            </div>
-          </div>
-          <div class="cp-voices">
-            ${voice('fish-start','Декабрь 2024-го. Решение самому заняться охлаждённой рыбой.')}
-            ${voice('fish-work','Январь 2025-го. Уже на складе: режем, вакуумируем, солим.')}
-          </div>
-        </div>
       </section>
 
       <section id="seafood" class="cp-scene cp-seafood dialogue-section" tabindex="-1" aria-labelledby="seafood-title">
@@ -92,25 +105,21 @@
             ${question('А что ещё к столу?')}
             ${paragraph('Крупные куски — к столу. Опилио — в салат.','cp-answer')}
           </div>
-          <div class="cp-product cp-crab-product">${player('crab')}</div>
           <div class="cp-crab-tasting">
             ${paragraph('Для салата Юра предлагает мясо опилио — уже без панциря. В этой июньской записи 2026-го показывает его рядом с фалангами.','cp-product-answer')}
             ${player('crab-table')}
           </div>
-        </div>
-        <div class="cp-shells">
-          ${question('А кроме краба?')}
-          <div class="cp-shells-grid">
-            <article class="cp-shell">
-              <h3>Гребешок с Сахалина</h3>
-              ${paragraph('Юра открывает банку — и говорит о запахе, который жаль не передать через экран. Внутри — крупный гребешок с Сахалина.')}
-              ${player('scallop')}
-            </article>
-            <article class="cp-shell">
-              <h3>Икра морского ежа</h3>
-              ${paragraph('К моменту обзора Юра уже попробовал икру, а ребята за кадром успели съесть по баночке. Потом он показывает термокоробку, в которой приехала эта партия.')}
-              ${player('urchin')}
-            </article>
+          <div class="cp-product cp-crab-product">${videoNote('crab','Фаланги крупным планом','Короткая запись из ноября 2024-го: мясо краба без панциря.')}</div>
+          <div class="cp-shells">
+            ${question('А кроме краба?')}
+            <div class="cp-shells-grid">
+              <article class="cp-shell">
+                ${videoNote('scallop','Гребешок с Сахалина','Юра открывает банку прямо на складе. Жаль, запах не передать через экран.')}
+              </article>
+              <article class="cp-shell">
+                ${videoNote('urchin','Икра морского ежа','Юра уже попробовал. Ребята за кадром успели съесть по баночке. В видео — и термокоробка, в которой приехала партия.')}
+              </article>
+            </div>
           </div>
         </div>
       </section>
