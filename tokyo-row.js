@@ -40,7 +40,7 @@ function tokyoRow({products, contactUrl}) {
         <input class="row-player-seek" type="range" min="0" max="${duration}" step="0.1" value="0" aria-label="Позиция: ${label}" aria-controls="${id}" disabled>
         <p class="row-player-status" role="status" aria-live="polite"></p>
       </div>
-      <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span class="row-link-label" data-player-caption>Архив · ${date}</span>&nbsp;${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Автоматические субтитры: ${label}" aria-controls="${id}-captions" aria-pressed="true" hidden><span aria-hidden="true">CC</span></button>`:''}</figcaption>
+      <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span class="row-link-label" data-player-caption>Архив · ${date}</span>${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Субтитры: ${label}" aria-description="Автоматическая расшифровка" aria-controls="${id}-captions" aria-pressed="true" hidden><span class="row-caption-label">Субтитры</span><span class="row-caption-state" data-caption-state aria-hidden="true">вкл.</span></button>`:''}</figcaption>
       ${captions?`<p class="row-player-subtitles" id="${id}-captions" data-subtitles aria-live="off" hidden></p>`:''}
     </figure>`;
   const stories = {
@@ -64,7 +64,7 @@ function tokyoRow({products, contactUrl}) {
   const story = key => `<article class="dialogue-story">${storyPlayer(key)}<div class="dialogue-story-copy"><h3>${stories[key].title}</h3>${stories[key].copy?`<p>${stories[key].copy}</p>`:''}</div></article>`;
   return `
     <header class="site-header row-header">
-      <a class="wordmark" href="#main" aria-label="Рыба и крабы, начало"><img class="row-brand-mark" src="assets/brand/favicon-48.32a9d3ead51c.png" width="24" height="24" alt=""><span class="row-wordmark-name">РЫБА И КРАБЫ</span></a>
+      <a class="wordmark" href="#main" aria-label="Рыба и крабы, начало"><img class="row-brand-mark" src="assets/brand/favicon-48.48c4f23bb785.png" width="24" height="24" alt=""><span class="row-wordmark-name">РЫБА И КРАБЫ</span></a>
       <nav aria-label="Навигация сайта"><a href="#caviar"><span class="row-nav-label">Икра</span></a><a href="#fish"><span class="row-nav-label">Рыба</span></a><a class="header-contact" href="${contactUrl}" target="_blank" rel="noopener"><span class="row-nav-label">Написать Юре</span> <span aria-hidden="true">↗</span></a></nav>
     </header>
     <main id="main" class="row-main" tabindex="-1">
@@ -114,7 +114,7 @@ function tokyoRow({products, contactUrl}) {
         <div class="dialogue-footer-details">
           <address class="dialogue-footer-contacts">
             <a class="row-order-link dialogue-footer-phone" href="tel:+79688005000"><span class="row-link-label">+7&nbsp;968 800-50-00</span></a>
-            <a class="row-order-link" href="mailto:rybaikraby@gmail.com"><span class="row-link-label">rybaikraby<wbr>@gmail.com</span></a>
+            <a class="row-order-link dialogue-footer-email" href="mailto:rybaikraby@gmail.com" aria-label="Написать Юре на почту: rybaikraby@gmail.com" title="rybaikraby@gmail.com"><span class="row-link-label">Письмо Юре</span></a>
             <a class="row-reference" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%20124%D0%90" target="_blank" rel="noopener"><span class="row-link-label">Москва, Дмитровское шоссе, 124А</span> ${arrow}</a>
           </address>
           <a class="row-order-link dialogue-footer-channel" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Поступления и дегустации в Telegram</span> ${arrow}</a>

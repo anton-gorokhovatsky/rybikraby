@@ -26,12 +26,16 @@ jobs:
           node --check market-light.js
           node --check oks-lettering.js
           node --check market-player.js
+          node --check seasonal.js
+          node --check seasonal-light.js
+          node --check season-lettering.js
+          node --check player-refinement.js
           python3 - <<'PY'
           import os, shutil, json, hashlib, re
           from pathlib import Path
           output = Path('_site')
           output.mkdir(exist_ok=True)
-          names = ['index.html', 'styles.css', 'tokyo-row.css', 'composition.css', 'app.js', 'tokyo-row.js', 'composition.js', 'market-light.js', 'oks-lettering.js', 'market-player.js', '.nojekyll']
+          names = ['index.html', 'styles.css', 'tokyo-row.css', 'composition.css', 'app.js', 'tokyo-row.js', 'composition.js', 'market-light.js', 'oks-lettering.js', 'market-player.js', 'seasonal.js', 'seasonal.css', 'interface.css', 'seasonal-light.js', 'season-lettering.js', 'player-refinement.js', '.nojekyll']
           for name in names:
               shutil.copyfile(name, output / name)
           shutil.copytree('assets', output / 'assets', dirs_exist_ok=True)

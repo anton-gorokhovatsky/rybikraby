@@ -1,0 +1,137 @@
+/* Local colour studies: one seasonal world, with lighter and darker surfaces.
+   Photo files and layout stay intact; the hero's lighting follows the palette. */
+body[data-seasonal="spring"] {
+  --season-paper:#e7eedf;--season-ink:#1c3b2f;--season-muted:#4b6252;
+  --season-line:#859a83;--season-soft:#d7e1cb;
+  --season-deep:#203b2c;--season-on-deep:#f0f4df;--season-muted-deep:#c3d0b8;
+  --season-highlight:#d8e8a0;--season-on-highlight:#203b2c;
+  --season-display:#e0edaa;--season-hero-text:#f3f5e8;
+  --season-night:#182e24;--season-night-ink:#e7eedc;--season-night-muted:#bbcab0;
+}
+body[data-seasonal="summer"] {
+  --season-paper:#f8ead8;--season-ink:#6b301e;--season-muted:#79533f;
+  --season-line:#ba8d70;--season-soft:#efd9bb;
+  --season-deep:#84351f;--season-on-deep:#fff0d9;--season-muted-deep:#edc5a7;
+  --season-highlight:#ffe09b;--season-on-highlight:#6b301e;
+  --season-display:#ffe29e;--season-hero-text:#fff3df;
+  --season-night:#44271e;--season-night-ink:#ffecd2;--season-night-muted:#dcbaa1;
+}
+body[data-seasonal="autumn"] {
+  --season-paper:#edddc4;--season-ink:#492b24;--season-muted:#745549;
+  --season-line:#af8a6d;--season-soft:#dfc6a4;
+  --season-deep:#502d28;--season-on-deep:#fff0d3;--season-muted-deep:#ddbea5;
+  --season-highlight:#f0c17e;--season-on-highlight:#492b24;
+  --season-display:#f4cc8f;--season-hero-text:#fff1dc;
+  --season-night:#342620;--season-night-ink:#f7e4c7;--season-night-muted:#d0b59b;
+}
+body[data-seasonal="newyear"] {
+  --season-paper:#541f31;--season-ink:#fff1d5;--season-muted:#e1c4bd;
+  --season-line:#b08080;--season-soft:#6a3442;
+  --season-deep:#193a2f;--season-on-deep:#fff1d5;--season-muted-deep:#cccfb8;
+  --season-highlight:#f7d291;--season-on-highlight:#4b2131;
+  --season-display:#ffe7ac;--season-hero-text:#fff4dd;
+  --season-night:#371c29;--season-night-ink:#fff0d3;--season-night-muted:#d9b7b1;
+  --season-scheme:dark;
+}
+body[data-seasonal="winter"] {
+  --season-paper:#e6eff0;--season-ink:#1c3d51;--season-muted:#4f6877;
+  --season-line:#859fa9;--season-soft:#cddfe3;
+  --season-deep:#1c3d51;--season-on-deep:#edf5f4;--season-muted-deep:#bdced5;
+  --season-highlight:#daedef;--season-on-highlight:#1c3d51;
+  --season-display:#deeff1;--season-hero-text:#f1f7f5;
+  --season-night:#182f41;--season-night-ink:#e5f1f0;--season-night-muted:#bdcfd7;
+}
+body[data-seasonal][data-light="evening"] {
+  --season-paper:var(--season-night);--season-ink:var(--season-night-ink);
+  --season-muted:var(--season-night-muted);--season-scheme:dark;
+}
+body[data-direction="tokyo"][data-version="3"][data-seasonal] {
+  --paper:var(--season-paper);--ink:var(--season-ink);--muted:var(--season-muted);
+  --line:var(--season-line);--soft:var(--season-soft);
+  --accent:var(--season-ink);--on-accent:var(--season-paper);
+  color-scheme:var(--season-scheme,light);
+}
+body[data-seasonal][data-composition] .cp-scene.dialogue-dark {
+  --paper:var(--season-deep);--ink:var(--season-on-deep);
+  --muted:var(--season-muted-deep);--accent:var(--season-on-deep);
+  --soft:color-mix(in srgb,var(--season-on-deep) 10%,var(--season-deep));
+  background:var(--paper);color:var(--ink);
+}
+body[data-seasonal] .row-hero {
+  --ink:var(--season-hero-text);--accent:var(--season-hero-text);
+  background:var(--season-deep);color:var(--season-hero-text);
+}
+body[data-seasonal] .row-hero h1 { color:var(--season-display); }
+body[data-seasonal] .row-hero::before {
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--season-deep) calc(var(--market-light-left,.83) * 100%),transparent),
+    color-mix(in srgb,var(--season-deep) calc(var(--market-light-middle,.36) * 100%),transparent) 63%,
+    color-mix(in srgb,var(--season-deep) calc(var(--market-light-right,.68) * 100%),transparent));
+}
+body[data-seasonal] .row-hero .row-player {
+  --player-ink:var(--season-hero-text);
+  --player-line:color-mix(in srgb,var(--season-hero-text) 45%,transparent);
+}
+body[data-seasonal] .row-hero .row-play { color:var(--season-deep); }
+body[data-seasonal] .row-player-time>[data-total],
+body[data-seasonal] .row-player-time>span:nth-child(2) { opacity:1; }
+body[data-seasonal] .cp-scene .row-player-time>[data-total],
+body[data-seasonal] .cp-scene .row-player-time>span:nth-child(2) { color:var(--muted); }
+body[data-seasonal] .dialogue-start { background:var(--season-highlight);color:var(--season-on-highlight); }
+body[data-seasonal] :is(a,button,input,select):focus-visible { outline-color:var(--ink); }
+/* The accepted glass recipe: the same 10px blur, saturation and opacity levels.
+   Only the material's light/dark colours follow the season. */
+body[data-seasonal][data-menu="glass"] .row-header {
+  background:var(--season-deep);
+  background:color-mix(in srgb,var(--season-deep) 93%,transparent);
+  color:var(--season-on-deep);--ink:var(--season-on-deep);
+}
+body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"] {
+  background:var(--season-paper);
+  background:color-mix(in srgb,var(--season-paper) 95%,transparent);
+  color:var(--season-ink);--ink:var(--season-ink);
+}
+@supports (backdrop-filter:blur(10px)) or (-webkit-backdrop-filter:blur(10px)) {
+  body[data-seasonal][data-menu="glass"] .row-header { background:color-mix(in srgb,var(--season-deep) 22%,transparent); }
+  body[data-seasonal][data-menu="glass"] .row-header[data-over-lettering="true"] { background:color-mix(in srgb,var(--season-deep) 64%,transparent); }
+  body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"] { background:color-mix(in srgb,var(--season-paper) 44%,transparent); }
+  body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"][data-over-lettering="true"] { background:color-mix(in srgb,var(--season-paper) 80%,transparent); }
+}
+/* Use the existing solid fallback when a bright frame or CTA passes under
+   the menu. Otherwise the seasonal glass keeps its original transmission. */
+body[data-seasonal][data-menu="glass"] .row-header[data-surface="dark"][data-over-content="true"] { background:var(--season-deep);background:color-mix(in srgb,var(--season-deep) 93%,transparent); }
+body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"][data-over-content="true"] { background:var(--season-paper);background:color-mix(in srgb,var(--season-paper) 95%,transparent); }
+@media (hover:hover) and (pointer:fine) {
+  body[data-seasonal] .dialogue-start:hover { background:color-mix(in srgb,var(--season-highlight),white 12%); }
+}
+@media (max-width:760px) {
+  body[data-seasonal] .row-hero::before { background:linear-gradient(90deg,color-mix(in srgb,var(--season-deep) 85%,transparent),color-mix(in srgb,var(--season-deep) 45%,transparent)); }
+}
+/* Shared components and materials; only one editorial accent per edition. */
+.season-caviar-note { max-width:46ch; }
+.season-feature { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--cp-layout-gap);align-items:start;margin-bottom:var(--cp-topic-gap); }
+.season-feature-copy { min-width:0; }
+.season-feature .cp-question { margin-left:0; }
+.season-feature h3 { margin:0;font-size:min(168px,calc((100vw - 2 * var(--row-gutter) - var(--cp-layout-gap)) / 2 / var(--season-lettering)));font-weight:400;line-height:1.04; }
+.season-feature .cp-answer { margin-top:28px;max-width:18ch; }
+.season-feature .row-reference { min-height:44px;margin-top:16px;font-size:.875rem;color:var(--muted); }
+.season-photo { width:min(100%,360px);margin:0;justify-self:end; }
+.season-photo-link { display:block;cursor:zoom-in; }
+.season-photo img { display:block;width:100%;height:auto;max-height:65svh;object-fit:contain;object-position:top right; }
+.season-photo figcaption { margin-top:8px; }
+.season-photo figcaption .row-reference { margin-top:0; }
+.season-photo-link:focus-visible { outline:3px solid var(--ink);outline-offset:6px; }
+.season-summer-opening { display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:var(--cp-layout-gap);align-items:start; }
+.season-summer-opening .cp-caviar-product { justify-self:end; }
+.season-summer-opening .cp-caviar-product>.cp-product-answer { font-size:.875rem;color:var(--muted); }
+.season-comparison { margin-top:var(--cp-topic-gap); }
+.season-comparison .row-lots { margin-top:0; }
+body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-columns:minmax(0,1fr);max-width:800px; }
+@media (max-width:760px) {
+  .season-feature,.season-summer-opening { grid-template-columns:minmax(0,1fr);gap:28px; }
+  .season-feature h3 { font-size:min(120px,calc((100vw - 2 * var(--row-gutter)) / var(--season-lettering))); }
+  .season-feature .cp-answer { margin-top:24px; }
+  .season-photo { justify-self:start;width:min(100%,320px); }
+  .season-photo img { object-position:top left; }
+  .season-summer-opening .cp-caviar-product { justify-self:start; }
+}

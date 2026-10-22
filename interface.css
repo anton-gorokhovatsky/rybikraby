@@ -1,0 +1,156 @@
+/* One local refinement layer: roles, proximity, and optical weight.
+   Oks continues to carry the sign/product names; Golos carries the conversation. */
+body[data-seasonal] {
+  --type-caption:.875rem;--type-body:1.125rem;--type-voice:1.375rem;
+  --type-question:1.5rem;--type-answer:clamp(1.75rem,2.6vw,2.5rem);
+  --type-invitation:clamp(1.75rem,3.2vw,3rem);--type-control:1.125rem;
+  --space-inline:.5rem;--space-copy:1rem;--space-group:1.5rem;
+  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;
+  --cp-voice-size:var(--type-voice);--cp-copy-size:var(--type-body);
+  --cp-topic-gap:var(--space-topic);--cp-scene-gap:clamp(64px,7vw,104px);
+}
+body[data-seasonal] .cp-question { margin:0 0 var(--space-group);font-size:var(--type-question);line-height:1.35;letter-spacing:-.02em; }
+body[data-seasonal] :is(.cp-answer,.cp-caviar .cp-answer,.season-feature .cp-answer) { font-size:var(--type-answer);line-height:1.15;letter-spacing:-.03em; }
+body[data-seasonal] :is(.cp-copy,.season-caviar-note) { font-size:var(--type-body);line-height:1.5; }
+body[data-seasonal] :is(.cp-voice-answer,.cp-product-answer) { font-size:var(--type-voice);line-height:1.35;letter-spacing:-.02em; }
+body[data-seasonal] .cp-shell h3 { font-size:var(--type-question);font-weight:400;line-height:1.25;letter-spacing:-.02em; }
+body[data-seasonal] .cp-caviar .row-lot dd { font-size:var(--type-body);line-height:1.4; }
+body[data-seasonal] .cp-caviar .row-lot h3 { font-size:clamp(2.875rem,4.4vw,4rem); }
+body[data-seasonal] .row-lot { gap:var(--space-copy) var(--space-group); }
+body[data-seasonal] .cp-scene-heading { margin-bottom:var(--space-layout); }
+body[data-seasonal] .cp-caviar .cp-answer { margin-top:var(--space-group); }
+body[data-seasonal] .cp-caviar .row-lots { margin-top:var(--space-layout);gap:var(--space-group); }
+body[data-seasonal] .cp-caviar .row-lot dl { margin-top:var(--space-copy);gap:var(--space-inline); }
+body[data-seasonal] .cp-copy { margin-top:var(--space-copy); }
+body[data-seasonal] .cp-exchange { margin-top:var(--space-layout); }
+body[data-seasonal] .cp-caviar-conversation .cp-exchange { margin-top:0; }
+body[data-seasonal] .cp-source { margin-top:var(--space-copy); }
+body[data-seasonal] :is(.cp-source,.season-feature .row-reference,.season-photo figcaption,.fish-uses-source) { font-size:var(--type-caption); }
+body[data-seasonal] .dialogue-hello { font-size:var(--type-invitation);line-height:1.15; }
+body[data-seasonal] .dialogue-greeting>p+p { font-size:var(--type-body);line-height:1.5; }
+body[data-seasonal] .dialogue-reply { font-size:var(--type-control);line-height:1.4; }
+body[data-seasonal] .dialogue-intro { width:100%;container:hero-intro / inline-size; }
+body[data-seasonal] .row-header { container:row-navigation / inline-size; }
+@container row-navigation (width < 16rem) {
+  body[data-seasonal] .row-header nav { display:grid;grid-template-columns:repeat(2,max-content);justify-content:start;gap:.25rem 1.5rem; }
+  body[data-seasonal] .row-header .header-contact { grid-column:1/-1; }
+}
+@container hero-intro (width < 14em) {
+  body[data-seasonal] .dialogue-intro .row-yura { grid-column:1;grid-row:1; }
+  body[data-seasonal] .dialogue-intro .row-yura .row-player-controls { width:var(--row-content-width); }
+  body[data-seasonal] .dialogue-greeting { grid-column:1/-1;grid-row:2; }
+  body[data-seasonal] .dialogue-start { grid-column:1/-1;grid-row:3; }
+}
+
+/* The arrow's stroke follows the letters instead of an oversized font glyph. */
+body[data-seasonal] .row-action-arrow { display:inline-block;flex:0 0 auto;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible; }
+body[data-seasonal] :is(.row-reference,.header-contact,.dialogue-reply,.dialogue-footer-link,.row-order-link) { align-items:flex-start; }
+body[data-seasonal] .row-action-arrow { align-self:flex-start;margin-block-start:calc((1lh - 1em) / 2); }
+body[data-seasonal] .row-reference-dated>.row-link-label { display:flex;flex-wrap:wrap;align-items:first baseline;gap:.25em .75em; }
+.row-reference-dated time { white-space:nowrap; }
+body[data-seasonal] :is(.header-contact,.dialogue-reply,.dialogue-footer-link,.row-order-link) { gap:.75em; }
+body[data-seasonal] .dialogue-reply { align-items:center;min-height:48px;padding:.75em 1em;border-radius:18px 18px 4px 18px;line-height:1.25; }
+body[data-seasonal] .dialogue-reply .dialogue-action-label { font-size:inherit;line-height:inherit;transform:translateY(.04em); }
+body[data-seasonal] .dialogue-reply .row-action-arrow { align-self:center;margin-block-start:0; }
+@supports (corner-shape:superellipse(1.6)) {
+  body[data-seasonal] .dialogue-reply { corner-shape:superellipse(1.6); }
+}
+body[data-seasonal] .cp-voice-answer { max-width:none; }
+body[data-seasonal] .cp-voice-copy { flex:1 1 20ch;min-width:0; }
+
+/* Three actual parts of one fish; labels stay outside the photographs. */
+.fish-uses { grid-area:photo;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:2rem 1.5rem;container:fish-uses / inline-size; }
+.fish-use { margin:0;min-width:0; }
+.fish-use a { display:block;width:100%;cursor:zoom-in; }
+.fish-use img { display:block;width:100%;height:auto; }
+body[data-seasonal] .fish-use figcaption { margin-top:.75rem;font-size:var(--type-body);font-weight:400;line-height:1.4;letter-spacing:0; }
+.fish-uses-source { grid-column:1/-1; }
+body[data-seasonal] .fish-uses-source .row-reference { min-height:44px;color:var(--muted);font-size:var(--type-caption); }
+.fish-use a:focus-visible { outline:2px solid var(--ink);outline-offset:4px; }
+body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply photo' 'story photo' 'cutting photo'; }
+.season-table-story { grid-area:story;max-width:44rem; }
+body[data-seasonal] .season-table-story h3 { margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em; }
+body[data-seasonal] .season-table-story p { max-width:48ch;margin:var(--space-copy) 0 0;font-size:var(--type-body);line-height:1.5;color:var(--muted);text-wrap:pretty; }
+body[data-seasonal] .season-table-story .season-story-lead { max-width:42ch;font-size:var(--type-voice);line-height:1.4;color:var(--ink);letter-spacing:-.02em; }
+.season-story-links { display:flex;flex-wrap:wrap;align-items:first baseline;gap:8px 32px;margin-top:var(--space-copy); }
+body[data-seasonal] .season-story-links .row-reference { min-height:44px;font-size:var(--type-caption);color:var(--muted); }
+body[data-seasonal] .season-story-links .row-order-link { min-height:44px;font-size:var(--type-body);font-weight:400;line-height:1.4; }
+@container fish-uses (width < 38rem) {
+  .fish-use { grid-column:1/-1; }
+}
+@media(max-width:1100px) {
+  body[data-seasonal] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'photo' 'cutting'; }
+  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply' 'photo' 'story' 'cutting'; }
+}
+
+/* Play is primary, sound is secondary. The triangle's centroid is almost
+   exactly at x=12 in its 24-unit box; remove the old extra rightward shift. */
+body[data-seasonal] .cp-scene .row-player,
+body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:min(100%,var(--player-width));max-width:100%; }
+body[data-seasonal] .cp-voice>.row-player { flex:0 1 var(--player-width); }
+body[data-seasonal] .row-player-buttons { display:grid;grid-template-columns:44px minmax(0,1fr) 44px;justify-content:normal;gap:12px;align-items:center; }
+body[data-seasonal] .row-player-buttons .row-play { width:44px;height:44px;transform:translateX(-1px); }
+body[data-seasonal] .row-player-buttons .icon-play { width:24px;height:24px;transform:none; }
+body[data-seasonal] .row-player-buttons .row-sound { justify-self:end;width:44px;height:44px;border-color:transparent;opacity:.75; }
+body[data-seasonal] .row-player-time { display:block;min-width:max-content;justify-self:center;text-align:center;font-size:var(--type-caption);line-height:1.25;letter-spacing:0;font-variant-numeric:tabular-nums; }
+body[data-seasonal] .row-player-time>span { display:none; }
+body[data-seasonal] .row-player-time>[data-remaining] { display:inline;font-size:inherit;opacity:1;color:inherit; }
+body[data-seasonal] .row-player-time>[data-remaining]::before { content:none; }
+body[data-seasonal] .row-player-controls { margin-top:16px; }
+body[data-seasonal] .row-player-meta .row-reference { font-size:.75rem; }
+body[data-seasonal] .row-player-meta { display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px;align-items:first baseline; }
+body[data-seasonal] .row-player-meta .row-reference { display:inline-flex;gap:.5em;width:auto;max-width:100%;align-items:flex-start; }
+body[data-seasonal] .row-player-meta [data-player-caption] { white-space:nowrap; }
+body[data-seasonal] .row-player-meta .row-caption-toggle { justify-self:start;font-size:var(--type-caption); }
+body[data-seasonal] .row-lot dd { overflow-wrap:anywhere; }
+@media(hover:hover) and (pointer:fine) {
+  body[data-seasonal] .row-sound:hover { opacity:1; }
+}
+body[data-seasonal] .row-sound:focus-visible { opacity:1; }
+
+/* One invitation, then one quiet contact group. No competing phone headline. */
+body[data-seasonal] .dialogue-footer-conversation { display:block; }
+body[data-seasonal] .dialogue-footer-order { max-width:48rem; }
+body[data-seasonal] .dialogue-footer-order h2 { margin-inline-start:calc(-1em * var(--heading-ink-left, .052));font-size:var(--type-invitation);line-height:1.12;letter-spacing:-.035em;font-weight:400;overflow-wrap:anywhere; }
+body[data-seasonal] .dialogue-footer-order p { max-width:44ch;margin-top:var(--space-copy);font-size:var(--type-body);line-height:1.5; }
+body[data-seasonal] .dialogue-footer-link { margin-top:var(--space-group);font-size:var(--type-question);line-height:1.35; }
+body[data-seasonal] .dialogue-footer-details { margin-top:48px; }
+body[data-seasonal] .dialogue-footer-contacts { display:flex;flex-flow:row wrap;align-items:first baseline;gap:8px 32px; }
+body[data-seasonal] .dialogue-footer-contacts :is(.row-order-link,.row-reference) { min-height:44px;padding-block:8px;margin:0;font-size:var(--type-body);font-weight:400;line-height:1.4; }
+body[data-seasonal] .dialogue-footer-details .dialogue-footer-channel { max-width:none;margin-top:16px;font-size:var(--type-caption);font-weight:400;line-height:1.4; }
+body[data-seasonal] .dialogue-footer-email .row-link-label { white-space:nowrap; }
+body[data-seasonal] .dialogue-footer-brand { margin-top:48px; }
+.season-switcher { margin-top:24px;scroll-margin-bottom:24px; }
+body[data-seasonal] .season-switcher p { margin:0;color:var(--muted);font-size:var(--type-caption);line-height:1.4; }
+.season-switcher nav { display:flex;flex-wrap:wrap;align-items:first baseline;gap:4px 16px;margin-top:4px; }
+body[data-seasonal] .season-switcher a { display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px 0;font-size:var(--type-caption);font-weight:400;line-height:1.4;text-decoration:none;text-underline-offset:.3em;text-decoration-thickness:1px; }
+body[data-seasonal] .season-switcher a[aria-current] { font-weight:500;text-decoration-line:underline; }
+.season-switcher a:focus-visible { outline:2px solid var(--ink);outline-offset:2px; }
+@media(hover:hover) and (pointer:fine) {
+  body[data-seasonal] .season-switcher a:hover { text-decoration-line:underline; }
+}
+body[data-seasonal] .season-switcher a:active { opacity:.7; }
+html.season-restoring { scroll-behavior:auto!important; }
+
+@media(max-width:760px) {
+  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply' 'photo' 'story' 'cutting'; }
+  .season-switcher nav { column-gap:8px; }
+  body[data-seasonal] { --type-question:1.375rem;--type-voice:1.25rem;--type-control:1rem;--space-topic:3rem; }
+  .fish-uses { gap:1.5rem 1rem; }
+  body[data-seasonal] .dialogue-footer-details { margin-top:32px; }
+  body[data-seasonal] .dialogue-footer-contacts { flex-direction:column;align-items:flex-start;gap:4px; }
+  /* Oks' visible caps are shorter than its em. Tighten both sign lines as one
+     wordmark; the SVG contours themselves are unchanged. */
+  body[data-seasonal] :is(.row-hero h1,.dialogue-footer-brand) { row-gap:0;line-height:.78; }
+  body[data-seasonal] .row-hero h1>span+span { margin-top:0; }
+}
+@media(max-width:360px) {
+  /* Keep the five 44px targets together in a 280px text field. */
+  .season-switcher nav { column-gap:6px; }
+}
+@media(max-width:1100px) {
+  body[data-seasonal] .cp-caviar .row-lot { align-items:start; }
+  /* Oks' visible cap begins lower inside its line than Golos' cap. */
+  body[data-seasonal] .cp-caviar .row-lot h3 { margin-block-start:-.06em; }
+  body[data-seasonal] .cp-caviar .row-lot dl { margin-top:0; }
+}

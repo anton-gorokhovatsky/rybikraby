@@ -26,6 +26,11 @@
     if(trackElement && captionButton && subtitleText) {
       const track = trackElement.track;
       let captionsEnabled = true;
+      const captionState = captionButton.querySelector('[data-caption-state]');
+      const showCaptionState = (enabled, text = enabled ? 'вкл.' : 'выкл.') => {
+        captionButton.setAttribute('aria-pressed',String(enabled));
+        if(captionState) captionState.textContent = text;
+      };
       const updateCaptions = () => {
         const active = [...(track.activeCues || [])];
         subtitleText.textContent = rowTypograph(active.map(cue=>cue.text).join(' ').replace(/\s+/g,' '));
@@ -35,7 +40,7 @@
       subtitleText.hidden = false;
       captionButton.addEventListener('click', () => {
         captionsEnabled = !captionsEnabled;
-        captionButton.setAttribute('aria-pressed',String(captionsEnabled));
+        showCaptionState(captionsEnabled);
         subtitleText.setAttribute('aria-hidden',String(!captionsEnabled));
         updateCaptions();
       });
@@ -44,7 +49,7 @@
       trackElement.addEventListener('error',()=>{
         subtitleText.textContent='Субтитры не загрузились.';
         captionButton.disabled=true;
-        captionButton.setAttribute('aria-pressed','false');
+        showCaptionState(false,'недоступны');
         captionButton.setAttribute('aria-label',`Субтитры недоступны: ${label}`);
       });
       updateCaptions();
