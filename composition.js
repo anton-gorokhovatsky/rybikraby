@@ -30,8 +30,9 @@
       const seconds=Math.floor(Number(original.dataset.duration));
       const duration=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
       const date=original.querySelector('[data-player-caption]').textContent.replace(/^Архив · /,'');
+      const isoDate=date.split('.').reverse().join('-');
       return `<details class="cp-video-note${original.classList.contains('row-player-round')?' cp-video-note-round':''}">
-        <summary><span class="cp-video-note-copy"><span class="cp-video-note-title">${prose(label)}</span><span class="cp-video-note-description">${prose(description)}</span><span class="cp-video-note-meta">${date} · ${duration}</span><span class="cp-video-note-action"><span class="cp-note-closed">Открыть видео</span><span class="cp-note-open">Свернуть видео</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></span></span><img class="cp-video-note-poster" src="${video.getAttribute('poster')}" width="${video.getAttribute('width')}" height="${video.getAttribute('height')}" loading="lazy" alt=""></summary>
+        <summary><span class="cp-video-note-copy"><span class="cp-video-note-title">${prose(label)}</span><span class="cp-video-note-description">${prose(description)}</span><span class="cp-video-note-meta"><time datetime="${isoDate}">${date}</time><span>${duration}</span></span><span class="cp-video-note-action"><span class="cp-note-closed">Открыть видео</span><span class="cp-note-open">Свернуть видео</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></span></span><img class="cp-video-note-poster" src="${video.getAttribute('poster')}" width="${video.getAttribute('width')}" height="${video.getAttribute('height')}" loading="lazy" alt=""></summary>
         <div class="cp-video-note-body">${player(key)}</div>
       </details>`;
     };

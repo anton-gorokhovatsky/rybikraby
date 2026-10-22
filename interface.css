@@ -36,7 +36,7 @@ body[data-seasonal] .cp-story-intro { max-width:var(--player-portrait-width);mar
 body[data-seasonal] .cp-story-intro .cp-product-answer { margin:var(--space-copy) 0 0; }
 body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice story';row-gap:var(--space-layout); }
 body[data-seasonal] .cp-caviar-conversation>.cp-exchange { grid-area:choice; }
-body[data-seasonal] :is(.cp-caviar-conversation,.season-summer-opening) .cp-caviar-product { display:block;grid-area:story; }
+body[data-seasonal] :is(.cp-caviar-conversation,.season-summer-opening) .cp-caviar-product { display:block;grid-area:story;width:100%;justify-self:stretch; }
 body[data-seasonal] .cp-caviar-product>.cp-story-intro { max-width:41ch;margin-bottom:var(--space-group); }
 body[data-seasonal] .season-summer-opening { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'copy story';gap:var(--space-layout) var(--cp-layout-gap); }
 body[data-seasonal] .season-summer-opening>.cp-caviar-copy { grid-area:copy; }
@@ -109,7 +109,8 @@ body[data-seasonal] .cp-video-note>summary { display:grid;grid-template-columns:
 .cp-video-note-copy { display:block;min-width:0; }
 body[data-seasonal] .cp-video-note-title { display:block;font-size:var(--type-question);line-height:1.25;letter-spacing:-.02em;text-wrap:pretty; }
 body[data-seasonal] .cp-video-note-description { display:block;max-width:36ch;margin-top:var(--space-copy);font-size:var(--type-body);line-height:1.5; }
-body[data-seasonal] .cp-video-note-meta { display:block;margin-top:var(--space-copy);font-size:var(--type-caption);line-height:1.4;color:var(--muted); }
+body[data-seasonal] .cp-video-note-meta { display:flex;flex-wrap:wrap;gap:.25em .75em;margin-top:var(--space-copy);font-size:var(--type-caption);line-height:1.4;color:var(--muted); }
+.cp-video-note-meta>* { white-space:nowrap; }
 body[data-seasonal] .cp-video-note-action { display:inline-flex;gap:var(--space-inline);align-items:center;min-height:44px;font-size:var(--type-caption);line-height:1.4;text-decoration:underline;text-underline-offset:.22em; }
 .cp-video-note-action svg { flex:none;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
 .cp-video-note-poster { display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover; }
