@@ -54,51 +54,70 @@ body[data-seasonal] .row-action-arrow { align-self:flex-start;margin-block-start
 body[data-seasonal] .row-reference-dated>.row-link-label { display:flex;flex-wrap:wrap;align-items:first baseline;gap:.25em .75em; }
 .row-reference-dated time { white-space:nowrap; }
 body[data-seasonal] :is(.header-contact,.dialogue-reply,.dialogue-footer-link,.row-order-link) { gap:.75em; }
-body[data-seasonal] .dialogue-reply { align-items:center;min-width:0;max-width:100%;min-height:48px;padding:.75em min(1em,24px);border-radius:18px 18px 4px 18px;line-height:1.25; }
-body[data-seasonal] .dialogue-reply .dialogue-action-label { min-width:0;font-size:inherit;line-height:inherit;overflow-wrap:anywhere;transform:translateY(.04em); }
+body[data-seasonal] .dialogue-reply { align-items:center;min-width:0;max-width:100%;min-height:48px;padding:.67em min(1em,24px) .83em;border-radius:18px 18px 4px 18px;line-height:1.25; }
+body[data-seasonal] .dialogue-reply .dialogue-action-label { min-width:0;font-size:inherit;line-height:inherit;overflow-wrap:anywhere; }
 body[data-seasonal] .dialogue-reply .row-action-arrow { align-self:center;margin-block-start:0; }
 @supports (corner-shape:superellipse(1.6)) {
   body[data-seasonal] .dialogue-reply { corner-shape:superellipse(1.6); }
 }
 body[data-seasonal] .dialogue-start { display:block;justify-self:start;width:fit-content;text-align:left; }
-body[data-seasonal] .dialogue-start .dialogue-action-label { display:inline;position:relative;top:.04em;transform:none;overflow-wrap:normal; }
+body[data-seasonal] .dialogue-start .dialogue-action-label { display:inline;overflow-wrap:normal; }
 body[data-seasonal] .dialogue-start .row-action-arrow { float:right;margin-inline-start:.75em;margin-block-start:calc((1lh - 1em) / 2); }
 body[data-seasonal] .cp-voice-answer { max-width:none; }
 body[data-seasonal] .cp-voice-copy { flex:1 1 20ch;min-width:0; }
 
-/* Three actual parts of one fish; labels stay outside the photographs. */
-.fish-uses { grid-area:photo;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:2rem 1.5rem;container:fish-uses / inline-size; }
+/* Compact pieces share a column; the full fillet balances both of them.
+   Cutting and photographs share a starting line and keep their sources. */
+body[data-seasonal] .cp-fish { container:fish-scene / inline-size; }
+body[data-seasonal] .cp-fish-layout { display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);grid-template-areas:'reply reply' 'cutting photo';gap:var(--space-layout) var(--cp-layout-gap);align-items:start; }
+body[data-seasonal] .cp-fish-reply { display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);gap:var(--space-copy) var(--cp-layout-gap);align-items:first baseline; }
+body[data-seasonal] .cp-fish-reply .cp-question { margin:0; }
+body[data-seasonal] .cp-fish-reply>.cp-copy { grid-column:2;max-width:36ch;margin:0; }
+.fish-uses { grid-area:photo;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);grid-template-areas:'steaks fillets' 'broth fillets' 'source source';align-items:start;gap:var(--space-layout);min-width:0; }
 .fish-use { margin:0;min-width:0; }
+.fish-use-steaks { grid-area:steaks; }
+.fish-use-broth { grid-area:broth; }
+.fish-use-fillets { grid-area:fillets; }
 .fish-use a { display:block;width:100%;cursor:zoom-in; }
 .fish-use img { display:block;width:100%;height:auto; }
 body[data-seasonal] .fish-use figcaption { margin:0 0 var(--space-copy);font-size:var(--type-body);font-weight:400;line-height:1.4;letter-spacing:0; }
-.fish-uses-source { grid-column:1/-1; }
+.fish-uses-source { grid-area:source; }
 body[data-seasonal] .fish-uses-source .row-reference { min-height:44px;color:var(--muted);font-size:var(--type-caption); }
 .fish-use a:focus-visible { outline:2px solid var(--ink);outline-offset:4px; }
-body[data-seasonal] .cp-fish { container:fish-scene / inline-size; }
-body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply photo' 'cutting photo' 'cutting story'; }
-.season-table-story { grid-area:story;max-width:44rem; }
-body[data-seasonal] .season-table-story h3 { margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em; }
-body[data-seasonal] .season-table-story p { max-width:48ch;margin:var(--space-copy) 0 0;font-size:var(--type-body);line-height:1.5;color:var(--muted);text-wrap:pretty; }
+body[data-seasonal] .cp-cutting { display:block;margin:0;--player-portrait-width:28rem; }
+body[data-seasonal] .cp-cutting>.cp-cutting-label { margin:0 0 var(--space-copy);font-size:var(--type-body);line-height:1.4; }
+body[data-seasonal] .cp-cutting>.row-player { width:100%;max-width:28rem; }
+.season-table-story { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-copy) var(--cp-layout-gap);align-items:first baseline;margin-top:var(--space-topic); }
+body[data-seasonal] .season-table-story h3 { grid-column:1/-1;margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em; }
+body[data-seasonal] .season-table-story p { max-width:48ch;margin:0;font-size:var(--type-body);line-height:1.5;color:var(--muted);text-wrap:pretty; }
 body[data-seasonal] .season-table-story .season-story-lead { max-width:42ch;font-size:var(--type-voice);line-height:1.4;color:var(--ink);letter-spacing:-.02em; }
-.season-story-links { display:flex;flex-wrap:wrap;align-items:first baseline;gap:8px 32px;margin-top:var(--space-copy); }
+.season-story-links { grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:first baseline;justify-items:start;gap:8px var(--cp-layout-gap); }
 body[data-seasonal] .season-story-links .row-reference { min-height:44px;font-size:var(--type-caption);color:var(--muted); }
 body[data-seasonal] .season-story-links .row-order-link { min-height:44px;font-size:var(--type-body);font-weight:400;line-height:1.4; }
-@container fish-uses (width < 38rem) {
-  .fish-use { grid-column:1/-1; }
+@container fish-scene (width < 44rem) {
+  body[data-seasonal] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'photo' 'cutting'; }
+  .fish-uses { width:min(100%,42rem); }
+  body[data-seasonal] .cp-fish-reply { grid-template-columns:minmax(0,1fr); }
+  body[data-seasonal] .cp-fish-reply .cp-question { margin-bottom:var(--space-inline); }
+  body[data-seasonal] .cp-fish-reply>.cp-copy { grid-column:1; }
+  .season-table-story,.season-story-links { grid-template-columns:minmax(0,1fr); }
 }
 @container fish-scene (width < 72rem) {
-  body[data-seasonal] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'photo' 'cutting'; }
-  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply' 'photo' 'cutting' 'story'; }
   body[data-seasonal] .cp-voices { row-gap:24px; }
   body[data-seasonal] .cp-voices>.cp-voice { display:grid;grid-template-rows:subgrid;grid-row:span 2;gap:24px;container-type:normal; }
   body[data-seasonal] .cp-voices .row-player-subtitles { width:100%; }
 }
-@container fish-scene (44rem <= width < 72rem) {
-  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'reply reply' 'photo photo' 'cutting story'; }
+@container fish-scene (width < 38rem) {
+  .fish-uses { grid-template-columns:minmax(0,1fr);grid-template-areas:'steaks' 'broth' 'fillets' 'source';gap:var(--space-layout); }
 }
 @container fish-scene (width < 44rem) {
   body[data-seasonal] .cp-voices { grid-template-columns:minmax(0,1fr); }
+}
+
+/* At very large text in a narrow field, keep whole Russian words and the
+   answer's rank above the 1.375rem question; never cap the user's root size. */
+@container fish-scene (width < 12rem) {
+  body[data-seasonal] .cp-fish-reply .cp-answer { font-size:1.5rem; }
 }
 
 /* Play is primary, sound is secondary. The triangle's centroid is almost
@@ -153,13 +172,11 @@ body[data-seasonal] .season-switcher a:active { opacity:.7; }
 html.season-restoring { scroll-behavior:auto!important; }
 
 @media(max-width:760px) {
-  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'photo' 'cutting' 'story'; }
   .season-switcher nav { column-gap:8px; }
   body[data-seasonal] { --type-question:1.375rem;--type-control:1rem;--space-topic:3rem; }
   body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:100%;max-width:var(--player-portrait-width); }
   body[data-seasonal] .cp-shells-grid { row-gap:var(--space-copy); }
   body[data-seasonal] .cp-shell+.cp-shell { margin-top:var(--space-layout); }
-  .fish-uses { gap:1.5rem 1rem; }
   body[data-seasonal] .dialogue-footer-details { margin-top:32px; }
   body[data-seasonal] .dialogue-footer-contacts { flex-direction:column;align-items:flex-start;gap:4px; }
   /* Oks' visible caps are shorter than its em. Tighten both sign lines as one

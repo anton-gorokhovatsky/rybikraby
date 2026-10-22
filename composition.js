@@ -56,7 +56,10 @@
             ${paragraph('Стейки — на сковороду. Филе — посолить. Голову и обрезь — на бульон.')}
           </div>
           ${fishPicture}
-          <div class="cp-cutting">${player('fish-cutting')}</div>
+          <div class="cp-cutting">
+            <p class="cp-cutting-label">Как Юра разделывает сёмгу</p>
+            ${player('fish-cutting')}
+          </div>
         </div>
         <div class="cp-work">
           ${question('Ты сам этим занимаешься?')}

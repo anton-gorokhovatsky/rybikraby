@@ -158,7 +158,7 @@
         <div class="season-story-links">${link('https://ru.wikisource.org/wiki/Москва_и_москвичи_(Гиляровский)/Трактиры', 'Гиляровский, «Москва и москвичи»')}
           <a class="row-order-link" href="https://t.me/Yuraikra" target="_blank" rel="noopener"><span class="row-link-label">${text('Спросить Юру о рыбе')}</span> <span aria-hidden="true">↗</span></a>
         </div>`;
-      fish.querySelector('.cp-fish-layout').append(story);
+      fish.querySelector('.cp-fish-layout').after(story);
     }
     // The same stroke and em-size follow the text in every link family.
     root.querySelectorAll('a>span[aria-hidden="true"]').forEach(span => {
