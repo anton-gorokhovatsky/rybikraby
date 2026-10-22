@@ -46,7 +46,7 @@
     summer: {
       start: 'Что за первая нерка?', first: 'caviar',
       caviar: 'Первую нерку начинаем с пробы.',
-      caviarCopy: 'Вот как это было в июне 2026-го: открываю банку, пробую соль и показываю зерно.',
+      caviarCopy: 'Первая проба, ради которой ждут начала сезона. Рядом — июньская запись Юры: соль, зерно и открытая банка.',
       choice: 'А если я не разбираюсь?', fish: 'А рыбу на огонь?', crab: 'А что ещё для общего стола?',
       contact: 'Что пробуем?',
       contactCopy: 'Спроси Юру о новой партии или расскажи, что хочется приготовить. Наличие, фасовку, цену и получение обсудите в Telegram.',
@@ -81,10 +81,8 @@
     note.textContent = text(accent.caviarCopy);
     caviar.querySelector('.cp-caviar-copy>.cp-answer').after(note);
     setText('.cp-caviar .cp-exchange>.cp-question', accent.choice);
-    setText('.cp-caviar-product>.cp-product-answer', 'В июне 2026-го пробую первую нерку сезона. Открываю банку и показываю зерно.');
     setText('.cp-fish-reply>.cp-question', accent.fish);
     setText('.cp-crab-reply>.cp-question', accent.crab);
-    setText('.cp-counter-reply>.cp-answer', 'Готовить вместе — люблю.');
     setText('#contact-title', accent.contact);
     setText('.dialogue-footer-order>p', accent.contactCopy);
     setText('.dialogue-footer-link .row-link-label', accent.contactLink);
@@ -131,7 +129,6 @@
       comparison.append(copy.querySelector('.row-lots'), copy.querySelector('.cp-source'));
       opening.append(copy, tasting);
       caviar.prepend(opening, comparison);
-      setText('.cp-caviar-product>.cp-product-answer', 'Дегустация первой партии · июнь 2026');
     }
     const fishPicture = root.querySelector('.dialogue-fish-picture');
     const uses = document.createElement('div');

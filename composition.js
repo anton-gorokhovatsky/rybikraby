@@ -22,6 +22,7 @@
     const question=text=>`<p class="cp-question">${prose(text)}</p>`;
     const paragraph=(text,style='cp-copy')=>`<p class="${style}">${prose(text)}</p>`;
     const voice=(key,text)=>`<div class="cp-voice">${paragraph(text,'cp-voice-answer')}${player(key)}</div>`;
+    const reference=(url,label)=>`<a class="row-reference" href="${url}" target="_blank" rel="noopener"><span class="row-link-label">${prose(label)}</span><span aria-hidden="true">↗</span></a>`;
     const hero=root.querySelector('.row-hero').outerHTML;
     const header=root.querySelector('.row-header').outerHTML;
     const lots=root.querySelector('.row-lots').outerHTML;
@@ -41,7 +42,11 @@
             ${voice('caviar-choice','Я пробую икру сам. Подберём по соли, консистенции и твоему бюджету.')}
           </div>
           <div class="cp-product cp-caviar-product">
-            ${paragraph('Вот, пробую нерку нового сезона. Открываю банку и показываю зерно.','cp-product-answer')}
+            <div class="cp-story-intro">
+              <h3 class="cp-story-heading">${prose('Первые девять килограммов')}</h3>
+              ${paragraph('4 июня 2026-го в канале сообщили о первой икре нерки с Камчатки. В июньском видео Юра пробует новую нерку уже в Москве.','cp-product-answer')}
+              <div class="cp-story-sources">${reference('https://t.me/ikrabov/192','Начало сезона в канале')}</div>
+            </div>
             ${player('caviar-tasting')}
           </div>
         </div>
@@ -55,17 +60,27 @@
             ${paragraph('Можно и пожарить, и посолить.','cp-answer')}
             ${paragraph('Стейки — на сковороду. Филе — посолить. Голову и обрезь — на бульон.')}
           </div>
-          ${fishPicture}
           <div class="cp-cutting">
             <p class="cp-cutting-label">Как Юра разделывает сёмгу</p>
             ${player('fish-cutting')}
           </div>
+          ${fishPicture}
         </div>
         <div class="cp-work">
-          ${question('Ты сам этим занимаешься?')}
+          <div class="cp-work-story">
+            ${question('Ты сам этим занимаешься?')}
+            <blockquote class="cp-answer">${prose('«Меня так прёт от этого»')}</blockquote>
+            <p class="cp-story-attribution">${reference('https://t.me/ikrabov/90','Юра, декабрь 2024')}</p>
+            ${paragraph('Всё началось с запаха корюшки в майском Петербурге. Спустя несколько лет Юра увлёкся работой рыбных рядов и пошёл учиться разделке.')}
+            ${paragraph('В январе 2025-го объявил себе челлендж: почистить и разделать пятьдесят рыб своими руками. В канале остались первые попытки и рабочие дни на складе.')}
+            <div class="cp-story-sources">
+              ${reference('https://t.me/ikrabov/41','Первая корюшка')}
+              ${reference('https://t.me/ikrabov/108','Челлендж на пятьдесят рыб')}
+            </div>
+          </div>
           <div class="cp-voices">
-            ${voice('fish-start','Сначала меня увлекли рыбные ряды. Захотелось самому работать с рыбой и ножом.')}
-            ${voice('fish-work','А здесь мы уже на складе. Режем, вакуумируем, солим сёмгу и форель.')}
+            ${voice('fish-start','Декабрь 2024-го. Решение самому заняться охлаждённой рыбой.')}
+            ${voice('fish-work','Январь 2025-го. Уже на складе: режем, вакуумируем, солим.')}
           </div>
         </div>
       </section>
@@ -79,7 +94,7 @@
           </div>
           <div class="cp-product cp-crab-product">${player('crab')}</div>
           <div class="cp-crab-tasting">
-            ${paragraph('А здесь показываю салатное мясо и другие продукты. Запись из июня 2026-го.','cp-product-answer')}
+            ${paragraph('Для салата Юра предлагает мясо опилио — уже без панциря. В этой июньской записи 2026-го показывает его рядом с фалангами.','cp-product-answer')}
             ${player('crab-table')}
           </div>
         </div>
@@ -87,13 +102,13 @@
           ${question('А кроме краба?')}
           <div class="cp-shells-grid">
             <article class="cp-shell">
-              <h3>Гребешок из Сахалина</h3>
-              ${paragraph('Приехал ещё в раковине. Сейчас откроем и посмотрим внутрь.')}
+              <h3>Гребешок с Сахалина</h3>
+              ${paragraph('Юра открывает раковину — и говорит о запахе, который жаль не передать через экран. Этот гребешок приехал с Сахалина.')}
               ${player('scallop')}
             </article>
             <article class="cp-shell">
               <h3>Икра морского ежа</h3>
-              ${paragraph('Уже в баночках по 100 г. Показываю, как эта партия приехала в термоупаковке.')}
+              ${paragraph('К моменту обзора Юра уже попробовал икру, а ребята за кадром успели съесть по баночке. Потом он показывает термокоробку, в которой приехала эта партия.')}
               ${player('urchin')}
             </article>
           </div>
@@ -105,11 +120,19 @@
         <div class="cp-counter-layout">
           <div class="cp-counter-reply">
             ${question('А сам готовишь?')}
-            ${paragraph('Собраться и приготовить — люблю.','cp-answer')}
-            ${voice('with-yakov','С поваром Яковом пробуем рыбу на мангале и обсуждаем блюда с чавычей.')}
+            ${paragraph('Сначала пробуем вместе.','cp-answer')}
+            ${voice('with-yakov','Июнь 2026-го. Юра и повар Яков собрались пробовать рыбу на мангале и обсуждать меню с чавычей для вечера с музыкой.')}
+            <aside class="cp-supper-note">
+              <h3 class="cp-story-heading">${prose('Крабовый ужин с музыкой')}</h3>
+              ${paragraph('В приглашении на мартовский ужин 2025-го — повар Вячеслав Китушин, жюльен, салат и подкопчённые фаланги. К еде — музыка от диджея.')}
+              <div class="cp-story-sources">${reference('https://t.me/ikrabov/122','Приглашение на крабовый ужин')}</div>
+            </aside>
           </div>
           <div class="cp-product cp-counter-product">
-            ${paragraph('А потом — снова за рыбой. Полный прилавок и вот такое настроение.','cp-product-answer')}
+            <div class="cp-story-intro">
+              <h3 class="cp-story-heading">${prose('У прилавка — свой саундтрек')}</h3>
+              ${paragraph('Рыбный обзор превращается в маленький музыкальный номер. Четырнадцать секунд Юриного настроения.','cp-product-answer')}
+            </div>
             ${player('counter')}
           </div>
         </div>

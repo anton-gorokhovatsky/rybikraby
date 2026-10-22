@@ -123,7 +123,6 @@ body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"][data-ov
 .season-photo-link:focus-visible { outline:3px solid var(--ink);outline-offset:6px; }
 .season-summer-opening { display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:var(--cp-layout-gap);align-items:start; }
 .season-summer-opening .cp-caviar-product { justify-self:end; }
-.season-summer-opening .cp-caviar-product>.cp-product-answer { font-size:.875rem;color:var(--muted); }
 .season-comparison { margin-top:var(--cp-topic-gap); }
 .season-comparison .row-lots { margin-top:0; }
 body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-columns:minmax(0,1fr);max-width:800px; }
