@@ -2,10 +2,10 @@
    Oks continues to carry the sign/product names; Golos carries the conversation. */
 body[data-seasonal] {
   --type-caption:.875rem;--type-body:1.125rem;--type-voice:var(--type-body);
-  --type-question:1.5rem;--type-answer:clamp(1.75rem,2.6vw,2.5rem);
+  --type-question:1.5rem;--type-answer:clamp(1.75rem,2.6vw,2.5rem);--type-answer-narrow:1.5rem;
   --type-invitation:clamp(1.75rem,3.2vw,3rem);--type-control:1.125rem;
   --space-inline:.5rem;--space-copy:1rem;--space-group:1.5rem;
-  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;--player-portrait-width:22rem;
+  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;--player-portrait-width:22rem;--player-feature-width:28rem;
   --cp-voice-size:var(--type-voice);--cp-copy-size:var(--type-body);
   --cp-topic-gap:var(--space-topic);--cp-scene-gap:clamp(64px,7vw,104px);
 }
@@ -84,9 +84,10 @@ body[data-seasonal] .fish-use figcaption { margin:0 0 var(--space-copy);font-siz
 .fish-uses-source { grid-area:source; }
 body[data-seasonal] .fish-uses-source .row-reference { min-height:44px;color:var(--muted);font-size:var(--type-caption); }
 .fish-use a:focus-visible { outline:2px solid var(--ink);outline-offset:4px; }
-body[data-seasonal] .cp-cutting { display:block;margin:0;--player-portrait-width:28rem; }
+body[data-seasonal] :is(.cp-cutting,.cp-crab-product) { --player-portrait-width:var(--player-feature-width); }
+body[data-seasonal] .cp-cutting { display:block;margin:0; }
 body[data-seasonal] .cp-cutting>.cp-cutting-label { margin:0 0 var(--space-copy);font-size:var(--type-body);line-height:1.4; }
-body[data-seasonal] .cp-cutting>.row-player { width:100%;max-width:28rem; }
+body[data-seasonal] .cp-cutting>.row-player { width:100%;max-width:var(--player-feature-width); }
 .season-table-story { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-copy) var(--cp-layout-gap);align-items:first baseline;margin-top:var(--space-topic); }
 body[data-seasonal] .season-table-story h3 { grid-column:1/-1;margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em; }
 body[data-seasonal] .season-table-story p { max-width:48ch;margin:0;font-size:var(--type-body);line-height:1.5;color:var(--muted);text-wrap:pretty; }
@@ -114,10 +115,13 @@ body[data-seasonal] .season-story-links .row-order-link { min-height:44px;font-s
   body[data-seasonal] .cp-voices { grid-template-columns:minmax(0,1fr); }
 }
 
-/* At very large text in a narrow field, keep whole Russian words and the
-   answer's rank above the 1.375rem question; never cap the user's root size. */
-@container fish-scene (width < 12rem) {
-  body[data-seasonal] .cp-fish-reply .cp-answer { font-size:1.5rem; }
+/* One responsive answer role for every scene. A rem-based field responds to
+   large user text as well as physical width; functional labels retain their size. */
+body[data-seasonal] .row-main { container:page-reading / inline-size; }
+@container page-reading (width < 12rem) {
+  body[data-seasonal] .cp-scene { --type-answer:var(--type-answer-narrow); }
+  body[data-seasonal] .cp-scene :is(.cp-copy,.cp-question,.cp-voice-answer,.cp-product-answer,.row-lot dd),
+  body[data-seasonal] .season-table-story p { hyphens:auto;hyphenate-limit-chars:8 3 3; }
 }
 
 /* Play is primary, sound is secondary. The triangle's centroid is almost

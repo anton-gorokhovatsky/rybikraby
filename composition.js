@@ -76,10 +76,12 @@
           <div class="cp-crab-reply">
             ${question('А что ещё к столу?')}
             ${paragraph('Крупные куски — к столу. Опилио — в салат.','cp-answer')}
-            ${paragraph('А здесь показываю салатное мясо и другие продукты. Запись из июня 2026-го.')}
           </div>
           <div class="cp-product cp-crab-product">${player('crab')}</div>
-          <div class="cp-crab-tasting">${player('crab-table')}</div>
+          <div class="cp-crab-tasting">
+            ${paragraph('А здесь показываю салатное мясо и другие продукты. Запись из июня 2026-го.','cp-product-answer')}
+            ${player('crab-table')}
+          </div>
         </div>
         <div class="cp-shells">
           ${question('А кроме краба?')}
