@@ -74,7 +74,7 @@
     const seafood = root.querySelector('#seafood');
     const start = root.querySelector('.dialogue-start');
     start.href = `#${accent.first}`;
-    start.innerHTML = `<span class="dialogue-action-label">${text(accent.start)}</span> <span aria-hidden="true">↓</span>`;
+    start.innerHTML = `<span aria-hidden="true">↓</span><span class="dialogue-action-label">${text(accent.start)}</span>`;
     setText('.cp-caviar-copy>.cp-answer', accent.caviar);
     const note = document.createElement('p');
     note.className = 'cp-copy season-caviar-note';
@@ -141,9 +141,9 @@
     uses.setAttribute('aria-label', 'Одна сёмга — три способа приготовления');
     uses.innerHTML = [
       ['steaks', 'Пожарить', 'Стейки сёмги, извлечённые из фотографии Юры', 551, 682],
-      ['fillets', 'Посолить', 'Два куска филе сёмги из той же фотографии', 547, 1349],
-      ['broth', 'Сварить', 'Голова и обрезь сёмги для бульона', 631, 729]
-    ].map(([part, label, alt, width, height]) => `<figure class="fish-use fish-use-${part}"><a href="assets/fish-${part}.png" target="_blank" rel="noopener" aria-label="${label}: рассмотреть рыбу в полном размере"><img src="assets/fish-${part}.png" width="${width}" height="${height}" alt="${alt}" loading="lazy"></a><figcaption>${label}</figcaption></figure>`).join('') + `<div class="fish-uses-source">${link('https://t.me/Yuraikra', 'Из истории Юры · 14.01.2025')}</div>`;
+      ['broth', 'Сварить', 'Голова и обрезь сёмги для бульона', 631, 729],
+      ['fillets', 'Посолить', 'Два куска филе сёмги из той же фотографии', 547, 1349]
+    ].map(([part, label, alt, width, height]) => `<figure class="fish-use fish-use-${part}"><figcaption>${label}</figcaption><a href="assets/fish-${part}.png" target="_blank" rel="noopener" aria-label="${label}: рассмотреть рыбу в полном размере"><img src="assets/fish-${part}.png" width="${width}" height="${height}" alt="${alt}" loading="lazy"></a></figure>`).join('') + `<div class="fish-uses-source">${link('https://t.me/Yuraikra', 'Из истории Юры · 14.01.2025')}</div>`;
     fishPicture.replaceWith(uses);
     if (key === 'autumn') {
       // One sourced association at the table. Editorial narration stays outside
@@ -158,7 +158,7 @@
         <div class="season-story-links">${link('https://ru.wikisource.org/wiki/Москва_и_москвичи_(Гиляровский)/Трактиры', 'Гиляровский, «Москва и москвичи»')}
           <a class="row-order-link" href="https://t.me/Yuraikra" target="_blank" rel="noopener"><span class="row-link-label">${text('Спросить Юру о рыбе')}</span> <span aria-hidden="true">↗</span></a>
         </div>`;
-      fish.querySelector('.cp-fish-reply').after(story);
+      fish.querySelector('.cp-fish-layout').append(story);
     }
     // The same stroke and em-size follow the text in every link family.
     root.querySelectorAll('a>span[aria-hidden="true"]').forEach(span => {

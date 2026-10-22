@@ -1,11 +1,11 @@
 /* One local refinement layer: roles, proximity, and optical weight.
    Oks continues to carry the sign/product names; Golos carries the conversation. */
 body[data-seasonal] {
-  --type-caption:.875rem;--type-body:1.125rem;--type-voice:1.375rem;
+  --type-caption:.875rem;--type-body:1.125rem;--type-voice:var(--type-body);
   --type-question:1.5rem;--type-answer:clamp(1.75rem,2.6vw,2.5rem);
   --type-invitation:clamp(1.75rem,3.2vw,3rem);--type-control:1.125rem;
   --space-inline:.5rem;--space-copy:1rem;--space-group:1.5rem;
-  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;
+  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;--player-portrait-width:22rem;
   --cp-voice-size:var(--type-voice);--cp-copy-size:var(--type-body);
   --cp-topic-gap:var(--space-topic);--cp-scene-gap:clamp(64px,7vw,104px);
 }
@@ -26,6 +26,11 @@ body[data-seasonal] .cp-exchange { margin-top:var(--space-layout); }
 body[data-seasonal] .cp-caviar-conversation .cp-exchange { margin-top:0; }
 body[data-seasonal] .cp-source { margin-top:var(--space-copy); }
 body[data-seasonal] :is(.cp-source,.season-feature .row-reference,.season-photo figcaption,.fish-uses-source) { font-size:var(--type-caption); }
+body[data-seasonal] .cp-shells-grid { align-items:start;row-gap:var(--space-copy); }
+body[data-seasonal] .cp-shell { display:grid;grid-template-rows:subgrid;grid-row:span 3; }
+body[data-seasonal] .cp-shell>.cp-copy { margin-top:0; }
+body[data-seasonal] .cp-shell>.row-player { margin-top:0; }
+body[data-seasonal] :is(.cp-product-answer,.cp-shell>.cp-copy) { max-width:var(--player-portrait-width); }
 body[data-seasonal] .dialogue-hello { font-size:var(--type-invitation);line-height:1.15; }
 body[data-seasonal] .dialogue-greeting>p+p { font-size:var(--type-body);line-height:1.5; }
 body[data-seasonal] .dialogue-reply { font-size:var(--type-control);line-height:1.4; }
@@ -49,12 +54,15 @@ body[data-seasonal] .row-action-arrow { align-self:flex-start;margin-block-start
 body[data-seasonal] .row-reference-dated>.row-link-label { display:flex;flex-wrap:wrap;align-items:first baseline;gap:.25em .75em; }
 .row-reference-dated time { white-space:nowrap; }
 body[data-seasonal] :is(.header-contact,.dialogue-reply,.dialogue-footer-link,.row-order-link) { gap:.75em; }
-body[data-seasonal] .dialogue-reply { align-items:center;min-height:48px;padding:.75em 1em;border-radius:18px 18px 4px 18px;line-height:1.25; }
-body[data-seasonal] .dialogue-reply .dialogue-action-label { font-size:inherit;line-height:inherit;transform:translateY(.04em); }
+body[data-seasonal] .dialogue-reply { align-items:center;min-width:0;max-width:100%;min-height:48px;padding:.75em min(1em,24px);border-radius:18px 18px 4px 18px;line-height:1.25; }
+body[data-seasonal] .dialogue-reply .dialogue-action-label { min-width:0;font-size:inherit;line-height:inherit;overflow-wrap:anywhere;transform:translateY(.04em); }
 body[data-seasonal] .dialogue-reply .row-action-arrow { align-self:center;margin-block-start:0; }
 @supports (corner-shape:superellipse(1.6)) {
   body[data-seasonal] .dialogue-reply { corner-shape:superellipse(1.6); }
 }
+body[data-seasonal] .dialogue-start { display:block;justify-self:start;width:fit-content;text-align:left; }
+body[data-seasonal] .dialogue-start .dialogue-action-label { display:inline;position:relative;top:.04em;transform:none;overflow-wrap:normal; }
+body[data-seasonal] .dialogue-start .row-action-arrow { float:right;margin-inline-start:.75em;margin-block-start:calc((1lh - 1em) / 2); }
 body[data-seasonal] .cp-voice-answer { max-width:none; }
 body[data-seasonal] .cp-voice-copy { flex:1 1 20ch;min-width:0; }
 
@@ -63,11 +71,12 @@ body[data-seasonal] .cp-voice-copy { flex:1 1 20ch;min-width:0; }
 .fish-use { margin:0;min-width:0; }
 .fish-use a { display:block;width:100%;cursor:zoom-in; }
 .fish-use img { display:block;width:100%;height:auto; }
-body[data-seasonal] .fish-use figcaption { margin-top:.75rem;font-size:var(--type-body);font-weight:400;line-height:1.4;letter-spacing:0; }
+body[data-seasonal] .fish-use figcaption { margin:0 0 var(--space-copy);font-size:var(--type-body);font-weight:400;line-height:1.4;letter-spacing:0; }
 .fish-uses-source { grid-column:1/-1; }
 body[data-seasonal] .fish-uses-source .row-reference { min-height:44px;color:var(--muted);font-size:var(--type-caption); }
 .fish-use a:focus-visible { outline:2px solid var(--ink);outline-offset:4px; }
-body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply photo' 'story photo' 'cutting photo'; }
+body[data-seasonal] .cp-fish { container:fish-scene / inline-size; }
+body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply photo' 'cutting photo' 'cutting story'; }
 .season-table-story { grid-area:story;max-width:44rem; }
 body[data-seasonal] .season-table-story h3 { margin:0;font-size:var(--type-question);font-weight:400;line-height:1.35;letter-spacing:-.02em; }
 body[data-seasonal] .season-table-story p { max-width:48ch;margin:var(--space-copy) 0 0;font-size:var(--type-body);line-height:1.5;color:var(--muted);text-wrap:pretty; }
@@ -78,15 +87,24 @@ body[data-seasonal] .season-story-links .row-order-link { min-height:44px;font-s
 @container fish-uses (width < 38rem) {
   .fish-use { grid-column:1/-1; }
 }
-@media(max-width:1100px) {
+@container fish-scene (width < 72rem) {
   body[data-seasonal] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'photo' 'cutting'; }
-  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply' 'photo' 'story' 'cutting'; }
+  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply' 'photo' 'cutting' 'story'; }
+  body[data-seasonal] .cp-voices { row-gap:24px; }
+  body[data-seasonal] .cp-voices>.cp-voice { display:grid;grid-template-rows:subgrid;grid-row:span 2;gap:24px;container-type:normal; }
+  body[data-seasonal] .cp-voices .row-player-subtitles { width:100%; }
+}
+@container fish-scene (44rem <= width < 72rem) {
+  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'reply reply' 'photo photo' 'cutting story'; }
+}
+@container fish-scene (width < 44rem) {
+  body[data-seasonal] .cp-voices { grid-template-columns:minmax(0,1fr); }
 }
 
 /* Play is primary, sound is secondary. The triangle's centroid is almost
    exactly at x=12 in its 24-unit box; remove the old extra rightward shift. */
-body[data-seasonal] .cp-scene .row-player,
-body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:min(100%,var(--player-width));max-width:100%; }
+body[data-seasonal] .cp-scene .row-player { width:min(100%,var(--player-width));max-width:100%; }
+body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:min(100%,var(--player-portrait-width)); }
 body[data-seasonal] .cp-voice>.row-player { flex:0 1 var(--player-width); }
 body[data-seasonal] .row-player-buttons { display:grid;grid-template-columns:44px minmax(0,1fr) 44px;justify-content:normal;gap:12px;align-items:center; }
 body[data-seasonal] .row-player-buttons .row-play { width:44px;height:44px;transform:translateX(-1px); }
@@ -97,7 +115,7 @@ body[data-seasonal] .row-player-time>span { display:none; }
 body[data-seasonal] .row-player-time>[data-remaining] { display:inline;font-size:inherit;opacity:1;color:inherit; }
 body[data-seasonal] .row-player-time>[data-remaining]::before { content:none; }
 body[data-seasonal] .row-player-controls { margin-top:16px; }
-body[data-seasonal] .row-player-meta .row-reference { font-size:.75rem; }
+body[data-seasonal] .row-player-meta .row-reference { font-size:var(--type-caption); }
 body[data-seasonal] .row-player-meta { display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px;align-items:first baseline; }
 body[data-seasonal] .row-player-meta .row-reference { display:inline-flex;gap:.5em;width:auto;max-width:100%;align-items:flex-start; }
 body[data-seasonal] .row-player-meta [data-player-caption] { white-space:nowrap; }
@@ -117,8 +135,10 @@ body[data-seasonal] .dialogue-footer-link { margin-top:var(--space-group);font-s
 body[data-seasonal] .dialogue-footer-details { margin-top:48px; }
 body[data-seasonal] .dialogue-footer-contacts { display:flex;flex-flow:row wrap;align-items:first baseline;gap:8px 32px; }
 body[data-seasonal] .dialogue-footer-contacts :is(.row-order-link,.row-reference) { min-height:44px;padding-block:8px;margin:0;font-size:var(--type-body);font-weight:400;line-height:1.4; }
+body[data-seasonal] .dialogue-footer-location { display:block;max-width:100%; }
+body[data-seasonal] .dialogue-location-address { display:block;max-width:28ch;font-size:var(--type-caption);line-height:1.5;color:var(--muted); }
 body[data-seasonal] .dialogue-footer-details .dialogue-footer-channel { max-width:none;margin-top:16px;font-size:var(--type-caption);font-weight:400;line-height:1.4; }
-body[data-seasonal] .dialogue-footer-email .row-link-label { white-space:nowrap; }
+body[data-seasonal] :is(.dialogue-footer-email,a[href^="tel:"]) .row-link-label { white-space:nowrap; }
 body[data-seasonal] .dialogue-footer-brand { margin-top:48px; }
 .season-switcher { margin-top:24px;scroll-margin-bottom:24px; }
 body[data-seasonal] .season-switcher p { margin:0;color:var(--muted);font-size:var(--type-caption);line-height:1.4; }
@@ -133,9 +153,12 @@ body[data-seasonal] .season-switcher a:active { opacity:.7; }
 html.season-restoring { scroll-behavior:auto!important; }
 
 @media(max-width:760px) {
-  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-areas:'reply' 'photo' 'story' 'cutting'; }
+  body[data-seasonal="autumn"] .cp-fish-layout { grid-template-columns:minmax(0,1fr);grid-template-areas:'reply' 'photo' 'cutting' 'story'; }
   .season-switcher nav { column-gap:8px; }
-  body[data-seasonal] { --type-question:1.375rem;--type-voice:1.25rem;--type-control:1rem;--space-topic:3rem; }
+  body[data-seasonal] { --type-question:1.375rem;--type-control:1rem;--space-topic:3rem; }
+  body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:100%;max-width:var(--player-portrait-width); }
+  body[data-seasonal] .cp-shells-grid { row-gap:var(--space-copy); }
+  body[data-seasonal] .cp-shell+.cp-shell { margin-top:var(--space-layout); }
   .fish-uses { gap:1.5rem 1rem; }
   body[data-seasonal] .dialogue-footer-details { margin-top:32px; }
   body[data-seasonal] .dialogue-footer-contacts { flex-direction:column;align-items:flex-start;gap:4px; }

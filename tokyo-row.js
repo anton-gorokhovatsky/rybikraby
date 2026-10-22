@@ -113,9 +113,9 @@ function tokyoRow({products, contactUrl}) {
         <div class="dialogue-footer-order"><h2 id="contact-title">Что приготовим?</h2><p>Напиши, что хочется к столу, на сколько человек и к какому дню. С Юрой обсудите наличие, фасовку, цену и получение.</p><a class="dialogue-footer-link" href="${contactUrl}" target="_blank" rel="noopener"><span class="row-link-label">Написать Юре</span> ${arrow}</a></div>
         <div class="dialogue-footer-details">
           <address class="dialogue-footer-contacts">
-            <a class="row-order-link dialogue-footer-phone" href="tel:+79688005000"><span class="row-link-label">+7&nbsp;968 800-50-00</span></a>
+            <a class="row-order-link dialogue-footer-phone" href="tel:+79688005000" aria-label="Позвонить Юре: +7 968 800-50-00" title="+7 968 800-50-00"><span class="row-link-label">Позвонить Юре</span></a>
             <a class="row-order-link dialogue-footer-email" href="mailto:rybaikraby@gmail.com" aria-label="Написать Юре на почту: rybaikraby@gmail.com" title="rybaikraby@gmail.com"><span class="row-link-label">Письмо Юре</span></a>
-            <a class="row-reference" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%20124%D0%90" target="_blank" rel="noopener"><span class="row-link-label">Москва, Дмитровское шоссе, 124А</span> ${arrow}</a>
+            <span class="dialogue-footer-location"><a class="row-reference" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%20124%D0%90" target="_blank" rel="noopener" aria-label="Как добраться: Москва, Дмитровское шоссе, 124А"><span class="row-link-label">Как добраться</span> ${arrow}</a><span class="dialogue-location-address">Москва, Дмитровское шоссе, 124А</span></span>
           </address>
           <a class="row-order-link dialogue-footer-channel" href="https://t.me/ikrabov" target="_blank" rel="noopener"><span class="row-link-label">Поступления и дегустации в Telegram</span> ${arrow}</a>
         </div>
