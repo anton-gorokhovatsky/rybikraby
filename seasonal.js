@@ -158,9 +158,12 @@
       story.id = 'fish-table';
       story.setAttribute('aria-labelledby', 'fish-table-title');
       story.innerHTML = `<h3 id="fish-table-title">${text('А к ухе — пирог?')}</h3>
-        <p class="season-story-lead">${text('У Гиляровского расстегай у Тестова режут «розанчиком» — на узкие ломтики от середины к румяным краям. Так и хочется поставить пирог посреди стола и позвать всех к обеду.')}</p>
-        <p>${text('А дома можно взять сёмгу: филе — в начинку, голову и обрезь — на бульон. Попроси Юру подобрать рыбу для такого стола.')}</p>
-        <div class="season-story-links">${link('https://ru.wikisource.org/wiki/Москва_и_москвичи_(Гиляровский)/Трактиры', 'Гиляровский, «Москва и москвичи»')}
+        <div class="season-story-part">
+          <p class="season-story-lead">${text('У Гиляровского расстегай у Тестова режут «розанчиком» — на узкие ломтики от середины к румяным краям. Так и хочется поставить пирог посреди стола и позвать всех к обеду.')}</p>
+          ${link('https://ru.wikisource.org/wiki/Москва_и_москвичи_(Гиляровский)/Трактиры', 'Гиляровский, «Москва и москвичи»')}
+        </div>
+        <div class="season-story-part">
+          <p>${text('А дома можно взять сёмгу: филе — в начинку, голову и обрезь — на бульон. Попроси Юру подобрать рыбу для такого стола.')}</p>
           <a class="row-order-link" href="https://t.me/Yuraikra" target="_blank" rel="noopener"><span class="row-link-label">${text('Спросить Юру о рыбе')}</span> <span aria-hidden="true">↗</span></a>
         </div>`;
       fish.querySelector('.cp-fish-layout').after(story);

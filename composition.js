@@ -81,7 +81,7 @@
             ${voice('fish-start','Декабрь 2024-го. Юра решает самому заняться охлаждённой рыбой.')}
           </div>
           <div class="cp-work-next">
-            ${videoNote('fish-work','Пятьдесят рыб — своими руками','В январе 2025-го Юра объявил себе такой челлендж. На видео того времени — работа на складе: режем, вакуумируем, солим.')}
+            ${videoNote('fish-work','Челлендж: пятьдесят рыб','В январе 2025-го Юра решил сам почистить и разделать пятьдесят рыб. На видео того времени — режем, вакуумируем, солим.')}
             <div class="cp-story-sources">${reference('https://t.me/ikrabov/108','Пост о челлендже')}</div>
           </div>
         </div>
@@ -129,8 +129,8 @@
         <div class="cp-scene-heading">${title('counter')}</div>
         <div class="cp-counter-layout">
           <div class="cp-counter-reply">
-            ${question('А сам готовишь?')}
-            ${paragraph('Сначала пробуем вместе.','cp-answer')}
+            ${question('А если собраться вместе?')}
+            ${paragraph('Рыба, повара и музыка.','cp-answer')}
             ${voice('with-yakov','Июнь 2026-го. Юра и повар Яков собрались пробовать рыбу на мангале и обсуждать меню с чавычей для вечера с музыкой.')}
             <aside class="cp-supper-note">
               <h3 class="cp-story-heading">${prose('Крабовый ужин с музыкой')}</h3>
