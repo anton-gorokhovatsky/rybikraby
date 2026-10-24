@@ -42,12 +42,14 @@
     };
     const syncLayout = () => {
       const next = header.clientWidth < 64 * parseFloat(getComputedStyle(document.documentElement).fontSize);
-      const focusWasHidden = !next && document.activeElement === toggle;
+      const focusedLinkWillHide = next && !opened && navigation.contains(document.activeElement);
+      const focusedToggleWillHide = !next && document.activeElement === toggle;
       compact = next;
       header.dataset.navCompact = String(compact);
       toggle.hidden = !compact;
       setOpen(opened);
-      if (focusWasHidden) navigation.querySelector('a').focus({preventScroll: true});
+      if (focusedLinkWillHide) toggle.focus({preventScroll: true});
+      else if (focusedToggleWillHide) navigation.querySelector('a').focus({preventScroll: true});
     };
     header.addEventListener('pointerdown', () => { header.dataset.navInput = 'pointer'; });
     header.addEventListener('keydown', () => { header.dataset.navInput = 'keyboard'; });

@@ -27,13 +27,18 @@ body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel {
 body[data-seasonal] .site-navigation[data-nav-compact="true"] :is(.menu-products,.menu-secondary) { display:flex;flex-direction:column;align-items:stretch;gap:0; }
 body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel>* { flex-shrink:0; }
 body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel a { width:100%;min-width:0;max-width:none;white-space:normal;overflow-wrap:normal; }
+body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel .row-nav-label { min-width:0;overflow-wrap:anywhere;hyphens:auto; }
 body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-products a { font-size:var(--type-question);line-height:1.3;padding:.5em 0;letter-spacing:-.02em; }
 body[data-seasonal] .site-navigation[data-nav-compact="true"] :is(.menu-secondary a,.menu-panel .header-contact) { font-size:var(--type-control);line-height:1.4;padding:.5em 0; }
-body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel .header-contact { justify-content:flex-start;align-items:center; }
+body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel .header-contact { justify-content:flex-start;align-items:flex-start;padding-block:max(.5em,calc((44px - 1lh) / 2)); }
+body[data-seasonal] .site-navigation[data-nav-compact="true"] .header-contact .row-action-arrow { align-self:flex-start;margin-block-start:calc((1lh - 1em) / 2); }
 body[data-seasonal][data-menu="glass"] .row-header.site-navigation[data-nav-open="true"] { border-radius:4px 4px 0 0;background:var(--season-paper);color:var(--season-ink);--ink:var(--season-ink); }
 @container row-navigation (width < 20em) {
+  body[data-seasonal] .site-navigation[data-nav-compact="true"] .wordmark { flex:0 0 44px;min-width:44px; }
   body[data-seasonal] .site-navigation[data-nav-compact="true"] .row-wordmark-name { display:none; }
   body[data-seasonal] .site-navigation[data-nav-compact="true"] .row-brand-mark { display:block; }
+  .site-navigation .menu-toggle { gap:.5em;padding-inline-start:.25em; }
+  .site-navigation .menu-toggle-label { min-width:0; }
 }
 @media(max-width:760px) {
   body[data-seasonal] .site-navigation[data-nav-compact="true"] .menu-panel { padding-inline:8px; }
