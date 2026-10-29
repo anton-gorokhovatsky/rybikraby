@@ -176,10 +176,10 @@ body[data-seasonal] .season-tabs a:focus-visible {
 .season-tabs a:active .season-tab-time { opacity:.65; }
 @media(max-width:760px) {
   body[data-seasonal] .row-hero { --row-hero-pad-bottom:var(--space-inline); }
-  body[data-seasonal] .row-hero-content { row-gap:var(--space-copy); }
+  body[data-seasonal] .row-hero-content { row-gap:var(--space-layout); }
   .hero-actions { display:grid;grid-column:1/-1;grid-template-columns:minmax(0,1fr);gap:8px; }
   body[data-seasonal] .hero-actions .season-tabs {
-    position:relative;inset:auto;justify-self:end;justify-content:flex-end;
+    position:relative;inset:auto;justify-self:start;justify-content:flex-start;
     width:max-content;max-width:100%;column-gap:.5rem;
   }
   body[data-seasonal] .season-tabs a { padding-inline:0;font-size:var(--type-control); }
@@ -189,12 +189,13 @@ body[data-seasonal] .season-tabs a:focus-visible {
   body[data-seasonal] .row-hero { --row-hero-pad-bottom:8px; }
   body[data-seasonal] .row-hero-content { row-gap:8px; }
   body[data-seasonal] .dialogue-intro { row-gap:var(--space-inline); }
-}
-/* At 320px the annotation borrows 12px from each outer photograph field.
-   The text and 44px targets keep their size; the oval keeps its 8px gap. */
-@media(max-width:340px) {
   body[data-seasonal] .hero-actions .season-tabs {
-    max-width:calc(100% + 24px);margin-inline:-12px;
+    width:100%;justify-content:space-between;column-gap:0;
+  }
+}
+@media(max-width:760px) {
+  @container hero-intro (width < 14rem) {
+    body[data-seasonal] .hero-actions .season-tabs { justify-content:flex-start;column-gap:var(--space-inline); }
   }
 }
 /* The short side column keeps the accepted voice rhythm. */

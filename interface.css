@@ -248,8 +248,8 @@ body[data-seasonal] .cp-work-after-table { margin:var(--space-topic) 0 0; }
    The original figure and controls keep their DOM ownership on every width. */
 .hero-voice-reserve { display:none; }
 @media(max-width:760px) {
-  body[data-seasonal] .row-hero { --row-hero-pad-bottom:max(12px,env(safe-area-inset-bottom)); }
-  body[data-seasonal] .dialogue-intro { grid-template-rows:auto auto auto auto auto auto auto;row-gap:0; }
+  body[data-seasonal] .row-hero { --row-hero-pad-bottom:max(24px,env(safe-area-inset-bottom)); }
+  body[data-seasonal] .dialogue-intro { grid-template-rows:auto auto auto auto auto auto auto;row-gap:0;margin-top:0; }
   body[data-seasonal] .dialogue-intro .row-yura,
   body[data-seasonal] .dialogue-intro .row-yura>.row-player { display:grid;grid-template-columns:subgrid;grid-template-rows:subgrid;grid-column:1/-1;grid-row:1/6;width:100%; }
   body[data-seasonal] .row-yura :is(.hero-player-core,.row-player-controls,.row-player-buttons,.row-player-meta) { display:contents; }
