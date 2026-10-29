@@ -27,7 +27,8 @@
     const label = video.getAttribute('aria-label');
     const hero = player.closest('.row-hero');
     const greeting = hero && hero.querySelector('.dialogue-greeting');
-    const trackElement = video.querySelector('track[kind="captions"]');
+    // Timed cues feed the page text; metadata cannot paint over the video.
+    const trackElement = video.querySelector('track[data-player-captions]');
     const track = trackElement && trackElement.track;
     const captionButton = player.querySelector('[data-captions]');
     const captionState = captionButton && captionButton.querySelector('[data-caption-state]');

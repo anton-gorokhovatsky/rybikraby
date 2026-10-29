@@ -22,7 +22,7 @@ function tokyoRow({products, contactUrl}) {
       <div class="row-player-picture">
         <video id="${id}" controls playsinline preload="none" poster="assets/${poster}" width="${round?400:720}" height="${round?400:1280}" aria-label="${label}">
           <source src="assets/${src}" type="video/mp4">
-          ${captions?`<track kind="captions" src="assets/${captions}?v=${captionsRevision}" srclang="ru" label="Русский, с редакторской правкой" default>`:''}
+          ${captions?`<track kind="metadata" data-player-captions src="assets/${captions}?v=${captionsRevision}" srclang="ru" label="Русский, с редакторской правкой">`:''}
           <a href="${source}">Посмотреть видео в Telegram</a>
         </video>
       </div>
