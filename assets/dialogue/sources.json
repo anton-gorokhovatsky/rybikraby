@@ -141,6 +141,13 @@
       "source_video": "dialogue/crab-table.mp4",
       "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
       "selected": "2026-10-22"
+    },
+    "comparison_crop": {
+      "file": "dialogue/crab-table-detail.jpg",
+      "source_frame_time_seconds": 22,
+      "source": "https://t.me/Yuraikra/s/777",
+      "source_date": "2026-06-09",
+      "method": "CSS viewport375×468.75 at x175 y510 in the unchanged720×1280 poster; full frame linked. No file editing or common portion-size claim."
     }
   },
   {
@@ -189,6 +196,14 @@
       "source_video": "dialogue/urchin.mp4",
       "method": "Frame extracted from this same unchanged video at native resolution; JPEG encoding only; original baked-in captions preserved",
       "selected": "2026-10-22"
+    },
+    "note_preview": {
+      "file": "dialogue/urchin-preview.jpg",
+      "time_seconds": 31.5,
+      "source": "https://t.me/ikrabov/179",
+      "source_date": "2026-04-02",
+      "method": "Native720×1280 frame extraction and JPEG encoding only; closed note preview. Full poster and video unchanged.",
+      "sha256": "3f59094ddfb4d1b991160d1a27ca379a72029823a7ac20b57acdb68311c930a4"
     }
   },
   {
@@ -207,7 +222,15 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked",
+    "comparison_frame": {
+      "file": "dialogue/crab-detail.jpg",
+      "time_seconds": 0.7,
+      "source": "https://t.me/ikrabov/57",
+      "source_date": "2024-11-11",
+      "method": "Native720×1280 frame extraction and JPEG encoding only; product figure. Original poster and video unchanged.",
+      "sha256": "e2ac1d3ac5b7a47988ba22fa8358a4f502fe197e019e0002fe0ebe6e0259d39b"
+    }
   },
   {
     "key": "with-yakov",

@@ -178,7 +178,6 @@ body[data-seasonal] .season-tabs a:focus-visible {
   body[data-seasonal] .row-hero { --row-hero-pad-bottom:var(--space-inline); }
   body[data-seasonal] .row-hero-content { row-gap:var(--space-copy); }
   .hero-actions { display:grid;grid-column:1/-1;grid-template-columns:minmax(0,1fr);gap:8px; }
-  body[data-seasonal] .hero-actions .dialogue-start { grid-column:1;grid-row:auto;justify-self:start;width:fit-content;max-width:100%; }
   body[data-seasonal] .hero-actions .season-tabs {
     position:relative;inset:auto;justify-self:end;justify-content:flex-end;
     width:max-content;max-width:100%;column-gap:.5rem;
@@ -202,14 +201,10 @@ body[data-seasonal] .season-tabs a:focus-visible {
 @container hero-intro (14rem <= width < 19rem) {
   body[data-seasonal] .dialogue-intro .dialogue-greeting>p+p { margin-top:var(--space-inline);line-height:1.35; }
 }
-@container hero-intro (width < 14rem) {
-  .hero-actions { grid-row:3; }
-}
 /* Enlarged text is allowed to reflow the five links, with no clipped words. */
 @media(min-width:761px) {
   @container hero-intro (width < 42rem) {
     .hero-actions { display:grid;grid-column:2;grid-template-columns:minmax(0,1fr);gap:var(--space-copy); }
-    body[data-seasonal] .hero-actions .dialogue-start { grid-column:1; }
     body[data-seasonal] .hero-actions .season-tabs {
       position:relative;inset:auto;justify-self:end;width:max-content;max-width:100%;
     }

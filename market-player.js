@@ -1,13 +1,19 @@
-/* Controls are outside the picture: the Telegram circle stays a circle. */
+/* Controls are outside the picture: the Telegram circle stays a circle.
+   This controller owns playback intent and the caption preference. CSS reads
+   data-player-phase / data-player-engaged and the derived hero voice only. */
 (() => {
   'use strict';
   const players = [...document.querySelectorAll('[data-market-player]')];
+  const pauseControllers = new Map();
+  const narrowHero = window.matchMedia('(max-width:760px)');
   const time = seconds => {
     const value = Math.max(0, Math.floor(Number(seconds) || 0));
     return `${String(Math.floor(value / 60)).padStart(2,'0')}:${String(value % 60).padStart(2,'0')}`;
   };
   players.forEach(player => {
     const video = player.querySelector('video');
+    const mediaSources = [...video.querySelectorAll('source')];
+    const failedMediaSources = new Set();
     const controls = player.querySelector('.row-player-controls');
     const play = player.querySelector('[data-play]');
     const sound = player.querySelector('[data-sound]');
@@ -16,121 +22,355 @@
     const total = player.querySelector('[data-total]');
     const status = player.querySelector('.row-player-status');
     const caption = player.querySelector('[data-player-caption]');
-    const source = caption.closest('a');
+    const sourceLink = caption.closest('a');
     const originalCaption = caption.textContent;
-    const sourceLabel = source.getAttribute('aria-label');
     const label = video.getAttribute('aria-label');
+    const hero = player.closest('.row-hero');
+    const greeting = hero && hero.querySelector('.dialogue-greeting');
     const trackElement = video.querySelector('track[kind="captions"]');
+    const track = trackElement && trackElement.track;
     const captionButton = player.querySelector('[data-captions]');
+    const captionState = captionButton && captionButton.querySelector('[data-caption-state]');
+    const originalCaptionLabel = captionButton && captionButton.getAttribute('aria-label');
     const subtitleText = player.querySelector('[data-subtitles]');
-    if(trackElement && captionButton && subtitleText) {
-      const track = trackElement.track;
-      let captionsEnabled = true;
-      const captionState = captionButton.querySelector('[data-caption-state]');
-      const showCaptionState = (enabled, text = enabled ? 'вкл.' : 'выкл.') => {
-        captionButton.setAttribute('aria-pressed',String(enabled));
-        if(captionState) captionState.textContent = text;
-      };
-      const updateCaptions = () => {
-        const active = [...(track.activeCues || [])];
-        subtitleText.textContent = rowTypograph(active.map(cue=>cue.text).join(' ').replace(/\s+/g,' '));
-      };
-      track.mode = 'hidden';
-      captionButton.hidden = false;
-      subtitleText.hidden = false;
-      captionButton.addEventListener('click', () => {
-        captionsEnabled = !captionsEnabled;
-        showCaptionState(captionsEnabled);
-        subtitleText.setAttribute('aria-hidden',String(!captionsEnabled));
-        updateCaptions();
-      });
-      track.addEventListener('cuechange',updateCaptions);
-      trackElement.addEventListener('load',updateCaptions);
-      trackElement.addEventListener('error',()=>{
-        subtitleText.textContent='Субтитры не загрузились.';
-        captionButton.disabled=true;
-        showCaptionState(false,'недоступны');
-        captionButton.setAttribute('aria-label',`Субтитры недоступны: ${label}`);
-      });
-      updateCaptions();
+    const voiceReserve = hero && greeting ? document.createElement('div') : null;
+    if(voiceReserve) {
+      voiceReserve.className = 'hero-voice-reserve';
+      voiceReserve.setAttribute('aria-hidden', 'true');
+      voiceReserve.hidden = true;
+      player.append(voiceReserve);
     }
-    let starting = false;
-    let duration = Number(player.dataset.duration);
-    const setStatus = state => {
-      caption.textContent = state==='loading'?'Загрузка…':state==='error'?'Ошибка · Telegram':originalCaption;
-      status.textContent = state==='loading'?'Загрузка видео.':state==='error'?'Видео не загрузилось. Повторите запуск или откройте оригинал в Telegram.':'';
-      source.setAttribute('aria-label',state==='error'?`Видео не загрузилось. ${sourceLabel}`:sourceLabel);
-    };
 
-    const update = () => {
-      const playing = !video.paused && !video.ended;
-      player.classList.toggle('is-playing', playing);
-      player.classList.toggle('is-ended', video.ended);
+    let captionsEnabled = true;
+    let trackAvailable = Boolean(track && captionButton && subtitleText);
+    let captionFailed = Boolean(trackElement && trackElement.readyState === 3);
+    let sourceFailed = false;
+    let engaged = false;
+    let hasCaptionSession = false;
+    let starting = false;
+    let buffering = false;
+    let playRejected = false;
+    let requestToken = 0;
+    let retryPosition = null;
+    let duration = Number(player.dataset.duration);
+    if(captionFailed) trackAvailable = false;
+
+    const phase = () => {
+      if(video.error || sourceFailed || playRejected) return 'error';
+      if(starting || (buffering && !video.paused)) return 'loading';
+      if(video.ended) return 'ended';
+      if(!video.paused) return 'playing';
+      return engaged ? 'paused' : 'idle';
+    };
+    const canSeek = () => !video.error && !sourceFailed && video.readyState >= 1 &&
+      Number.isFinite(video.duration) && video.duration > 0;
+    const clearSourceFailure = () => {
+      sourceFailed = false;
+      failedMediaSources.clear();
+    };
+    const activeCaption = () => {
+      if(!trackAvailable || !track) return '';
+      const position = Number(video.currentTime) || 0;
+      return rowTypograph([...(track.activeCues || [])]
+        .filter(cue => cue.startTime <= position && position < cue.endTime)
+        .map(cue => cue.text).join(' ').replace(/\s+/g,' '));
+    };
+    const render = () => {
+      const state = phase();
+      const text = activeCaption();
+      if(text && engaged && video.currentTime > 0 && state !== 'ended' && state !== 'error') {
+        hasCaptionSession = true;
+      }
+      const contextual = Boolean(hero && greeting && narrowHero.matches);
+      const heroCaption = contextual && captionsEnabled && trackAvailable &&
+        hasCaptionSession && state !== 'ended' && state !== 'error';
+      const captionVisible = captionsEnabled && trackAvailable &&
+        state !== 'error' && state !== 'ended' && (!contextual || heroCaption);
+
+      player.dataset.playerPhase = state;
+      player.dataset.playerEngaged = String(engaged);
+      if(hero && greeting) {
+        const voice = heroCaption ? 'captions' : 'greeting';
+        player.dataset.heroVoice = voice;
+        hero.dataset.heroVoice = voice;
+        greeting.hidden = heroCaption;
+        greeting.setAttribute('aria-hidden', String(heroCaption));
+      }
+      if(subtitleText) {
+        subtitleText.textContent = captionVisible ? text : '';
+        subtitleText.hidden = !captionVisible;
+        subtitleText.setAttribute('aria-hidden', String(!captionVisible));
+      }
+      if(voiceReserve) {
+        const reserveTexts = contextual && engaged && track ?
+          [...(track.cues || [])].map(cue => rowTypograph(cue.text.replace(/\s+/g,' '))) : [];
+        const children = [...voiceReserve.children];
+        if(children.length !== reserveTexts.length || reserveTexts.some((value, index) => children[index].textContent !== value)) {
+          voiceReserve.replaceChildren(...reserveTexts.map(value => {
+            const line = document.createElement('span');
+            line.textContent = value;
+            return line;
+          }));
+        }
+        voiceReserve.hidden = reserveTexts.length === 0;
+      }
+      if(captionButton) {
+        captionButton.hidden = false;
+        captionButton.disabled = !trackAvailable;
+        captionButton.setAttribute('aria-pressed', String(captionsEnabled && trackAvailable));
+        captionButton.setAttribute('aria-label', trackAvailable ? originalCaptionLabel : `Субтитры недоступны: ${label}`);
+        if(captionState) captionState.textContent = trackAvailable ? (captionsEnabled ? 'вкл.' : 'выкл.') : 'недоступны';
+      }
+
+      // A source remains a source while feedback has its own status row.
+      const sourceText = contextual ? 'Архив' : originalCaption;
+      if(caption.textContent !== sourceText) caption.textContent = sourceText;
+      const feedback = [];
+      if(video.error || sourceFailed) feedback.push('Видео не загрузилось. Повторите запуск или откройте архив в Telegram.');
+      else if(playRejected) feedback.push('Видео не удалось запустить. Повторите запуск или откройте архив в Telegram.');
+      else if(state === 'loading') feedback.push('Загрузка видео.');
+      if(captionFailed) feedback.push('Субтитры не загрузились. Видео можно смотреть без них или открыть архив в Telegram.');
+      const feedbackText = feedback.join(' ');
+      if(status.textContent !== feedbackText) status.textContent = feedbackText;
+
+      const busy = state === 'loading' || state === 'playing';
+      player.classList.toggle('is-playing', busy);
+      player.classList.toggle('is-ended', state === 'ended');
       player.classList.toggle('is-muted', video.muted || video.volume === 0);
-      play.setAttribute('aria-label', `${playing?'Пауза':video.error?'Повторить загрузку':video.ended?'Смотреть ещё раз':'Смотреть'}: ${label}`);
+      let action = 'Смотреть';
+      if(busy) action = 'Пауза';
+      else if(state === 'error') action = 'Повторить запуск';
+      else if(state === 'ended') action = 'Смотреть ещё раз';
+      else if(state === 'paused') action = 'Продолжить';
+      play.setAttribute('aria-label', `${action}: ${label}`);
       sound.setAttribute('aria-pressed', String(!video.muted && video.volume > 0));
       elapsed.textContent = time(video.currentTime);
       total.textContent = time(duration);
+      const seekAvailable = canSeek();
+      if(!seekAvailable && !seek.disabled && document.activeElement === seek) {
+        play.focus({preventScroll:true});
+      }
+      seek.disabled = !seekAvailable;
       seek.value = video.currentTime || 0;
-      seek.style.setProperty('--played', `${Math.min(100, (video.currentTime || 0) / duration * 100)}%`);
+      seek.style.setProperty('--played', `${Math.min(100, duration > 0 ? (video.currentTime || 0) / duration * 100 : 0)}%`);
       seek.setAttribute('aria-valuetext', `${time(video.currentTime)} из ${time(duration)}`);
     };
+    const pausePlayback = () => {
+      requestToken += 1;
+      starting = false;
+      buffering = false;
+      video.pause();
+      render();
+    };
+    pauseControllers.set(player, pausePlayback);
+
     play.addEventListener('click', async () => {
-      if(starting || !video.paused) {
-        starting = false;
-        video.pause();
-        setStatus('');
-        update();
+      const currentPhase = phase();
+      if(starting || (!video.paused && currentPhase !== 'ended' && currentPhase !== 'error')) {
+        pausePlayback();
         return;
       }
-      if(video.error) video.load();
-      if(video.ended) video.currentTime = 0;
+      engaged = true;
+      const request = ++requestToken;
+      const ended = video.ended;
       starting = true;
-      setStatus('loading');
-      try { await video.play(); }
-      catch(error) {
-        if(error.name !== 'AbortError') setStatus('error');
-      } finally { starting = false; update(); }
+      buffering = false;
+      playRejected = false;
+      try {
+        if(video.error || sourceFailed || (video.networkState === 3 && video.readyState < 1)) {
+          if(retryPosition === null && Number.isFinite(video.currentTime) && video.currentTime > 0) {
+            retryPosition = video.currentTime;
+          }
+          clearSourceFailure();
+          video.load();
+        }
+        if(ended) {
+          retryPosition = null;
+          hasCaptionSession = false;
+          video.currentTime = 0;
+        }
+        render();
+        await video.play();
+      } catch(error) {
+        // A cancelled or superseded request cannot overwrite a later intention.
+        if(request === requestToken) {
+          starting = false;
+          buffering = false;
+          playRejected = true;
+          video.pause();
+          render();
+        }
+      } finally {
+        if(request === requestToken) {
+          starting = false;
+          render();
+        }
+      }
     });
     sound.addEventListener('click', () => {
       if(video.volume === 0) { video.volume = 1; video.muted = false; }
       else video.muted = !video.muted;
-      update();
+      render();
     });
-    video.addEventListener('loadedmetadata', () => {
+    if(track && captionButton && subtitleText) {
+      track.mode = 'hidden';
+      captionButton.addEventListener('click', () => {
+        if(!trackAvailable) return;
+        captionsEnabled = !captionsEnabled;
+        render();
+      });
+      track.addEventListener('cuechange', render);
+      trackElement.addEventListener('load', () => {
+        trackAvailable = true;
+        captionFailed = false;
+        render();
+      });
+      trackElement.addEventListener('error', () => {
+        trackAvailable = false;
+        captionFailed = true;
+        hasCaptionSession = false;
+        render();
+      });
+    }
+    mediaSources.forEach(mediaSource => mediaSource.addEventListener('error', () => {
+      // Source-list failures do not bubble and may leave video.error null.
+      // A later candidate or already usable media must not be marked failed.
+      if(video.hasAttribute('src') || video.readyState >= 1) return;
+      failedMediaSources.add(mediaSource);
+      if(failedMediaSources.size === mediaSources.length) {
+        sourceFailed = true;
+        pausePlayback();
+      }
+    }));
+
+    const restoreRetryPosition = () => {
+      if(retryPosition === null || video.readyState < 1) return;
+      const target = Number.isFinite(video.duration) && video.duration > 0 ?
+        Math.min(retryPosition, Math.max(0, video.duration - .001)) : retryPosition;
+      try {
+        video.currentTime = target;
+        retryPosition = null;
+      } catch(error) {
+        // Keep the known position for the next readiness event.
+      }
+    };
+    const updateDuration = () => {
+      if(video.readyState >= 1 && !video.error) clearSourceFailure();
       if(Number.isFinite(video.duration) && video.duration > 0) {
         duration = video.duration;
         seek.max = duration;
-        seek.disabled = false;
       }
-      update();
-    });
+      restoreRetryPosition();
+      render();
+    };
+    video.addEventListener('loadedmetadata', updateDuration);
+    video.addEventListener('durationchange', updateDuration);
+    video.addEventListener('canplay', updateDuration);
+    video.addEventListener('loadstart', () => { clearSourceFailure(); render(); });
     seek.addEventListener('input', () => {
+      if(!canSeek()) { render(); return; }
       video.currentTime = Number(seek.value);
-      update();
+      render();
     });
     video.addEventListener('play', () => {
-      players.forEach(other => { if(other !== player) other.querySelector('video').pause(); });
-      update();
+      if(!video.paused && !video.ended && !video.error) {
+        pauseControllers.forEach((pause, other) => { if(other !== player) pause(); });
+      }
+      render();
     });
-    video.addEventListener('playing', () => { setStatus(''); update(); });
-    video.addEventListener('waiting', () => { if(!video.paused) setStatus('loading'); });
-    video.addEventListener('pause', () => { if(!video.error) setStatus(''); update(); });
-    video.addEventListener('ended', () => { setStatus(''); update(); });
-    video.addEventListener('error', () => { setStatus('error'); update(); });
-    // Closing an optional note must never leave an invisible video playing.
-    // Reopening preserves the visitor's position and waits for Play again.
+    video.addEventListener('playing', () => {
+      if(!video.paused && !video.ended && !video.error) {
+        starting = false;
+        buffering = false;
+        playRejected = false;
+      }
+      render();
+    });
+    video.addEventListener('waiting', () => {
+      if(!video.paused && !video.ended && !video.error) buffering = true;
+      render();
+    });
+    video.addEventListener('pause', () => { if(video.paused) buffering = false; render(); });
+    video.addEventListener('ended', () => {
+      if(video.ended) { starting = false; buffering = false; }
+      render();
+    });
+    video.addEventListener('error', () => {
+      if(video.error) { starting = false; buffering = false; }
+      render();
+    });
+    video.addEventListener('emptied', () => {
+      hasCaptionSession = false;
+      buffering = false;
+      render();
+    });
+    ['timeupdate','volumechange','seeked'].forEach(event => video.addEventListener(event, render));
+
+    // Closing a note and leaving the hero cancel pending starts as well as play.
     const note = player.closest('.cp-video-note');
-    if(note) note.addEventListener('toggle', () => {
-      if(!note.open) { starting = false; video.pause(); setStatus(video.error?'error':''); update(); }
-    });
-    ['timeupdate','volumechange','seeked'].forEach(event => video.addEventListener(event, update));
+    if(note) note.addEventListener('toggle', () => { if(!note.open) pausePlayback(); });
+    if(hero && greeting) {
+      const action = hero.querySelector('.dialogue-start');
+      if(action) action.addEventListener('click', pausePlayback);
+      const secondaryControls = [sound, captionButton, seek].filter(Boolean);
+      const buttons = player.querySelector('.row-player-buttons');
+      const metadata = player.querySelector('.row-player-meta');
+      const syncControlOrder = () => {
+        const focused = document.activeElement;
+        let sourceMoved = false;
+        let captionMoved = false;
+        if(narrowHero.matches) {
+          if(sourceLink.parentNode !== buttons || sourceLink.nextElementSibling !== sound) {
+            buttons.insertBefore(sourceLink, sound);
+            sourceMoved = true;
+          }
+          if(captionButton && (captionButton.parentNode !== buttons || sound.nextElementSibling !== captionButton)) {
+            sound.after(captionButton);
+            captionMoved = true;
+          }
+        } else {
+          if(sourceLink.parentNode !== metadata) {
+            metadata.append(sourceLink);
+            sourceMoved = true;
+          }
+          if(captionButton && captionButton.parentNode !== metadata) {
+            metadata.append(captionButton);
+            captionMoved = true;
+          }
+        }
+        if((sourceMoved && focused === sourceLink) || (captionMoved && focused === captionButton)) {
+          const target = narrowHero.matches && !engaged && focused === captionButton ? play : focused;
+          target.focus({preventScroll:true});
+        }
+      };
+      player.addEventListener('focusout', event => {
+        if(event.relatedTarget || !secondaryControls.includes(event.target)) return;
+        const previous = event.target;
+        requestAnimationFrame(() => {
+          const current = document.activeElement;
+          const focusWasDropped = !current || current === document.body ||
+            current === document.documentElement || current === previous;
+          if(narrowHero.matches && !engaged && focusWasDropped &&
+            getComputedStyle(previous).display === 'none') {
+            play.focus({preventScroll:true});
+          }
+        });
+      });
+      narrowHero.addEventListener('change', () => {
+        if(narrowHero.matches && !engaged && secondaryControls.includes(document.activeElement)) {
+          play.focus({preventScroll:true});
+        }
+        syncControlOrder();
+        render();
+      });
+      syncControlOrder();
+    }
     video.controls = false;
     controls.hidden = false;
-    update();
+    render();
   });
   document.querySelectorAll('[data-order]').forEach(button => button.addEventListener('click', () => {
-    players.forEach(player => player.querySelector('video').pause());
+    pauseControllers.forEach(pause => pause());
   }));
   const revealLinkedVideo = () => {
     const id = location.hash.slice(1);

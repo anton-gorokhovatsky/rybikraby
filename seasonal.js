@@ -183,8 +183,8 @@
         <p class="cp-copy">${text('С неё всё началось. В один майский день в Петербурге Юра почувствовал этот запах — в городе шёл сезон корюшки.')}</p>
         ${link('https://t.me/ikrabov/41', 'Как всё началось · 27.09.2024')}
       </div><figure class="season-photo">
-        <a class="season-photo-link" href="assets/smelt.jpg" target="_blank" rel="noopener" aria-label="Рассмотреть корюшку в полном размере — откроется в новой вкладке"><img src="assets/smelt.jpg" width="480" height="848" alt="Серебристая корюшка крупным планом из мартовской записи канала «Рыба и крабы»." loading="lazy"></a>
-        <figcaption>${link('https://t.me/ikrabov/123', 'В канале · 26.03.2025')}</figcaption>
+        <a class="season-photo-link" href="assets/smelt-april-2026.jpg" target="_blank" rel="noopener" aria-label="Рассмотреть корюшку в полном размере — откроется в новой вкладке"><img src="assets/smelt-april-2026.jpg" width="720" height="1280" alt="Серебристая корюшка крупным планом — кадр из апрельской истории Юры." loading="lazy"></a>
+        <figcaption>${link('https://t.me/Yuraikra/s/761', 'Из истории Юры · 18.04.2026')}</figcaption>
       </figure>`;
       fish.querySelector('.cp-scene-heading').after(feature);
       setText('.cp-work-story>.cp-question', 'И что было дальше?');
@@ -201,10 +201,10 @@
       const comparison = document.createElement('div');
       comparison.className = 'season-comparison';
       comparison.append(copy.querySelector('.row-lots'), copy.querySelector('.cp-source'));
-      // The summer's facts and comparison fill the text column beside the
-      // full tasting. Keep the tall image from stranding an empty column.
-      copy.append(tasting.querySelector('.cp-story-intro'), comparison);
-      opening.append(copy, tasting);
+      // The same DOM reads as introduction, tasting, comparison. On a wide
+      // screen the comparison still shares the text column beside the video.
+      copy.append(tasting.querySelector('.cp-story-intro'));
+      opening.append(copy, tasting, comparison);
       caviar.prepend(opening);
     }
     const tasteReading = readingNote('taste-reading', tasteReadings[key]);
@@ -233,6 +233,11 @@
       </div>
       <div class="season-story-part"><p>${text(cooking.continuation)}</p></div>`;
     fish.querySelector('.cp-fish-layout').after(story);
+    if (key === 'winter') {
+      const biography=fish.querySelector('.cp-work');
+      biography.classList.add('cp-work-after-table');
+      story.after(biography);
+    }
     root.querySelector('.cp-counter-reply').append(readingNote('table-reading', tableReading));
     // The same stroke and em-size follow the text in every link family.
     root.querySelectorAll('a>span[aria-hidden="true"]').forEach(span => {
@@ -258,6 +263,11 @@
     copy.className = 'cp-voice-copy';
     copy.append(exchange.querySelector('.cp-question'), voice.querySelector('.cp-voice-answer'));
     voice.prepend(copy);
+    const heroPlayer=root.querySelector('.row-yura .row-player');
+    const mediaCore=document.createElement('div');
+    mediaCore.className='hero-player-core';
+    mediaCore.append(heroPlayer.querySelector('.row-player-picture'),heroPlayer.querySelector('.row-player-controls'));
+    heroPlayer.prepend(mediaCore);
     return page.innerHTML;
   };
 })();

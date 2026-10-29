@@ -73,8 +73,8 @@
         <svg class="season-current-mark" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="${mark}"/></svg>
       </a>`;
     }).join('');
-    action.before(actions);
-    actions.append(action, tabs);
+    actions.append(tabs);
+    intro.append(actions);
     // Old shared #editions links now lead to the opening scene.
     hero.id = 'editions';
   });

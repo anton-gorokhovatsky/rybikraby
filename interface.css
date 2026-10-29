@@ -3,9 +3,9 @@
 body[data-seasonal] {
   --type-caption:.875rem;--type-body:1.125rem;--type-voice:var(--type-body);
   --type-question:1.5rem;--type-answer:clamp(1.75rem,2.6vw,2.5rem);--type-answer-narrow:1.5rem;
-  --type-invitation:clamp(1.75rem,3.2vw,3rem);--type-control:1.125rem;
+  --type-invitation:clamp(1.75rem,3.2vw,3rem);--type-control:1.125rem;--type-subtitle:1rem;
   --space-inline:.5rem;--space-copy:1rem;--space-group:1.5rem;
-  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;--player-portrait-width:22rem;--player-feature-width:28rem;
+  --space-layout:2rem;--space-topic:4rem;--player-width:20rem;--player-portrait-width:22rem;--player-feature-width:28rem;--player-secondary-width:15rem;
   --cp-voice-size:var(--type-voice);--cp-copy-size:var(--type-body);
   --cp-topic-gap:var(--space-topic);--cp-scene-gap:clamp(64px,7vw,104px);
 }
@@ -38,11 +38,11 @@ body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice story'
 body[data-seasonal] .cp-caviar-conversation>.cp-exchange { grid-area:choice; }
 body[data-seasonal] :is(.cp-caviar-conversation,.season-summer-opening) .cp-caviar-product { display:block;grid-area:story;width:100%;justify-self:stretch; }
 body[data-seasonal] .cp-caviar-product>.cp-story-intro { max-width:41ch;margin-bottom:var(--space-group); }
-body[data-seasonal] .season-summer-opening { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'copy story';gap:var(--space-layout) var(--cp-layout-gap); }
+body[data-seasonal] .season-summer-opening { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'copy story' 'comparison story';gap:var(--space-layout) var(--cp-layout-gap); }
 body[data-seasonal] .season-summer-opening>.cp-caviar-copy { grid-area:copy; }
 body[data-seasonal] .season-summer-opening .cp-story-intro { margin-top:var(--space-layout); }
 body[data-seasonal] .season-summer-opening .cp-video-note-description { display:none; }
-body[data-seasonal] .season-comparison { margin-top:var(--space-layout); }
+body[data-seasonal] .season-comparison { grid-area:comparison;margin-top:0; }
 body[data-seasonal] .season-comparison .row-lots { grid-template-columns:minmax(0,1fr);margin-top:0; }
 body[data-seasonal] .season-comparison .row-lot { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9.5rem),1fr));gap:var(--space-copy) var(--space-group);align-items:start; }
 body[data-seasonal] .season-comparison .row-lot h3 { margin-top:-.06em; }
@@ -63,7 +63,7 @@ body[data-seasonal] .cp-work .cp-voice .row-player-subtitles { width:100%; }
 body[data-seasonal] .cp-supper-note { max-width:var(--player-feature-width);margin-top:var(--space-layout); }
 @media(max-width:760px) {
   body[data-seasonal] .cp-caviar-conversation { grid-template-areas:'choice' 'story'; }
-  body[data-seasonal] .season-summer-opening { grid-template-columns:minmax(0,1fr);grid-template-areas:'copy' 'story'; }
+  body[data-seasonal] .season-summer-opening { grid-template-columns:minmax(0,1fr);grid-template-areas:'copy' 'story' 'comparison'; }
 }
 body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'choice reading';max-width:none; }
 .season-reading-note { max-width:48ch;margin-top:var(--space-layout); }
@@ -79,16 +79,11 @@ body[data-seasonal] .dialogue-hello { font-size:var(--type-invitation);line-heig
 body[data-seasonal] .dialogue-greeting>p+p { font-size:var(--type-body);line-height:1.5; }
 body[data-seasonal] .dialogue-reply { font-size:var(--type-control);line-height:1.4; }
 body[data-seasonal] .dialogue-intro { width:100%;container:hero-intro / inline-size; }
+body[data-seasonal] .row-hero-content { container:hero-layout / inline-size; }
 body[data-seasonal] .row-header { container:row-navigation / inline-size; }
 @container row-navigation (width < 16rem) {
   body[data-seasonal] .row-header nav { display:grid;grid-template-columns:repeat(2,max-content);justify-content:start;gap:.25rem 1.5rem; }
   body[data-seasonal] .row-header .header-contact { grid-column:1/-1; }
-}
-@container hero-intro (width < 14em) {
-  body[data-seasonal] .dialogue-intro .row-yura { grid-column:1;grid-row:1; }
-  body[data-seasonal] .dialogue-intro .row-yura .row-player-controls { width:var(--row-content-width); }
-  body[data-seasonal] .dialogue-greeting { grid-column:1/-1;grid-row:2; }
-  body[data-seasonal] .dialogue-start { grid-column:1/-1;grid-row:3; }
 }
 
 /* The arrow's stroke follows the letters instead of an oversized font glyph. */
@@ -128,7 +123,7 @@ body[data-seasonal] .cp-video-note-action { display:inline-flex;gap:var(--space-
 .cp-video-note[open] .cp-note-closed { display:none; }
 .cp-video-note[open] .cp-note-open { display:inline; }
 .cp-video-note[open] .cp-video-note-action svg { transform:rotate(180deg); }
-.cp-video-note[open]>summary { grid-template-columns:minmax(0,1fr); }
+body[data-seasonal] .cp-video-note[open]>summary { grid-template-columns:minmax(0,1fr); }
 .cp-video-note[open]>summary .cp-video-note-poster { display:none; }
 .cp-video-note-body { margin-top:var(--space-copy); }
 body[data-seasonal] .cp-video-note-body>.row-player { width:100%;max-width:var(--player-feature-width); }
@@ -144,6 +139,20 @@ body[data-seasonal] .cp-crab-layout { grid-template-areas:'reply tasting' 'produ
 body[data-seasonal] .cp-crab-tasting { --player-portrait-width:var(--player-feature-width); }
 body[data-seasonal] .cp-crab-tasting>.row-player { width:100%; }
 body[data-seasonal] .cp-crab-product { align-self:start; }
+body[data-seasonal] .cp-crab-comparison { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-group);max-width:38rem;margin-top:var(--space-layout); }
+.cp-crab-detail { min-width:0;margin:0; }
+body[data-seasonal] .cp-crab-detail figcaption { margin:0 0 var(--space-copy);font-size:var(--type-body);line-height:1.4; }
+.cp-crab-photo { position:relative;display:block;overflow:hidden;aspect-ratio:4/5;cursor:zoom-in; }
+.cp-crab-photo img { display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%; }
+/* This is a view into the unchanged720×1280 poster:375×468.75 at(175,510).
+   The full source remains available through the photograph link. */
+.cp-crab-opilio .cp-crab-photo img { position:absolute;width:192%;max-width:none;height:auto;left:-46.6667%;top:-108.8%; }
+body[data-seasonal] .cp-crab-detail .row-reference { min-height:44px;margin-top:var(--space-inline);font-size:var(--type-caption);color:var(--muted); }
+.cp-crab-photo:focus-visible { outline:2px solid var(--ink);outline-offset:4px; }
+.cp-video-note[data-story="urchin"] .cp-video-note-poster { object-position:center top; }
+@container page-reading (width < 12rem) {
+  body[data-seasonal] .cp-crab-comparison { grid-template-columns:minmax(0,1fr); }
+}
 body[data-seasonal] .cp-shells { grid-area:shells;margin-top:0; }
 body[data-seasonal] :is(.cp-crab-reply,.cp-counter-reply,.cp-shells)>.cp-question { margin-left:0; }
 body[data-seasonal] .cp-counter-product { --player-portrait-width:var(--player-feature-width); }
@@ -213,6 +222,7 @@ body[data-seasonal] .row-main { container:page-reading / inline-size; }
 body[data-seasonal] .cp-scene .row-player { width:min(100%,var(--player-width));max-width:100%; }
 body[data-seasonal] .cp-scene .row-player:not(.row-player-round) { width:min(100%,var(--player-portrait-width)); }
 body[data-seasonal] .cp-voice>.row-player { flex:0 1 var(--player-width); }
+body[data-seasonal] .cp-voice-secondary { --player-width:var(--player-secondary-width); }
 body[data-seasonal] .row-player-buttons { display:grid;grid-template-columns:44px minmax(0,1fr) 44px;justify-content:normal;gap:12px;align-items:center; }
 body[data-seasonal] .row-player-buttons .row-play { width:44px;height:44px;transform:translateX(-1px); }
 body[data-seasonal] .row-player-buttons .icon-play { width:24px;height:24px;transform:none; }
@@ -223,11 +233,80 @@ body[data-seasonal] .row-player-time>[data-remaining] { display:inline;font-size
 body[data-seasonal] .row-player-time>[data-remaining]::before { content:none; }
 body[data-seasonal] .row-player-controls { margin-top:16px; }
 body[data-seasonal] .row-player video { scroll-margin-top:calc(var(--row-menu-height,64px) + var(--space-copy)); }
-body[data-seasonal] .row-player-meta .row-reference { font-size:var(--type-caption); }
+body[data-seasonal] .row-player-meta .row-reference { min-height:44px;padding-block:8px;font-size:var(--type-caption);line-height:1.4; }
 body[data-seasonal] .row-player-meta { display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px;align-items:first baseline; }
 body[data-seasonal] .row-player-meta .row-reference { display:inline-flex;gap:.5em;width:auto;max-width:100%;align-items:flex-start; }
 body[data-seasonal] .row-player-meta [data-player-caption] { white-space:nowrap; }
 body[data-seasonal] .row-player-meta .row-caption-toggle { justify-self:start;font-size:var(--type-caption); }
+body[data-seasonal] .row-player-subtitles { font-size:var(--type-subtitle);line-height:1.45;color:var(--muted); }
+body[data-seasonal] .row-player-status:not(:empty) { position:static;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;margin:var(--space-inline) 0 0;font-size:var(--type-caption);line-height:1.4; }
+body[data-seasonal] .row-hero .row-player-subtitles { color:color-mix(in srgb,var(--season-hero-text) 80%,var(--season-display)); }
+body[data-seasonal] .cp-work-after-table { margin:var(--space-topic) 0 0; }
+
+/* One place for Yuri's voice. Real cue text and the greeting reserve the
+   speech area, keeping CC and the seek control steady when the voice changes.
+   The original figure and controls keep their DOM ownership on every width. */
+.hero-voice-reserve { display:none; }
+@media(max-width:760px) {
+  body[data-seasonal] .row-hero { --row-hero-pad-bottom:max(12px,env(safe-area-inset-bottom)); }
+  body[data-seasonal] .dialogue-intro { grid-template-rows:auto auto auto auto auto auto auto;row-gap:0; }
+  body[data-seasonal] .dialogue-intro .row-yura,
+  body[data-seasonal] .dialogue-intro .row-yura>.row-player { display:grid;grid-template-columns:subgrid;grid-template-rows:subgrid;grid-column:1/-1;grid-row:1/6;width:100%; }
+  body[data-seasonal] .row-yura :is(.hero-player-core,.row-player-controls,.row-player-buttons,.row-player-meta) { display:contents; }
+  body[data-seasonal] .row-yura .row-player-controls[hidden] { display:none; }
+  body[data-seasonal] .row-yura .row-player-picture { grid-column:1;grid-row:1;width:var(--row-circle-size); }
+  body[data-seasonal] .row-yura :is(.row-play,.row-player-time,.row-reference) { grid-column:1;grid-row:1;align-self:start;margin-top:calc(var(--row-circle-size) + var(--space-inline)); }
+  body[data-seasonal] .row-yura .row-player-time { padding-block:calc((44px - 1lh) / 2); }
+  body[data-seasonal] .row-yura .row-play { justify-self:start; }
+  body[data-seasonal] .row-yura .row-player-time { justify-self:start;margin-inline-start:calc(44px + var(--space-inline)); }
+  body[data-seasonal] .row-yura .row-reference { justify-self:start;justify-content:center;align-items:center;width:max-content;min-width:44px;min-height:44px;font-size:var(--type-caption);line-height:1.4;display:inline-flex;margin-inline-start:calc(44px + var(--space-inline) + 4ch + var(--space-inline));padding:0; }
+  body[data-seasonal] .row-yura .row-reference .row-action-arrow { display:none; }
+  body[data-seasonal] .row-yura :is(.row-sound,.row-caption-toggle) { grid-column:1/-1;grid-row:3;justify-self:start;align-self:center;margin-top:var(--space-copy); }
+  body[data-seasonal] .row-yura [data-player-caption] { white-space:nowrap; }
+  body[data-seasonal] .row-yura .row-caption-toggle { font-size:var(--type-caption);margin-inline-start:calc(44px + var(--space-inline));max-width:calc(100% - 44px - var(--space-inline)); }
+  body[data-seasonal] .row-yura .row-player-buttons .row-caption-toggle { display:inline-flex;width:max-content;height:auto;min-height:44px;padding:8px 0;border:0;border-radius:0;align-items:baseline; }
+  body[data-seasonal] .row-yura .row-player-seek { grid-column:1/-1;grid-row:4;width:100%;margin:0; }
+  body[data-seasonal] .row-yura .row-player-status { grid-column:1/-1;grid-row:5;margin:0; }
+  body[data-seasonal] .row-yura .row-player-status:empty { display:none; }
+  body[data-seasonal] .row-yura [data-player-engaged="false"] :is(.row-sound,.row-caption-toggle,.row-player-seek) { display:none; }
+  body[data-seasonal] .dialogue-intro .row-yura .row-player-subtitles { display:block;grid-column:2;grid-row:1/3;align-self:start;width:100%;min-height:calc(var(--row-circle-size) + var(--space-inline) + 44px);margin:0;visibility:hidden; }
+  body[data-seasonal] .dialogue-intro .dialogue-greeting { display:block;grid-column:2;grid-row:1/3;align-self:start;min-width:0;min-height:calc(var(--row-circle-size) + var(--space-inline) + 44px); }
+  body[data-seasonal] .row-yura [data-player-engaged="true"] .hero-voice-reserve:not([hidden]) { display:grid;grid-column:2;grid-row:1/3;align-self:start;width:100%;margin:0;font-size:var(--type-subtitle);line-height:1.45;text-wrap:pretty;visibility:hidden;pointer-events:none; }
+  .hero-voice-reserve>span { grid-area:1/1; }
+  body[data-seasonal] .row-hero[data-hero-voice="captions"] .dialogue-greeting { visibility:hidden; }
+  body[data-seasonal] .row-hero[data-hero-voice="captions"] .row-player-subtitles { visibility:visible; }
+  body[data-seasonal] .dialogue-intro>.dialogue-start { grid-column:1/-1;grid-row:6;justify-self:start;margin-top:var(--space-group); }
+  body[data-seasonal] .dialogue-intro .hero-actions { grid-column:1/-1;grid-row:7;margin-top:var(--space-inline); }
+  @container hero-layout (width < 14rem) {
+    body[data-seasonal] .dialogue-intro { grid-template-columns:minmax(0,1fr); }
+    body[data-seasonal] .dialogue-intro .row-yura,
+    body[data-seasonal] .dialogue-intro .row-yura>.row-player { grid-row:1/7; }
+    body[data-seasonal] .row-yura :is(.row-play,.row-player-time,.row-reference) { grid-row:2;align-self:center;margin-top:var(--space-inline); }
+    body[data-seasonal] .dialogue-intro :is(.dialogue-greeting,.row-yura .row-player-subtitles,.row-yura .hero-voice-reserve) { grid-column:1;grid-row:3;min-height:0;margin-top:var(--space-group); }
+    body[data-seasonal] .row-yura :is(.row-sound,.row-caption-toggle) { grid-row:4; }
+    body[data-seasonal] .row-yura .row-player-seek { grid-row:5; }
+    body[data-seasonal] .row-yura .row-player-status { grid-row:6; }
+    body[data-seasonal] .dialogue-intro>.dialogue-start { grid-row:7; }
+    body[data-seasonal] .dialogue-intro .hero-actions { grid-row:8; }
+  }
+  @container hero-layout (width < 18rem) {
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) { grid-template-columns:minmax(0,1fr); }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .row-yura,
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .row-yura>.row-player { grid-row:1/7; }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .row-yura :is(.row-play,.row-player-time,.row-reference) { grid-row:2;align-self:center;margin-top:var(--space-inline); }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) :is(.dialogue-greeting,.row-yura .row-player-subtitles,.row-yura .hero-voice-reserve) { grid-column:1;grid-row:3;min-height:0;margin-top:var(--space-group); }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .row-yura :is(.row-sound,.row-caption-toggle) { grid-row:4; }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .row-yura .row-player-seek { grid-row:5; }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .row-yura .row-player-status { grid-row:6; }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"])>.dialogue-start { grid-row:7; }
+    body[data-seasonal] .dialogue-intro:has([data-player-engaged="true"]) .hero-actions { grid-row:8; }
+  }
+}
+@supports(height:100svh) {
+  @media(max-width:760px) {
+    body[data-direction="tokyo"][data-version="3"][data-seasonal] { --row-screen-height:100svh; }
+  }
+}
 body[data-seasonal] .row-lot dd { overflow-wrap:anywhere; }
 @media(hover:hover) and (pointer:fine) {
   body[data-seasonal] .row-sound:hover { opacity:1; }

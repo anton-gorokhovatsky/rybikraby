@@ -21,7 +21,7 @@
     };
     const question=text=>`<p class="cp-question">${prose(text)}</p>`;
     const paragraph=(text,style='cp-copy')=>`<p class="${style}">${prose(text)}</p>`;
-    const voice=(key,text)=>`<div class="cp-voice">${paragraph(text,'cp-voice-answer')}${player(key)}</div>`;
+    const voice=(key,text)=>`<div class="cp-voice${['caviar-choice','with-yakov'].includes(key)?' cp-voice-secondary':''}">${paragraph(text,'cp-voice-answer')}${player(key)}</div>`;
     // Supplementary footage remains here in full. Its short, visible note lets
     // a reader follow the story without walking through another tall player.
     const videoNote=(key,label,description)=>{
@@ -31,12 +31,13 @@
       const duration=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
       const date=original.querySelector('[data-player-caption]').textContent.replace(/^Архив · /,'');
       const isoDate=date.split('.').reverse().join('-');
-      return `<details class="cp-video-note${original.classList.contains('row-player-round')?' cp-video-note-round':''}">
-        <summary><span class="cp-video-note-copy"><span class="cp-video-note-title">${prose(label)}</span><span class="cp-video-note-description">${prose(description)}</span><span class="cp-video-note-meta"><time datetime="${isoDate}">${date}</time><span>${duration}</span></span><span class="cp-video-note-action"><span class="cp-note-closed">Открыть видео</span><span class="cp-note-open">Свернуть видео</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></span></span><img class="cp-video-note-poster" src="${video.getAttribute('poster')}" width="${video.getAttribute('width')}" height="${video.getAttribute('height')}" loading="lazy" alt=""></summary>
+      const preview=key==='urchin'?'assets/dialogue/urchin-preview.jpg':video.getAttribute('poster');
+      return `<details class="cp-video-note${original.classList.contains('row-player-round')?' cp-video-note-round':''}" data-story="${key}">
+        <summary><span class="cp-video-note-copy"><span class="cp-video-note-title">${prose(label)}</span><span class="cp-video-note-description">${prose(description)}</span><span class="cp-video-note-meta"><time datetime="${isoDate}">${date}</time><span>${duration}</span></span><span class="cp-video-note-action"><span class="cp-note-closed">Открыть видео</span><span class="cp-note-open">Свернуть видео</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></span></span><img class="cp-video-note-poster" src="${preview}" width="${video.getAttribute('width')}" height="${video.getAttribute('height')}" loading="lazy" alt=""></summary>
         <div class="cp-video-note-body">${player(key)}</div>
       </details>`;
     };
-    const reference=(url,label)=>`<a class="row-reference" href="${url}" target="_blank" rel="noopener"><span class="row-link-label">${prose(label)}</span><span aria-hidden="true">↗</span></a>`;
+    const reference=(url,label,accessible='')=>`<a class="row-reference" href="${url}" target="_blank" rel="noopener"${accessible?` aria-label="${accessible}"`:''}><span class="row-link-label">${prose(label)}</span><span aria-hidden="true">↗</span></a>`;
     const hero=root.querySelector('.row-hero').outerHTML;
     const header=root.querySelector('.row-header').outerHTML;
     const lots=root.querySelector('.row-lots').outerHTML;
@@ -105,6 +106,18 @@
           <div class="cp-crab-reply">
             ${question('А что ещё к столу?')}
             ${paragraph('Крупные куски — к столу. Опилио — в салат.','cp-answer')}
+            <div class="cp-crab-comparison" role="group" aria-label="Два вида крабового мяса — архивные кадры">
+              <figure class="cp-crab-detail cp-crab-phalanges">
+                <figcaption>Фаланги</figcaption>
+                <a class="cp-crab-photo" href="assets/dialogue/crab-detail.jpg" target="_blank" rel="noopener" aria-label="Рассмотреть фаланги краба в полном кадре"><img src="assets/dialogue/crab-detail.jpg" width="720" height="1280" alt="Крупные красно-белые фаланги краба в прозрачном лотке; архивная запись Юры." loading="lazy"></a>
+                ${reference('https://t.me/ikrabov/57','11.11.2024','Фаланги: оригинал архивного видео от 11 ноября 2024')}
+              </figure>
+              <figure class="cp-crab-detail cp-crab-opilio">
+                <figcaption>Опилио</figcaption>
+                <a class="cp-crab-photo" href="assets/dialogue/crab-table-detail.jpg" target="_blank" rel="noopener" aria-label="Рассмотреть исходный кадр с мясом опилио"><img src="assets/dialogue/crab-table-detail.jpg" width="720" height="1280" alt="Лоток светлого салатного мяса опилио в руках Юры; фрагмент июньской истории." loading="lazy"></a>
+                ${reference('https://t.me/Yuraikra/s/777','09.06.2026','Опилио: оригинал архивной истории от 9 июня 2026')}
+              </figure>
+            </div>
           </div>
           <div class="cp-crab-tasting">
             ${paragraph('Для салата Юра предлагает мясо опилио — уже без панциря. В этой июньской записи 2026-го показывает его рядом с фалангами.','cp-product-answer')}
