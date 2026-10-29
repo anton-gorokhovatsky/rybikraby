@@ -247,6 +247,38 @@ body[data-seasonal] .cp-work-after-table { margin:var(--space-topic) 0 0; }
    speech area, keeping CC and the seek control steady when the voice changes.
    The original figure and controls keep their DOM ownership on every width. */
 .hero-voice-reserve { display:none; }
+.hero-caption-history { display:none; }
+@media(min-width:761px) {
+  body[data-seasonal] .row-hero:has([data-player-engaged="true"]) {
+    --row-hero-title-room:calc(var(--row-screen-height) - var(--row-menu-height,64px) - 2 * var(--row-menu-inset,16px) - var(--row-hero-top-height) - var(--row-hero-pad-top) - var(--row-hero-pad-bottom) - var(--row-hero-row-gap) - var(--row-circle-size) - var(--hero-player-ui,156px));
+  }
+  body[data-seasonal] .row-yura .row-player-meta {
+    display:grid;grid-template-columns:var(--row-circle-size) minmax(0,560px);
+    gap:0 40px;width:var(--row-content-width);align-items:first baseline;justify-content:start;
+  }
+  body[data-seasonal] .row-yura [data-player-engaged="true"] .row-player-meta { row-gap:var(--space-inline); }
+  body[data-seasonal] .row-yura .row-player-meta>.row-reference { grid-area:1/1; }
+  body[data-seasonal] .row-yura .row-player-meta>.row-caption-toggle { grid-area:2/1; }
+  body[data-seasonal] .row-yura .row-player-subtitles {
+    display:block;grid-area:2/2;width:100%;max-width:none;min-height:0;margin:0;align-self:first baseline;
+  }
+  body[data-seasonal] .row-yura .row-player-subtitles:empty::before { content:'\00a0';visibility:hidden; }
+  body[data-seasonal] .row-yura .hero-voice-reserve:not([hidden]) {
+    display:grid;grid-area:2/2;width:100%;font-size:var(--type-subtitle);line-height:1.45;
+    text-wrap:pretty;visibility:hidden;pointer-events:none;align-self:first baseline;
+  }
+  body[data-seasonal] .row-yura .hero-caption-history:not([hidden]) {
+    display:flex;flex-direction:column;justify-content:flex-end;grid-area:1/2;
+    height:2.9em;overflow:hidden;font-size:var(--type-subtitle);line-height:1.45;align-self:end;
+    color:color-mix(in srgb,var(--season-hero-text) 80%,var(--season-display));
+    mask-image:linear-gradient(transparent,#000 35%);
+  }
+  .hero-caption-previous { flex:none;opacity:.5;white-space:normal;text-wrap:pretty; }
+  @container hero-layout (42rem <= width < 70rem) {
+    body[data-seasonal] .row-yura [data-player-engaged="true"] { padding-bottom:calc(44px + var(--space-group)); }
+  }
+}
+.hero-voice-reserve>span { grid-area:1/1; }
 @media(max-width:760px) {
   body[data-seasonal] .row-hero { --row-hero-pad-bottom:max(24px,env(safe-area-inset-bottom)); }
   body[data-seasonal] .dialogue-intro { grid-template-rows:auto auto auto auto auto auto auto;row-gap:0;margin-top:0; }
@@ -272,7 +304,6 @@ body[data-seasonal] .cp-work-after-table { margin:var(--space-topic) 0 0; }
   body[data-seasonal] .dialogue-intro .row-yura .row-player-subtitles { display:block;grid-column:2;grid-row:1/3;align-self:start;width:100%;min-height:calc(var(--row-circle-size) + var(--space-inline) + 44px);margin:0;visibility:hidden; }
   body[data-seasonal] .dialogue-intro .dialogue-greeting { display:block;grid-column:2;grid-row:1/3;align-self:start;min-width:0;min-height:calc(var(--row-circle-size) + var(--space-inline) + 44px); }
   body[data-seasonal] .row-yura [data-player-engaged="true"] .hero-voice-reserve:not([hidden]) { display:grid;grid-column:2;grid-row:1/3;align-self:start;width:100%;margin:0;font-size:var(--type-subtitle);line-height:1.45;text-wrap:pretty;visibility:hidden;pointer-events:none; }
-  .hero-voice-reserve>span { grid-area:1/1; }
   body[data-seasonal] .row-hero[data-hero-voice="captions"] .dialogue-greeting { visibility:hidden; }
   body[data-seasonal] .row-hero[data-hero-voice="captions"] .row-player-subtitles { visibility:visible; }
   body[data-seasonal] .dialogue-intro>.dialogue-start { grid-column:1/-1;grid-row:6;justify-self:start;margin-top:var(--space-group); }

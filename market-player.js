@@ -34,13 +34,57 @@
     const captionState = captionButton && captionButton.querySelector('[data-caption-state]');
     const originalCaptionLabel = captionButton && captionButton.getAttribute('aria-label');
     const subtitleText = player.querySelector('[data-subtitles]');
+    const metadata = player.querySelector('.row-player-meta');
     const voiceReserve = hero && greeting ? document.createElement('div') : null;
+    const captionHistory = hero && greeting ? document.createElement('div') : null;
+    const previousCaption = captionHistory ? document.createElement('span') : null;
+    let captionAnimation = null;
+    let visibleCueKey = '';
+    let visibleCueText = '';
+    let visibleCueTime = 0;
     if(voiceReserve) {
       voiceReserve.className = 'hero-voice-reserve';
       voiceReserve.setAttribute('aria-hidden', 'true');
       voiceReserve.hidden = true;
-      player.append(voiceReserve);
+      captionHistory.className = 'hero-caption-history';
+      captionHistory.setAttribute('aria-hidden', 'true');
+      captionHistory.hidden = true;
+      previousCaption.className = 'hero-caption-previous';
+      captionHistory.append(previousCaption);
+      metadata.append(captionHistory, subtitleText, voiceReserve);
     }
+
+    const clearCaptionHistory = () => {
+      if(captionAnimation) captionAnimation.cancel();
+      captionAnimation = null;
+      visibleCueKey = '';
+      visibleCueText = '';
+      if(previousCaption) previousCaption.textContent = '';
+    };
+    const updateCaptionHistory = (key, text, available) => {
+      if(!previousCaption) return;
+      if(!available || video.seeking || video.currentTime < visibleCueTime) {
+        clearCaptionHistory();
+      } else if(key !== visibleCueKey && visibleCueText && text !== visibleCueText) {
+        if(captionAnimation) captionAnimation.cancel();
+        previousCaption.textContent = visibleCueText;
+        if(!video.paused) {
+          const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+          const rise = getComputedStyle(hero).getPropertyValue('--space-inline').trim();
+          captionAnimation = previousCaption.animate([
+            {transform:reduced ? 'none' : `translateY(${rise})`, opacity:.8},
+            {transform:'none', opacity:.5}
+          ], {duration:reduced ? 125 : 180, easing:getComputedStyle(hero).getPropertyValue('--ease').trim()});
+        }
+      }
+      if(video.paused && captionAnimation) {
+        captionAnimation.cancel();
+        captionAnimation = null;
+      }
+      visibleCueKey = available ? key : '';
+      visibleCueText = available ? text : '';
+      visibleCueTime = video.currentTime;
+    };
 
     let captionsEnabled = true;
     let trackAvailable = Boolean(track && captionButton && subtitleText);
@@ -70,15 +114,18 @@
       failedMediaSources.clear();
     };
     const activeCaption = () => {
-      if(!trackAvailable || !track) return '';
+      if(!trackAvailable || !track) return {text:'', key:''};
       const position = Number(video.currentTime) || 0;
-      return rowTypograph([...(track.activeCues || [])]
-        .filter(cue => cue.startTime <= position && position < cue.endTime)
-        .map(cue => cue.text).join(' ').replace(/\s+/g,' '));
+      const cues = [...(track.activeCues || [])]
+        .filter(cue => cue.startTime <= position && position < cue.endTime);
+      return {
+        text:rowTypograph(cues.map(cue => cue.text).join(' ').replace(/\s+/g,' ')),
+        key:cues.map(cue => `${cue.startTime}:${cue.endTime}:${cue.text}`).join('|')
+      };
     };
     const render = () => {
       const state = phase();
-      const text = activeCaption();
+      const {text, key} = activeCaption();
       if(text && engaged && video.currentTime > 0 && state !== 'ended' && state !== 'error') {
         hasCaptionSession = true;
       }
@@ -98,12 +145,14 @@
         greeting.setAttribute('aria-hidden', String(heroCaption));
       }
       if(subtitleText) {
-        subtitleText.textContent = captionVisible ? text : '';
+        updateCaptionHistory(key, text, Boolean(hero && !narrowHero.matches && engaged && captionVisible));
+        const visibleText = captionVisible ? text : '';
+        if(subtitleText.textContent !== visibleText) subtitleText.textContent = visibleText;
         subtitleText.hidden = !captionVisible;
         subtitleText.setAttribute('aria-hidden', String(!captionVisible));
       }
       if(voiceReserve) {
-        const reserveTexts = contextual && engaged && track ?
+        const reserveTexts = engaged && track ?
           [...(track.cues || [])].map(cue => rowTypograph(cue.text.replace(/\s+/g,' '))) : [];
         const children = [...voiceReserve.children];
         if(children.length !== reserveTexts.length || reserveTexts.some((value, index) => children[index].textContent !== value)) {
@@ -114,6 +163,7 @@
           }));
         }
         voiceReserve.hidden = reserveTexts.length === 0;
+        captionHistory.hidden = reserveTexts.length === 0;
       }
       if(captionButton) {
         captionButton.hidden = false;
@@ -270,6 +320,7 @@
     video.addEventListener('loadstart', () => { clearSourceFailure(); render(); });
     seek.addEventListener('input', () => {
       if(!canSeek()) { render(); return; }
+      clearCaptionHistory();
       video.currentTime = Number(seek.value);
       render();
     });
@@ -305,7 +356,9 @@
       buffering = false;
       render();
     });
-    ['timeupdate','volumechange','seeked'].forEach(event => video.addEventListener(event, render));
+    video.addEventListener('seeking', () => { clearCaptionHistory(); render(); });
+    video.addEventListener('seeked', () => { clearCaptionHistory(); render(); });
+    ['timeupdate','volumechange'].forEach(event => video.addEventListener(event, render));
 
     // Closing a note and leaving the hero cancel pending starts as well as play.
     const note = player.closest('.cp-video-note');
@@ -315,7 +368,6 @@
       if(action) action.addEventListener('click', pausePlayback);
       const secondaryControls = [sound, captionButton, seek].filter(Boolean);
       const buttons = player.querySelector('.row-player-buttons');
-      const metadata = player.querySelector('.row-player-meta');
       const syncControlOrder = () => {
         const focused = document.activeElement;
         let sourceMoved = false;
@@ -331,11 +383,11 @@
           }
         } else {
           if(sourceLink.parentNode !== metadata) {
-            metadata.append(sourceLink);
+            metadata.insertBefore(sourceLink, captionHistory);
             sourceMoved = true;
           }
           if(captionButton && captionButton.parentNode !== metadata) {
-            metadata.append(captionButton);
+            metadata.insertBefore(captionButton, captionHistory);
             captionMoved = true;
           }
         }
@@ -358,6 +410,7 @@
         });
       });
       narrowHero.addEventListener('change', () => {
+        clearCaptionHistory();
         if(narrowHero.matches && !engaged && secondaryControls.includes(document.activeElement)) {
           play.focus({preventScroll:true});
         }
@@ -365,6 +418,22 @@
         render();
       });
       syncControlOrder();
+      // The sign uses the actual media/metadata height in its existing screen
+      // budget. Cue wrapping can grow at enlarged text without hiding a line.
+      const core = player.querySelector('.hero-player-core');
+      const picture = player.querySelector('.row-player-picture');
+      if(core && window.ResizeObserver) {
+        const sizeCaptionScene = () => {
+          if(narrowHero.matches) return;
+          const ui = core.getBoundingClientRect().height - picture.getBoundingClientRect().height +
+            metadata.getBoundingClientRect().height + parseFloat(getComputedStyle(player).paddingBottom);
+          hero.style.setProperty('--hero-player-ui', `${Math.ceil(ui)}px`);
+        };
+        const captionSceneSize = new ResizeObserver(sizeCaptionScene);
+        captionSceneSize.observe(core);
+        captionSceneSize.observe(metadata);
+        sizeCaptionScene();
+      }
     }
     video.controls = false;
     controls.hidden = false;
