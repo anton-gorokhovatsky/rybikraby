@@ -155,22 +155,28 @@
     setText('#contact-title', accent.contact);
     setText('.dialogue-footer-order>p', accent.contactCopy);
     setText('.dialogue-footer-link .row-link-label', accent.contactLink);
-    // A small invitation at the very end, not the visitor's main task.
-    const seasons = document.createElement('div');
-    seasons.id = 'seasons';
-    seasons.className = 'season-switcher';
-    seasons.innerHTML = `<p id="season-switcher-label">Заглянуть в другой сезон</p><nav aria-labelledby="season-switcher-label">${[
+    // The same editions have two entrances: the paper edge and the quiet
+    // invitation after reading. Both remain ordinary, shareable page URLs.
+    const editionLinks = (destination, tabs = false) => [
       ['spring','Весна'],['summer','Лето'],['autumn','Осень'],['newyear','Новый год'],['winter','Зима']
     ].map(([value,label]) => {
       const url = new URL(location.href);
       url.searchParams.set('accent',value);
-      url.hash = 'seasons';
-      return `<a href="${url.pathname}${url.search.replace(/&/g,'&amp;')}#seasons"${key === value ? ' aria-current="page"' : ''}>${label}</a>`;
-    }).join('')}</nav>`;
+      return `<a${tabs ? ` class="season-tab" data-edition="${value}"` : ''} href="${url.pathname}${url.search.replace(/&/g,'&amp;')}#${destination}"${key === value ? ' aria-current="page"' : ''}><span>${label}</span></a>`;
+    }).join('');
+    const seasons = document.createElement('div');
+    seasons.id = 'seasons';
+    seasons.className = 'season-switcher';
+    seasons.innerHTML = `<p id="season-switcher-label">Заглянуть в другой сезон</p><nav aria-labelledby="season-switcher-label">${editionLinks('seasons')}</nav>`;
     root.querySelector('.dialogue-footer-meta').after(seasons);
     // Change the entry and the conversation order, never hide the permanent offer.
     if (key === 'newyear') caviar.after(seafood);
     if (accent.first === 'fish') caviar.before(fish);
+    const editions = document.createElement('nav');
+    editions.id = 'editions';
+    editions.className = 'season-editions';
+    editions.setAttribute('aria-label', 'Сезонные редакции');
+    editions.innerHTML = `<div class="season-editions-list">${editionLinks('editions', true)}</div>`;
 
     if (key === 'spring') {
       const art = seasonalLettering.smelt;
@@ -258,6 +264,9 @@
     copy.className = 'cp-voice-copy';
     copy.append(exchange.querySelector('.cp-question'), voice.querySelector('.cp-voice-answer'));
     voice.prepend(copy);
+    // Install the paper edge after every edition has composed its opening.
+    // The scene owns its real surface; the hero and measured menu stay intact.
+    root.querySelector('.row-main>.cp-scene').prepend(editions);
     return page.innerHTML;
   };
 })();

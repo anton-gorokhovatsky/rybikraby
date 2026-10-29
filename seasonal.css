@@ -108,6 +108,35 @@ body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"][data-ov
   body[data-seasonal] .row-hero::before { background:linear-gradient(90deg,color-mix(in srgb,var(--season-deep) 85%,transparent),color-mix(in srgb,var(--season-deep) 45%,transparent)); }
 }
 /* Shared components and materials; only one editorial accent per edition. */
+/* The raised tab is part of the first scene's actual paper, including a dark
+   fish opening. The hero and the independently measured menu keep their size. */
+.season-editions {
+  position:relative;z-index:1;overflow-x:auto;overflow-y:hidden;
+  margin:calc(-1 * var(--cp-scene-gap) - 8px) calc(-1 * var(--row-gutter)) var(--cp-scene-gap);
+  padding-inline:var(--row-gutter);scroll-padding-inline:var(--row-gutter);scroll-margin-top:0;
+  scrollbar-width:thin;scrollbar-color:var(--muted) transparent;
+}
+.season-editions-list { display:flex;align-items:flex-end;gap:.125rem;width:max-content;min-width:100%; }
+.season-tab { --tab-paper:#e7eedf;--tab-ink:#1c3b2f; }
+.season-tab[data-edition="summer"] { --tab-paper:#f8ead8;--tab-ink:#6b301e; }
+.season-tab[data-edition="autumn"] { --tab-paper:#edddc4;--tab-ink:#492b24; }
+.season-tab[data-edition="newyear"] { --tab-paper:#541f31;--tab-ink:#fff1d5; }
+.season-tab[data-edition="winter"] { --tab-paper:#e6eff0;--tab-ink:#1c3d51; }
+body[data-seasonal] .season-tab {
+  display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;
+  min-width:44px;min-height:44px;padding:.625em .5em;border-radius:6px 6px 0 0;
+  background:var(--tab-paper);color:var(--tab-ink);font-size:var(--type-control);line-height:1.4;
+  text-decoration:none;white-space:nowrap;
+}
+body[data-seasonal] .season-tab[aria-current] {
+  min-height:52px;padding-block-start:calc(.625em + 8px);background:var(--paper);color:var(--ink);font-weight:500;
+}
+.season-tab[aria-current]>span { text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em; }
+body[data-seasonal] .season-tab:focus-visible { outline:2px solid currentColor;outline-offset:-4px; }
+.season-tab:active>span { opacity:.65; }
+@media(hover:hover) and (pointer:fine) {
+  .season-tab:hover>span { text-decoration:underline;text-underline-offset:.25em; }
+}
 .season-caviar-note { max-width:46ch; }
 .season-feature { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--cp-layout-gap);align-items:start;margin-bottom:var(--cp-topic-gap); }
 .season-feature-copy { min-width:0; }
