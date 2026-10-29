@@ -2,13 +2,12 @@
 (() => {
   'use strict';
   const navigationType = performance.getEntriesByType('navigation')[0]?.type;
-  const seasonDestination = ['#seasons', '#editions'].includes(location.hash);
-  if (seasonDestination && navigationType !== 'back_forward' && navigationType !== 'reload') {
+  if (location.hash === '#seasons' && !['back_forward', 'reload'].includes(navigationType)) {
     document.documentElement.classList.add('season-restoring');
     addEventListener('load', () => {
-      const destination = document.querySelector(location.hash);
-      destination?.scrollIntoView({block:location.hash === '#seasons' ? 'end' : 'start',behavior:'auto'});
-      destination?.querySelector('[aria-current]')?.focus({preventScroll:true});
+      const end = document.querySelector('#seasons');
+      end?.scrollIntoView({block:'end',behavior:'auto'});
+      end?.querySelector('[aria-current]')?.focus({preventScroll:true});
       requestAnimationFrame(() => document.documentElement.classList.remove('season-restoring'));
     }, {once:true});
   }
@@ -23,21 +22,6 @@
     }
   });
   document.addEventListener('DOMContentLoaded', () => {
-    const editions = document.querySelector('.season-editions');
-    const selected = editions?.querySelector('[aria-current]');
-    const revealEdition = () => {
-      if (!editions || !selected) return;
-      // Only scroll the rail; opening the normal hero must never move the page.
-      const target = editions.contains(document.activeElement) ? document.activeElement.closest('a') || selected : selected;
-      const padding = parseFloat(getComputedStyle(editions).paddingInlineStart);
-      const left = target.offsetLeft - padding;
-      const right = target.offsetLeft + target.offsetWidth + padding;
-      if (left < editions.scrollLeft) editions.scrollLeft = left;
-      else if (right > editions.scrollLeft + editions.clientWidth) editions.scrollLeft = right - editions.clientWidth;
-    };
-    editions?.addEventListener('focusin', revealEdition);
-    document.fonts.ready.then(revealEdition);
-    if (editions) new ResizeObserver(revealEdition).observe(editions);
     const menu = document.querySelector('.row-header');
     const material = [...document.querySelectorAll('.row-player-picture,.fish-use img,.season-photo,.dialogue-start')]
       .filter(element => !element.closest('.row-hero') || element.matches('.dialogue-start'));
@@ -56,5 +40,42 @@
     addEventListener('resize', syncBackdrop);
     document.fonts.ready.then(syncBackdrop);
     syncBackdrop();
+  });
+})();
+
+(() => {
+  'use strict';
+  document.addEventListener('DOMContentLoaded', () => {
+    const hero = document.querySelector('.row-hero');
+    const intro = hero.querySelector('.dialogue-intro');
+    const action = intro.querySelector('.dialogue-start');
+    // Season Artist A: an editorial annotation on the photograph.
+    const editions = [
+      ['spring', 'Весна'], ['summer', 'Лето'], ['autumn', 'Осень'],
+      ['newyear', 'Новый год'], ['winter', 'Зима']
+    ];
+    const current = document.body.dataset.seasonal;
+    const actions = document.createElement('div');
+    actions.className = 'hero-actions';
+    const tabs = document.createElement('nav');
+    tabs.className = 'season-tabs';
+    tabs.setAttribute('aria-label', 'Сезонные истории');
+    tabs.innerHTML = editions.map(([key, name]) => {
+      const url = new URL(location.href);
+      url.searchParams.set('accent', key);
+      url.hash = 'main';
+      const title = key === 'newyear' ? 'Новогодний стол — Новый год' : name;
+      const mark = key === 'newyear'
+        ? 'M6 21C5 11 9 5 23 3C43 1 72 2 86 5C93 7 95 13 94 22C94 31 89 35 75 37C55 39 26 37 15 34C8 32 5 28 6 21M12 9C28 2 72 1 88 7'
+        : 'M7 24C2 14 14 5 37 3C61 1 90 6 94 18C99 30 80 37 55 37C31 38 10 35 7 24M10 11C25 2 72 1 90 10';
+      return `<a href="${url.pathname}${url.search.replace(/&/g, '&amp;')}#main" data-edition="${key}" aria-label="${title}"${key === current ? ' aria-current="page"' : ''}>
+        <span class="season-tab-time">${name.replace('Новый год', 'Новый\u00a0год')}</span>
+        <svg class="season-current-mark" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="${mark}"/></svg>
+      </a>`;
+    }).join('');
+    action.before(actions);
+    actions.append(action, tabs);
+    // Old shared #editions links now lead to the opening scene.
+    hero.id = 'editions';
   });
 })();

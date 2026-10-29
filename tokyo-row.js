@@ -16,12 +16,13 @@ function tokyoRow({products, contactUrl}) {
     return `<span class="row-lettering" style="--lettering-width:${art.inkWidth/1000}"><span class="row-readable">${text}</span><svg viewBox="${art.inkLeft} 0 ${art.inkWidth} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
   };
   const arrow = '<span aria-hidden="true">↗</span>';
+  const captionsRevision = '2774629a2f5c';
   const player = ({id, label, src, poster, source, date, duration, round=false, captions=''}) => `
     <figure class="row-player ${round?'row-player-round':''}" data-market-player data-duration="${duration}">
       <div class="row-player-picture">
         <video id="${id}" controls playsinline preload="none" poster="assets/${poster}" width="${round?400:720}" height="${round?400:1280}" aria-label="${label}">
           <source src="assets/${src}" type="video/mp4">
-          ${captions?`<track kind="captions" src="assets/${captions}" srclang="ru" label="Русский, автоматические субтитры" default>`:''}
+          ${captions?`<track kind="captions" src="assets/${captions}?v=${captionsRevision}" srclang="ru" label="Русский, с редакторской правкой" default>`:''}
           <a href="${source}">Посмотреть видео в Telegram</a>
         </video>
       </div>
@@ -40,7 +41,7 @@ function tokyoRow({products, contactUrl}) {
         <input class="row-player-seek" type="range" min="0" max="${duration}" step="0.1" value="0" aria-label="Позиция: ${label}" aria-controls="${id}" disabled>
         <p class="row-player-status" role="status" aria-live="polite"></p>
       </div>
-      <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span class="row-link-label" data-player-caption>Архив · ${date}</span>${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Субтитры: ${label}" aria-description="Автоматическая расшифровка" aria-controls="${id}-captions" aria-pressed="true" hidden><span class="row-caption-label">Субтитры</span><span class="row-caption-state" data-caption-state aria-hidden="true">вкл.</span></button>`:''}</figcaption>
+      <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span class="row-link-label" data-player-caption>Архив · ${date}</span>${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Субтитры: ${label}" aria-description="Автоматическая расшифровка с редакторской правкой" aria-controls="${id}-captions" aria-pressed="true" hidden><span class="row-caption-label">Субтитры</span><span class="row-caption-state" data-caption-state aria-hidden="true">вкл.</span></button>`:''}</figcaption>
       ${captions?`<p class="row-player-subtitles" id="${id}-captions" data-subtitles aria-live="off" hidden></p>`:''}
     </figure>`;
   const stories = {

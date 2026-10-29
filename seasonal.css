@@ -108,35 +108,6 @@ body[data-seasonal][data-menu="glass"] .row-header[data-surface="paper"][data-ov
   body[data-seasonal] .row-hero::before { background:linear-gradient(90deg,color-mix(in srgb,var(--season-deep) 85%,transparent),color-mix(in srgb,var(--season-deep) 45%,transparent)); }
 }
 /* Shared components and materials; only one editorial accent per edition. */
-/* The raised tab is part of the first scene's actual paper, including a dark
-   fish opening. The hero and the independently measured menu keep their size. */
-.season-editions {
-  position:relative;z-index:1;overflow-x:auto;overflow-y:hidden;
-  margin:calc(-1 * var(--cp-scene-gap) - 8px) calc(-1 * var(--row-gutter)) var(--cp-scene-gap);
-  padding-inline:var(--row-gutter);scroll-padding-inline:var(--row-gutter);scroll-margin-top:0;
-  scrollbar-width:thin;scrollbar-color:var(--muted) transparent;
-}
-.season-editions-list { display:flex;align-items:flex-end;gap:.125rem;width:max-content;min-width:100%; }
-.season-tab { --tab-paper:#e7eedf;--tab-ink:#1c3b2f; }
-.season-tab[data-edition="summer"] { --tab-paper:#f8ead8;--tab-ink:#6b301e; }
-.season-tab[data-edition="autumn"] { --tab-paper:#edddc4;--tab-ink:#492b24; }
-.season-tab[data-edition="newyear"] { --tab-paper:#541f31;--tab-ink:#fff1d5; }
-.season-tab[data-edition="winter"] { --tab-paper:#e6eff0;--tab-ink:#1c3d51; }
-body[data-seasonal] .season-tab {
-  display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;
-  min-width:44px;min-height:44px;padding:.625em .5em;border-radius:6px 6px 0 0;
-  background:var(--tab-paper);color:var(--tab-ink);font-size:var(--type-control);line-height:1.4;
-  text-decoration:none;white-space:nowrap;
-}
-body[data-seasonal] .season-tab[aria-current] {
-  min-height:52px;padding-block-start:calc(.625em + 8px);background:var(--paper);color:var(--ink);font-weight:500;
-}
-.season-tab[aria-current]>span { text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.25em; }
-body[data-seasonal] .season-tab:focus-visible { outline:2px solid currentColor;outline-offset:-4px; }
-.season-tab:active>span { opacity:.65; }
-@media(hover:hover) and (pointer:fine) {
-  .season-tab:hover>span { text-decoration:underline;text-underline-offset:.25em; }
-}
 .season-caviar-note { max-width:46ch; }
 .season-feature { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--cp-layout-gap);align-items:start;margin-bottom:var(--cp-topic-gap); }
 .season-feature-copy { min-width:0; }
@@ -162,4 +133,85 @@ body[data-seasonal="summer"] .cp-caviar-conversation { grid-template-columns:min
   .season-photo { justify-self:start;width:min(100%,320px); }
   .season-photo img { object-position:top left; }
   .season-summer-opening .cp-caviar-product { justify-self:start; }
+}
+
+/* Season Artist A — one editorial ink mark, five visible destinations.
+   The photograph stays continuous; the selected season receives a contour. */
+.hero-actions { display:contents; }
+body[data-seasonal] .season-tabs {
+  position:absolute;right:var(--row-gutter);bottom:var(--row-hero-pad-bottom);z-index:5;
+  display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:baseline;
+  gap:0 .5rem;width:max-content;max-width:calc(100% - 2 * var(--row-gutter));
+  margin:0;padding:0;color:var(--season-hero-text);
+  text-shadow:0 1px 7px color-mix(in srgb,var(--season-deep) 90%,transparent);
+}
+body[data-seasonal] .season-tabs::before {
+  content:"";position:absolute;z-index:-1;inset:-1rem -1.5rem;
+  background:radial-gradient(ellipse,color-mix(in srgb,var(--season-deep) 34%,transparent),transparent 72%);
+  pointer-events:none;
+}
+body[data-seasonal] .season-tabs a {
+  position:relative;display:flex;align-items:center;justify-content:center;
+  min-width:44px;min-height:44px;padding:.5rem .25rem;
+  color:inherit;font-size:var(--type-control);font-weight:400;line-height:1.25;
+  text-decoration:none;white-space:nowrap;
+}
+.season-tab-time { position:relative;z-index:1; }
+.season-current-mark {
+  position:absolute;left:-3px;top:2px;width:calc(100% + 6px);height:calc(100% - 4px);
+  fill:none;stroke:currentColor;stroke-width:1.3;overflow:visible;
+  transform:rotate(-5deg);opacity:0;pointer-events:none;
+}
+.season-current-mark path { vector-effect:non-scaling-stroke; }
+body[data-seasonal] .season-tabs a[aria-current] { color:var(--season-display); }
+.season-tabs a[aria-current] .season-current-mark { opacity:1; }
+/* The long label needs room inside the ellipse at both outer letters. */
+.season-tabs a[data-edition="newyear"] .season-current-mark { left:-.6em;width:calc(100% + 1.2em);transform:rotate(-1deg); }
+body[data-seasonal] .season-tabs a:focus-visible {
+  outline:2px solid currentColor;outline-offset:4px;border-radius:2px;
+}
+@media(hover:hover) and (pointer:fine) {
+  body[data-seasonal] .season-tabs a:not([aria-current]):hover { color:var(--season-display); }
+}
+.season-tabs a:active .season-tab-time { opacity:.65; }
+@media(max-width:760px) {
+  body[data-seasonal] .row-hero { --row-hero-pad-bottom:var(--space-inline); }
+  body[data-seasonal] .row-hero-content { row-gap:var(--space-copy); }
+  .hero-actions { display:grid;grid-column:1/-1;grid-template-columns:minmax(0,1fr);gap:8px; }
+  body[data-seasonal] .hero-actions .dialogue-start { grid-column:1;grid-row:auto;justify-self:start;width:fit-content;max-width:100%; }
+  body[data-seasonal] .hero-actions .season-tabs {
+    position:relative;inset:auto;justify-self:end;justify-content:flex-end;
+    width:max-content;max-width:100%;column-gap:.5rem;
+  }
+  body[data-seasonal] .season-tabs a { padding-inline:0;font-size:var(--type-control); }
+  .season-current-mark { left:-5px;width:calc(100% + 10px); }
+}
+@media(max-width:360px) {
+  body[data-seasonal] .row-hero { --row-hero-pad-bottom:8px; }
+  body[data-seasonal] .row-hero-content { row-gap:8px; }
+  body[data-seasonal] .dialogue-intro { row-gap:var(--space-inline); }
+}
+/* At 320px the annotation borrows 12px from each outer photograph field.
+   The text and 44px targets keep their size; the oval keeps its 8px gap. */
+@media(max-width:340px) {
+  body[data-seasonal] .hero-actions .season-tabs {
+    max-width:calc(100% + 24px);margin-inline:-12px;
+  }
+}
+/* The short side column keeps the accepted voice rhythm. */
+@container hero-intro (14rem <= width < 19rem) {
+  body[data-seasonal] .dialogue-intro .dialogue-greeting>p+p { margin-top:var(--space-inline);line-height:1.35; }
+}
+@container hero-intro (width < 14rem) {
+  .hero-actions { grid-row:3; }
+}
+/* Enlarged text is allowed to reflow the five links, with no clipped words. */
+@media(min-width:761px) {
+  @container hero-intro (width < 42rem) {
+    .hero-actions { display:grid;grid-column:2;grid-template-columns:minmax(0,1fr);gap:var(--space-copy); }
+    body[data-seasonal] .hero-actions .dialogue-start { grid-column:1; }
+    body[data-seasonal] .hero-actions .season-tabs {
+      position:relative;inset:auto;justify-self:end;width:max-content;max-width:100%;
+    }
+  }
 }

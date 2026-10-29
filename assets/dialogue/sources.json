@@ -15,7 +15,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
   },
   {
     "key": "caviar-choice",
@@ -39,7 +39,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
   },
   {
     "key": "caviar-tasting",
@@ -57,7 +57,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete personal story downloaded with Telegram Web A; H.264 web copy, full original AAC audio, no cuts",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked",
     "poster_frame": {
       "time_seconds": 3,
       "source_video": "dialogue/caviar-tasting.mp4",
@@ -81,7 +81,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
   },
   {
     "key": "fish-work",
@@ -99,7 +99,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
   },
   {
     "key": "fish-cutting",
@@ -135,7 +135,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete personal story downloaded with Telegram Web A; H.264 web copy, full original AAC audio, no cuts",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked",
     "poster_frame": {
       "time_seconds": 22,
       "source_video": "dialogue/crab-table.mp4",
@@ -159,7 +159,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete personal story downloaded with Telegram Web A; H.264 web copy, full original AAC audio, no cuts",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked",
     "poster_frame": {
       "time_seconds": 21,
       "source_video": "dialogue/scallop.mp4",
@@ -183,7 +183,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked",
     "poster_frame": {
       "time_seconds": 22,
       "source_video": "dialogue/urchin.mp4",
@@ -207,7 +207,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
   },
   {
     "key": "with-yakov",
@@ -225,7 +225,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
   },
   {
     "key": "counter",
@@ -243,7 +243,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Automatic Russian transcription, editorial corrections, not manually audio verified",
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked",
     "poster_frame": {
       "time_seconds": 7,
       "source_video": "dialogue/counter.mp4",
