@@ -428,21 +428,26 @@ html.season-restoring { scroll-behavior:auto!important; }
    semantic rows reflow into labelled pairs, preserving the reading size. */
 body[data-seasonal] .cp-caviar .row-lots { display:block;width:min(100%,70rem);container:caviar-guide / inline-size;scroll-margin-top:calc(var(--row-menu-height) + var(--space-group)); }
 .caviar-table { width:100%;border-collapse:collapse;table-layout:fixed; }
-.caviar-kind-col { width:23%; }
-.caviar-grain-col { width:19%; }
-.caviar-color-col { width:17%; }
-.caviar-flavor-col { width:20%; }
-.caviar-serving-col { width:21%; }
+.caviar-kind-col { width:31%; }
+.caviar-grain-col { width:18%; }
+.caviar-color-col { width:15%; }
+.caviar-flavor-col { width:18%; }
+.caviar-serving-col { width:18%; }
 .caviar-table :is(th,td) { text-align:left;vertical-align:top;font-weight:400;padding:0 var(--space-group) 0 0; }
 .caviar-table :is(th,td):last-child { padding-right:0; }
 .caviar-table thead th { padding-bottom:var(--space-copy);font-size:var(--type-caption);line-height:1.4;color:var(--muted); }
 body[data-seasonal] .cp-caviar .row-lot { display:table-row; }
 .caviar-table tbody :is(th,td) { padding-top:var(--space-copy);padding-bottom:var(--space-group); }
 .caviar-table td { font-size:var(--type-body);line-height:1.4;overflow-wrap:anywhere; }
-body[data-seasonal] .row-lot-identity { display:block;width:100%;min-width:0; }
-body[data-seasonal] .cp-caviar .row-lot h3 { margin:-.06em 0 0;font-size:3.25rem; }
-body[data-seasonal] .row-lot-fish-wrap { position:relative;width:min(100%,15rem);height:5.5rem;margin-top:var(--space-inline); }
+/* Keep the fish and its name in one tier, as in the narrower guide. The
+   first column can then identify a row without setting a poster's height. */
+body[data-seasonal] .row-lot-identity { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:var(--space-copy);width:100%;min-width:0; }
+body[data-seasonal] .cp-caviar .row-lot h3 { grid-column:2;grid-row:1;margin:-.06em 0 0;font-size:3.25rem; }
+body[data-seasonal] .row-lot-fish-wrap { position:relative;grid-column:1;grid-row:1;width:100%;height:4rem;margin:0; }
 body[data-seasonal] .row-lot-fish { position:absolute;top:50%;display:block;max-width:none;width:calc(100% * var(--fish-scale));height:auto;margin-left:var(--fish-inset);transform:translateY(-50%) scaleX(-1); }
+@container caviar-guide (width >= 64rem) {
+  body[data-seasonal] .cp-caviar .row-lot h3 { font-size:2.5rem; }
+}
 .row-lot-cell-label { display:none; }
 /* The note and its source stack share their first real text baseline.
    cp-source used to be a single vertically centred link; this is a group. */
@@ -450,14 +455,16 @@ body[data-seasonal] .caviar-sources { display:flex;flex-wrap:wrap;align-items:fi
 .caviar-sources p { flex:1 1 30ch;max-width:66ch;min-width:0;margin:0;color:var(--muted);font-size:var(--type-caption);line-height:1.5; }
 .caviar-source-links { flex:1 1 32ch;min-width:0;display:flex;flex-wrap:wrap;gap:var(--space-inline) var(--space-group);align-items:first baseline;margin:0; }
 body[data-seasonal] .caviar-source-links .row-reference { margin:0;font-size:var(--type-caption);line-height:1.5; }
-@container caviar-guide (width < 58rem) {
+/* Below this width the four property columns cannot keep their real word
+   groups at reading size. Reflow the same rows instead of squeezing them. */
+@container caviar-guide (width < 64rem) {
   .caviar-table,.caviar-table tbody { display:block; }
   .caviar-table colgroup { display:none; }
   .caviar-table thead { position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%); }
   body[data-seasonal] .cp-caviar .row-lot { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-copy) var(--space-group);padding-bottom:var(--space-layout); }
   .caviar-table tbody :is(th,td) { display:block;padding:0; }
   .caviar-table tbody th { grid-column:1/-1; }
-  body[data-seasonal] .row-lot-identity { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:var(--space-group);width:100%; }
+  body[data-seasonal] .row-lot-identity { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:var(--space-group);width:min(100%,30rem); }
   body[data-seasonal] .row-lot-identity h3 { grid-column:2;grid-row:1;font-size:2.75rem; }
   body[data-seasonal] .row-lot-fish-wrap { grid-column:1;grid-row:1;width:min(100%,14rem);height:4rem;margin:0; }
   .row-lot-cell-label { display:block;margin-bottom:.2em;font-size:var(--type-caption);line-height:1.4;color:var(--muted); }
