@@ -15,7 +15,7 @@
     "audio": true,
     "decode_to_end": true,
     "method": "Complete public channel original, unchanged file",
-    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified; unclear speech marked"
+    "transcript_status": "Russian transcript edited and proofread on 2026-10-29; compared with two independent local ASR transcriptions of the original audio; not manually audio verified. Final phrase clarified by the site owner on 2026-10-30: скоро выйдем к вам с предложением."
   },
   {
     "key": "caviar-choice",

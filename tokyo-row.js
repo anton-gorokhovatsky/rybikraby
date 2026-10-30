@@ -16,7 +16,7 @@ function tokyoRow({products, contactUrl}) {
     return `<span class="row-lettering" style="--lettering-width:${art.inkWidth/1000}"><span class="row-readable">${text}</span><svg viewBox="${art.inkLeft} 0 ${art.inkWidth} 1000" aria-hidden="true" focusable="false"><path d="${art.path}" fill="currentColor"/></svg></span>`;
   };
   const arrow = '<span aria-hidden="true">↗</span>';
-  const captionsRevision = '2774629a2f5c';
+  const captionsRevision = '9602818efe50';
   const player = ({id, label, src, poster, source, date, duration, round=false, captions=''}) => `
     <figure class="row-player ${round?'row-player-round':''}" data-market-player data-duration="${duration}">
       <div class="row-player-picture">

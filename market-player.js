@@ -51,7 +51,7 @@
       captionHistory.hidden = true;
       previousCaption.className = 'hero-caption-previous';
       captionHistory.append(previousCaption);
-      metadata.append(captionHistory, subtitleText, voiceReserve);
+      metadata.append(status, captionHistory, subtitleText, voiceReserve);
     }
 
     const clearCaptionHistory = () => {
@@ -383,11 +383,11 @@
           }
         } else {
           if(sourceLink.parentNode !== metadata) {
-            metadata.insertBefore(sourceLink, captionHistory);
+            metadata.insertBefore(sourceLink, status);
             sourceMoved = true;
           }
           if(captionButton && captionButton.parentNode !== metadata) {
-            metadata.insertBefore(captionButton, captionHistory);
+            metadata.insertBefore(captionButton, status);
             captionMoved = true;
           }
         }
@@ -418,22 +418,6 @@
         render();
       });
       syncControlOrder();
-      // The sign uses the actual media/metadata height in its existing screen
-      // budget. Cue wrapping can grow at enlarged text without hiding a line.
-      const core = player.querySelector('.hero-player-core');
-      const picture = player.querySelector('.row-player-picture');
-      if(core && window.ResizeObserver) {
-        const sizeCaptionScene = () => {
-          if(narrowHero.matches) return;
-          const ui = core.getBoundingClientRect().height - picture.getBoundingClientRect().height +
-            metadata.getBoundingClientRect().height + parseFloat(getComputedStyle(player).paddingBottom);
-          hero.style.setProperty('--hero-player-ui', `${Math.ceil(ui)}px`);
-        };
-        const captionSceneSize = new ResizeObserver(sizeCaptionScene);
-        captionSceneSize.observe(core);
-        captionSceneSize.observe(metadata);
-        sizeCaptionScene();
-      }
     }
     video.controls = false;
     controls.hidden = false;
