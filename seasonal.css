@@ -9,12 +9,21 @@ body[data-seasonal="spring"] {
   --season-night:#182e24;--season-night-ink:#e7eedc;--season-night-muted:#bbcab0;
 }
 body[data-seasonal="summer"] {
-  --season-paper:#f8ead8;--season-ink:#6b301e;--season-muted:#79533f;
-  --season-line:#ba8d70;--season-soft:#efd9bb;
-  --season-deep:#84351f;--season-on-deep:#fff0d9;--season-muted-deep:#edc5a7;
-  --season-highlight:#ffe09b;--season-on-highlight:#6b301e;
-  --season-display:#ffe29e;--season-hero-text:#fff3df;
-  --season-night:#44271e;--season-night-ink:#ffecd2;--season-night-muted:#dcbaa1;
+  --season-paper:#f4f2d8;
+  --season-ink:#174d48;
+  --season-muted:#486c61;
+  --season-line:#8caa92;
+  --season-soft:#e5e9bd;
+  --season-deep:#24686a;
+  --season-on-deep:#f7f5d9;
+  --season-muted-deep:#dce8ce;
+  --season-highlight:#f6df77;
+  --season-on-highlight:#174d48;
+  --season-display:#f7e79b;
+  --season-hero-text:#faf8e5;
+  --season-night:#153f42;
+  --season-night-ink:#f1f2d8;
+  --season-night-muted:#c4d8bd;
 }
 body[data-seasonal="autumn"] {
   --season-paper:#edddc4;--season-ink:#492b24;--season-muted:#745549;
@@ -209,5 +218,20 @@ body[data-seasonal] .season-tabs a:focus-visible {
     body[data-seasonal] .hero-actions .season-tabs {
       position:relative;inset:auto;justify-self:end;width:max-content;max-width:100%;
     }
+  }
+}
+
+/* Summer: a neutral photographic veil keeps the real caviar orange. */
+body[data-seasonal="summer"] .row-hero::before {
+  background:linear-gradient(90deg,
+    rgb(41 44 37 / calc(var(--market-light-left,.83) * .9)),
+    rgb(41 44 37 / calc(var(--market-light-middle,.36) * .9)) 63%,
+    rgb(41 44 37 / calc(var(--market-light-right,.68) * .9)));
+}
+@media(max-width:760px) {
+  body[data-seasonal="summer"] .row-hero::before {
+    background:linear-gradient(90deg,
+      rgb(41 44 37 / calc(var(--market-light-left,.83) * .92)),
+      rgb(41 44 37 / calc(var(--market-light-right,.68) * .7)));
   }
 }
