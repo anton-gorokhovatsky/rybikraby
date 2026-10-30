@@ -8,9 +8,9 @@
   const accents = {
     autumn: {
       start: 'Икру к выходным?', first: 'caviar',
-      caviar: 'Икра к обычному завтраку.',
+      caviar: 'Икра к завтраку.',
       caviarCopy: 'На хлеб с маслом, к блинам или просто ложкой. Начнём с того, какой вкус тебе нравится.',
-      choice: 'А какую взять?', fish: 'А рыбу к ужину?', crab: 'А краба — к выходным?',
+      choice: 'А какую взять?', fish: 'А рыбу к ужину?', crab: 'А как подать краба?',
       contact: 'Что к столу?',
       contactCopy: 'Напиши, что хочется к столу, на сколько человек и к какому дню. С Юрой обсудите наличие, фасовку, цену и получение.',
       contactLink: 'Написать Юре'
@@ -45,8 +45,8 @@
     },
     summer: {
       start: 'Что за первая нерка?', first: 'caviar',
-      caviar: 'Первую нерку начинаем с пробы.',
-      caviarCopy: 'Первая проба, ради которой ждут начала сезона. Рядом — июньская запись Юры: соль, зерно и открытая банка.',
+      caviar: 'Сначала — проба новой икры нерки.',
+      caviarCopy: '',
       choice: 'А если я не разбираюсь?', fish: 'А рыбу на огонь?', crab: 'А что ещё для общего стола?',
       contact: 'Что пробуем?',
       contactCopy: 'Спроси Юру о новой партии или расскажи, что хочется приготовить. Наличие, фасовку, цену и получение обсудите в Telegram.',
@@ -87,7 +87,7 @@
     },
     newyear: {
       title: 'Проголодаться от разговора.',
-      body: 'В чеховской «Сирене» секретарь рассказывает о селёдке, кулебяке и стерляди. Председатель портит лист за листом, слушатели не выдерживают и уезжают обедать. Еды ещё нет перед глазами, а разговор уже сделал своё дело. Хорошо, когда рядом есть человек, который умеет так рассказывать о вкусе.',
+      body: 'В чеховской «Сирене» секретарь рассказывает о селёдке, кулебяке и стерляди. Председатель портит лист за листом, слушатели не выдерживают и уезжают обедать. Еды ещё нет перед глазами, а разговор уже сделал своё дело.',
       source: 'Чехов, «Сирена»',
       url: 'https://ru.wikisource.org/wiki/Сирена_(Чехов)'
     }
@@ -145,10 +145,12 @@
     start.href = `#${accent.first}`;
     start.innerHTML = `<span aria-hidden="true">↓</span><span class="dialogue-action-label">${text(accent.start)}</span>`;
     setText('.cp-caviar-copy>.cp-answer', accent.caviar);
-    const note = document.createElement('p');
-    note.className = 'cp-copy season-caviar-note';
-    note.textContent = text(accent.caviarCopy);
-    caviar.querySelector('.cp-caviar-copy>.cp-answer').after(note);
+    if (accent.caviarCopy) {
+      const note = document.createElement('p');
+      note.className = 'cp-copy season-caviar-note';
+      note.textContent = text(accent.caviarCopy);
+      caviar.querySelector('.cp-caviar-copy>.cp-answer').after(note);
+    }
     setText('.cp-caviar .cp-exchange>.cp-question', accent.choice);
     setText('.cp-fish-reply>.cp-question', accent.fish);
     setText('.cp-crab-reply>.cp-question', accent.crab);
@@ -173,6 +175,7 @@
     if (accent.first === 'fish') caviar.before(fish);
 
     if (key === 'spring') {
+      setText('.cp-fish-reply>.cp-answer', 'Сёмгу — пожарить или посолить.');
       const art = seasonalLettering.smelt;
       const feature = document.createElement('div');
       feature.className = 'season-feature';
@@ -215,11 +218,62 @@
     uses.id = 'salmon-uses';
     uses.setAttribute('role', 'group');
     uses.setAttribute('aria-label', 'Одна сёмга — три способа приготовления');
+    const servingDrawings = {
+    steaks: {
+      width:551,height:682,
+      back:`
+        <!-- The fish is a high raw pile. A wide, shallow oval pan supports
+             its lower half; no contour tries to frame the whole photograph. -->
+        <path d="M-24 406 C-9 326 100 262 252 259 C411 250 550 309 573 408 C600 514 514 628 353 669 C193 710 37 660 -11 556 C-31 512 -32 455 -24 406Z"/>
+        <path class="serving-secondary" d="M-8 411 C12 340 115 284 254 281 C402 272 532 329 551 414 C573 505 494 607 347 646 C199 684 54 638 10 547 C-8 509 -15 456 -8 411Z"/>
+        <path d="M-26 452 C-32 515 -13 582 39 628 C105 689 221 718 351 691 C490 663 575 577 579 479"/>
+        <path class="serving-handle-long" d="M-24 414 C-37 392 -47 369 -53 349 L-113 221 C-120 206 -116 190 -103 184 C-89 177 -75 185 -68 200 L-9 329 C-1 347 8 361 20 370"/>
+        <path class="serving-handle-long serving-secondary" d="M-98 205 C-104 208 -104 214 -101 222 L-89 248 C-85 256 -79 259 -74 256 C-69 253 -70 247 -73 240 L-85 214 C-88 207 -93 202 -98 205Z"/>
+        <path class="serving-handle-short" d="M-13 395 L-17 151 C-24 133 -25 57 -19 33 C-16 18 -3 9 10 11 C27 13 35 26 33 43 L22 148 L16 365"/>
+        <path class="serving-handle-short serving-secondary" d="M5 34 C-1 33 -5 39 -5 47 L-5 71 C-5 80 -2 86 4 87 C10 87 14 81 14 73 L16 48 C17 40 12 34 5 34Z"/>
+        <path class="serving-secondary" d="M-16 382 C-7 377 1 374 10 374 M-18 396 C-8 391 1 388 10 389"/>
+      `
+    },
+    fillets: {
+      width:547,height:1349,
+      back:`
+        <path d="M277 -6 C393 -9 480 76 517 223 C548 347 553 507 548 680 C551 867 538 1068 494 1208 C456 1324 380 1374 273 1371 C153 1378 72 1320 33 1192 C-3 1074 -10 887 -7 690 C-10 502 -1 314 29 184 C59 59 149 -12 277 -6"/>
+        <path class="serving-secondary" d="M124 66 C76 111 57 179 46 253 M31 891 C36 1010 46 1110 71 1190 C105 1293 167 1343 270 1344 C373 1351 442 1298 475 1198 C506 1101 519 966 522 837"/>
+        <!-- A small preparation group at the open end of the dish:
+             a pinch of coarse salt, three peppercorns and one dill sprig. -->
+        <g class="serving-dill">
+          <path d="M10 231 C28 188 47 143 89 55"/>
+          <path d="M27 192 C19 176 14 162 11 151 M37 169 C26 152 22 136 20 123 M49 141 C40 124 37 108 38 96 M61 116 C57 98 59 82 63 72 M73 91 C75 72 82 57 91 46"/>
+          <path d="M30 184 C41 180 51 172 58 163 M42 155 C54 151 64 143 72 134 M54 129 C67 124 79 116 86 105 M66 104 C79 98 89 90 96 81"/>
+          <path class="serving-secondary" d="M11 151 l-7 -5 M11 151 l-1 -11 M20 123 l-8 -5 M20 123 l-1 -11 M38 96 l-7 -6 M38 96 l2 -11 M63 72 l-6 -8 M63 72 l7 -9 M91 46 l-1 -9 M91 46 l8 -6 M58 163 l9 -3 M58 163 l3 -9 M72 134 l10 -2 M72 134 l4 -8 M86 105 l10 -3 M86 105 l3 -9 M96 81 l9 -3 M96 81 l3 -9"/>
+        </g>
+        <g class="serving-salt">
+          <path class="serving-salt-grain" d="M25 164 l8 -3 5 6 -4 7 -9 -2Z M39 157 l7 -4 7 5 -2 8 -9 1Z M41 173 l8 -5 6 7 -4 8 -8 -1Z M56 162 l6 -4 6 5 -2 7 -7 1Z M27 181 l6 -3 6 5 -3 7 -8 -1Z M55 185 l6 -3 5 5 -4 7 -6 -2Z"/>
+          <path d="M23 151 l2 -3 M45 194 l2 -2 M66 179 l2 -3 M17 177 l2 -2"/>
+        </g>
+        <g class="serving-pepper">
+          <path d="M112 59 C118 57 122 61 121 67 C120 73 114 75 109 72 C104 68 106 61 112 59Z M130 82 C136 82 139 87 136 92 C133 98 125 97 122 92 C120 87 124 82 130 82Z M110 95 C117 93 121 98 120 104 C118 111 111 113 106 109 C101 105 103 97 110 95Z"/>
+          <path class="serving-secondary" d="M111 63 l3 5 M126 88 l5 2 M108 100 l5 6"/>
+        </g>
+      `
+    },
+    broth: {
+      width:631,height:729,
+      back:`
+        <path d="M317 -2 C437 -5 540 56 589 169 C633 269 639 417 608 531 C573 661 471 735 330 746 C192 755 86 706 36 595 C-9 494 -6 342 23 227 C59 78 164 -5 317 -2"/>
+        <path class="serving-secondary" d="M122 70 C173 38 238 18 316 20 C429 16 523 77 567 180"/>
+        <path d="M28 213 C7 203 -14 204 -19 220 C-23 237 -20 270 -10 283 C-3 293 9 291 17 285 M591 172 C614 162 636 165 644 183 C652 200 655 228 647 240 C641 248 631 250 624 247"/>
+        <path class="serving-secondary" d="M11 226 C-1 221 -7 223 -8 234 L-5 263 C-4 274 3 277 13 273 M602 184 C618 178 626 181 630 191 L636 219 C639 231 634 237 625 236"/>
+        <path d="M9 421 C10 530 26 644 78 706 C130 766 229 782 329 779 C438 779 536 742 583 679 C614 638 628 559 631 462"/>
+      `
+    }
+  };
+
     uses.innerHTML = [
       ['steaks', 'Пожарить', 'Стейки сёмги, извлечённые из фотографии Юры', 551, 682],
       ['broth', 'Сварить', 'Голова и обрезь сёмги для бульона', 631, 729],
       ['fillets', 'Посолить', 'Два куска филе сёмги из той же фотографии', 547, 1349]
-    ].map(([part, label, alt, width, height]) => `<figure class="fish-use fish-use-${part}"><figcaption>${label}</figcaption><a href="assets/fish-${part}.png" target="_blank" rel="noopener" aria-label="${label}: рассмотреть рыбу в полном размере"><img src="assets/fish-${part}.png" width="${width}" height="${height}" alt="${alt}" loading="lazy"></a></figure>`).join('') + `<div class="fish-uses-source">${link('https://t.me/Yuraikra', 'Из истории Юры · 14.01.2025')}</div>`;
+    ].map(([part, label, alt, width, height]) => `<figure class="fish-use fish-use-${part}"><figcaption>${label}</figcaption><a href="assets/fish-${part}.png" target="_blank" rel="noopener" aria-label="${label}: рассмотреть рыбу в полном размере"><svg class="serving-drawing serving-drawing-${part}" viewBox="0 0 ${servingDrawings[part].width} ${servingDrawings[part].height}" aria-hidden="true" focusable="false">${servingDrawings[part].back}</svg><img src="assets/fish-${part}.png" width="${width}" height="${height}" alt="${alt}" loading="lazy"></a></figure>`).join('') + `<div class="fish-uses-source">${link('https://t.me/Yuraikra', 'Из истории Юры · 14.01.2025')}</div>`;
     fishPicture.replaceWith(uses);
     const cooking = cookingReadings[key];
     const story = document.createElement('aside');

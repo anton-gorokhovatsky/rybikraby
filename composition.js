@@ -49,7 +49,7 @@
           ${title('caviar')}
           ${paragraph('Начнём со вкуса.','cp-answer')}
           ${lots}
-          <a class="row-reference cp-source" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">О различиях — в канале</span> <span aria-hidden="true">↗</span></a>
+          <a class="row-reference cp-source" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">Разбор Юры · 02.06.2026</span> <span aria-hidden="true">↗</span></a>
         </div>
         <div class="cp-caviar-conversation">
           <div class="cp-exchange">

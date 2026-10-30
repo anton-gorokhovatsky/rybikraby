@@ -3,9 +3,11 @@
   const params = new URLSearchParams(location.search);
   const lightMode = params.get('light') || 'auto';
   const products = [
-    {id:'nerka', name:'Нерка', grain:'Мелкое', flavor:'Выразительный, с лёгкой горчинкой'},
-    {id:'gorbusha', name:'Горбуша', grain:'Среднее', flavor:'Классический, без выраженной горчинки'},
-    {id:'keta', name:'Кета', grain:'Крупное', flavor:'Нежный, со сливочным оттенком'}
+    {id:'nerka', name:'Нерка', grain:'Мелкое, ярко-красное', flavor:'Выразительный, с лёгкой горчинкой', illustration:'caviar-guide/nerka-marine.fa2c9611d564.webp', imageScale:1.068206, imageInset:-3.200420, imageWidth:640, imageHeight:242},
+    {id:'gorbusha', name:'Горбуша', grain:'Среднее', flavor:'Классический, без выраженной горчинки', illustration:'caviar-guide/gorbusha-marine.a484b665ad76.webp', imageScale:1.054226, imageInset:-2.179692, imageWidth:640, imageHeight:256},
+    {id:'keta', name:'Кета', grain:'Крупное, янтарно-оранжевое', flavor:'Нежный, со сливочным оттенком', illustration:'caviar-guide/keta-marine.9cdc9fa4a945.webp', imageScale:1.037017, imageInset:-1.427816, imageWidth:640, imageHeight:261},
+    {id:'coho', name:'Кижуч', grain:'Размер в посте не указан', flavor:'В посте не описан', note:'Насыщенный', noteLabel:'Цвет', illustration:'caviar-guide/coho-marine.7812cd64a738.webp', imageScale:1.041408, imageInset:-1.604555, imageWidth:640, imageHeight:248},
+    {id:'trout', name:'Форель', grain:'Очень мелкое, с плотной оболочкой', flavor:'Насыщенный рыбный', note:'Для украшения блюд', noteLabel:'Подача', illustration:'caviar-guide/trout-marine.cd2059605638.webp', imageScale:1.040975, imageInset:-1.348548, imageWidth:640, imageHeight:249}
   ];
   const contactUrl = 'https://t.me/Yuraikra';
   Object.assign(document.body.dataset,{direction:'tokyo',version:'3',type:'oks',menu:'glass',dialogue:''});

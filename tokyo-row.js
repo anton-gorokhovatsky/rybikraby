@@ -84,8 +84,12 @@ function tokyoRow({products, contactUrl}) {
       <section class="row-caviar dialogue-caviar" id="caviar" tabindex="-1" aria-labelledby="caviar-title">
         <div class="row-section-heading"><h2 id="caviar-title">${lettering('caviar','Красная икра')}</h2><a class="row-reference" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">О различиях — в канале</span> ${arrow}</a></div>
         <p class="dialogue-question">Начнём со вкуса.</p>
-        <div class="row-lots">
-          ${products.map(p=>`<article class="row-lot"><h3>${lettering(p.id,p.name)}</h3><dl><div><dt class="row-readable">Зерно</dt><dd>${p.grain} зерно</dd></div><div><dt class="row-readable">Вкус</dt><dd>${p.flavor}</dd></div></dl></article>`).join('')}
+        <div class="row-lots" id="caviar-guide">
+          <table class="caviar-table" role="table" aria-labelledby="caviar-title">
+            <colgroup><col class="caviar-kind-col"><col class="caviar-grain-col"><col class="caviar-flavor-col"></colgroup>
+            <thead><tr><th scope="col">Рыба</th><th scope="col">Зерно</th><th scope="col">Вкус</th></tr></thead>
+            <tbody>${products.map(p=>`<tr class="row-lot"><th scope="row"><div class="row-lot-identity"><h3>${lettering(p.id,p.name)}</h3><div class="row-lot-fish-wrap" style="--fish-scale:${p.imageScale||1};--fish-inset:${p.imageInset||0}%"><img class="row-lot-fish" src="assets/${p.illustration}" width="${p.imageWidth}" height="${p.imageHeight}" loading="lazy" alt=""></div></div></th><td><span class="row-lot-cell-label" aria-hidden="true">Зерно</span><p>${p.grain}</p>${p.noteLabel==='Цвет'?`<p class="row-lot-note"><span>${p.noteLabel}</span>${p.note}</p>`:''}</td><td><span class="row-lot-cell-label" aria-hidden="true">Вкус</span><p>${p.flavor}</p>${p.noteLabel==='Подача'?`<p class="row-lot-note"><span>${p.noteLabel}</span>${p.note}</p>`:''}</td></tr>`).join('')}</tbody>
+          </table>
         </div>
         <div class="dialogue-stories">${story('caviar-choice')}${story('caviar-tasting')}</div>
         <div class="dialogue-turn"><a class="dialogue-reply" href="#fish">А рыбу к ужину? <span aria-hidden="true">↓</span></a></div>

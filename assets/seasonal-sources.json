@@ -34,7 +34,7 @@
     "lifecycle": "Осень, предпраздничный Новый год, зима после праздников, весенняя корюшка и первая летняя нерка — разные редакционные поводы. Новый год не обозначает всю зиму. Перед актуальным включением проверяются материал, партия и условия; архив не становится новым поступлением."
   },
   "autumn": {
-    "basis": "Икра к выходным и обычному столу; не эксклюзив осени. Осень выбирает этот акцент, но не ограничивает продажу.",
+    "basis": "Икра к завтраку и выходным; способы подачи, не норма частоты покупки и не эксклюзив осени.",
     "source": "https://t.me/ikrabov/186",
     "published": "2026-05-31",
     "use": "Способы подачи: хлеб с маслом, блины, ложка. Новые связки — редакторский текст, не цитаты.",
@@ -73,7 +73,12 @@
       "fish-broth.png"
     ],
     "captions": "Live HTML text: Пожарить, Посолить, Сварить.",
-    "prompt": "Локальная запись редакторской обработки сохранена; в публичный пакет не входит."
+    "prompt": "Локальная запись редакторской обработки сохранена; в публичный пакет не входит.",
+    "surroundings": {
+      "approval": "2026-10-30: user approved adding kitchen context and surroundings after seeing the seasonal hand-drawn oval.",
+      "method": "Separate editorial SVG: wide shallow frying pan supporting the lower portion of the raw steaks, dish with a small salt/pepper/dill group, pot around head and trimmings. Original PNGs, crop and scale preserved. Pan SVG uses a 0.88 horizontal projection only in the single-column layout, retaining its full contour and stroke.",
+      "boundary": "Drawn cooking context, not a photograph of prepared dishes or evidence of Yuri’s actual cookware."
+    }
   },
   "yura_stories_2026_10_22": {
     "request": "Прямое поручение пользователя: извлечь характер и истории Юры из реальных материалов, выстроить ритм, сохранить принятый визуальный язык.",
@@ -307,5 +312,56 @@
     ],
     "replaced": "Осенняя вставка о расстегае у Гиляровского заменена по прямой критике пользователя; предыдущая версия сохранена локально в docs/reviews/2026-10-22-literary-scenes/before и в истории Git.",
     "preserved": "Первый экран, Oks/Golos, пять палитр, товарное сравнение, 12 полных видео, выбранный постер, фото сёмги, субтитры, архивные даты и прямое обращение в Telegram."
+  },
+  "caviar_comparison": {
+    "source": "https://t.me/ikrabov/190",
+    "published": "2026-06-02",
+    "checked": "2026-10-30",
+    "use": "Пять равноправных строк: нерка, горбуша, кета, кижуч, форель. Общие оси зерна и вкуса; известный цвет включён в зерно нерки и кеты. Для кижуча неизвестные размер и вкус явно обозначены; указан описанный в посте насыщенный цвет.",
+    "boundary": "Оценочные титулы, заявления об исключительной пользе и редкости не перенесены. Размер и вкус кижуча не дополнены. Описание вида не подтверждает соль, консистенцию или наличие сегодняшней партии.",
+    "illustrations": {
+      "method": "Built-in image_gen: three independently generated silver marine salmon profiles in one editorial drawing style. Proportional 640px sips web derivatives, alpha retained; lossless WebP encoding.",
+      "basis": [
+        "https://www.adfg.alaska.gov/index.cfm?adfg=sockeyesalmon.main",
+        "https://www.adfg.alaska.gov/index.cfm?adfg=pinksalmon.main",
+        "https://www.adfg.alaska.gov/index.cfm?adfg=chumsalmon.main",
+        "https://www.adfg.alaska.gov/index.cfm?adfg=cohosalmon.main",
+        "https://www.adfg.alaska.gov/index.cfm?adfg=steelhead.main"
+      ],
+      "boundary": "Editorial species illustrations, not photographs of Yuri’s fish, a scientific identification key or a scale of fish sizes. Original product photographs and Oks lettering unchanged. The Telegram post does not identify the trout species: rainbow trout is an editorial visual interpretation only.",
+      "assets": [
+        {
+          "species": "nerka",
+          "file": "assets/caviar-guide/nerka-marine.fa2c9611d564.webp",
+          "sha256": "fa2c9611d5643541a4454be52151ed193c72d2aae7fae1146e7af44a62017bfa",
+          "bytes": 100964
+        },
+        {
+          "species": "gorbusha",
+          "file": "assets/caviar-guide/gorbusha-marine.a484b665ad76.webp",
+          "sha256": "a484b665ad7633601168bf6cbbbd417e2252965b8ef363d9ff1cd55d162c5f7e",
+          "bytes": 117678
+        },
+        {
+          "species": "keta",
+          "file": "assets/caviar-guide/keta-marine.9cdc9fa4a945.webp",
+          "sha256": "9cdc9fa4a945b4b9c9506e8f1451a440097270014b7813c9ee15b75262f267f5",
+          "bytes": 106322
+        },
+        {
+          "species": "coho",
+          "file": "assets/caviar-guide/coho-marine.7812cd64a738.webp",
+          "sha256": "7812cd64a738cbd3b57926a7b119bd87a99a85dd633f493d1da3ca4d0fdb9bd7",
+          "bytes": 114014
+        },
+        {
+          "species": "trout",
+          "file": "assets/caviar-guide/trout-marine.cd2059605638.webp",
+          "sha256": "cd2059605638beb4949941194b65a6a94df7b8dd7bc3b7e7f7cd4f4662a4e514",
+          "bytes": 113868
+        }
+      ],
+      "presentation": "All five editorial profiles face right toward the comparison values. CSS reflection only; optical inset recomputed from the reflected alpha>=128 bounding box. Web assets and master pixels unchanged."
+    }
   }
 }
