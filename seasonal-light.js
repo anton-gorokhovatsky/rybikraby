@@ -79,3 +79,37 @@
     hero.id = 'editions';
   });
 })();
+
+/* Run after root market-player setup. Its cached caption/status/reserve refs
+   retain ownership; this moves the same connected nodes into the last row. */
+(() => {
+  const mount = () => {
+    const note = document.querySelector('.cp-video-note[data-story="urchin"]');
+    const article = note?.closest('.group-urchin');
+    const summary = note?.querySelector('summary');
+    const frame = note?.querySelector('.row-caption-frame');
+    if (!article || !summary || !frame) return;
+    const title = summary.querySelector('.cp-video-note-title');
+    const description = summary.querySelector('.cp-video-note-description');
+    const action = summary.querySelector('.cp-video-note-action');
+    const metadata = summary.querySelector('.cp-video-note-meta');
+    const overview = document.createElement('div');
+    overview.className = 'urchin-note-overview';
+    const heading = document.createElement('h3');
+    heading.className = 'urchin-note-heading';
+    heading.id = 'urchin-note-heading';
+    heading.append(title);
+    overview.append(heading, description);
+    article.prepend(overview);
+    frame.classList.add('urchin-caption-field');
+    article.append(frame);
+    article.classList.add('urchin-final-row');
+    action.id = 'urchin-note-action';
+    metadata.id = 'urchin-note-meta';
+    summary.setAttribute('aria-labelledby', `${heading.id} ${action.id}`);
+    summary.setAttribute('aria-describedby', metadata.id);
+    article.setAttribute('aria-labelledby', heading.id);
+  };
+  if (document.readyState === 'complete') mount();
+  else document.addEventListener('DOMContentLoaded', mount, {once:true});
+})();

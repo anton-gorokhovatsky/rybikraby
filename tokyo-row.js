@@ -9,6 +9,13 @@ function rowTypograph(text, allowLongWordWrap=false) {
   return allowLongWordWrap?formatted.replace(/\u00a0(?=\p{L}{10,})/gu,' '):formatted;
 }
 
+const marketPlayerMessages = {
+  mediaError:'Видео не загрузилось. Повторите запуск или откройте архив в Telegram.',
+  playError:'Видео не удалось запустить. Повторите запуск или откройте архив в Telegram.',
+  captionsError:'Субтитры не загрузились. Можно смотреть без них или открыть архив в Telegram.',
+  loading:'Загрузка видео.'
+};
+
 function tokyoRow({products, contactUrl}) {
   const brandStyle = `--row-brand-width:${(oksLettering.fish.inkWidth + 180 + oksLettering.crabs.inkWidth)/1000};--row-brand-line-width:${oksLettering.crabs.inkWidth/1000}`;
   const lettering = (key, text) => {
@@ -17,6 +24,12 @@ function tokyoRow({products, contactUrl}) {
   };
   const arrow = '<span aria-hidden="true">↗</span>';
   const captionsRevision = '9602818efe50';
+  const captionSizing = id => {
+    const texts = typeof captionLayout === 'undefined' ? [] : captionLayout[id]?.texts || [];
+    const escape = value => value.replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+    return texts.map(value => `<span data-reserve-cue>${escape(rowTypograph(value))}</span>`).join('') +
+      Object.values(marketPlayerMessages).map(value => `<span class="caption-feedback-reserve">${escape(value)}</span>`).join('');
+  };
   const player = ({id, label, src, poster, source, date, duration, round=false, captions=''}) => `
     <figure class="row-player ${round?'row-player-round':''}" data-market-player data-duration="${duration}">
       <div class="row-player-picture">
@@ -42,7 +55,7 @@ function tokyoRow({products, contactUrl}) {
         <p class="row-player-status" role="status" aria-live="polite"></p>
       </div>
       <figcaption class="row-player-meta"><a class="row-reference" href="${source}" target="_blank" rel="noopener" aria-label="Архив, оригинал видео в Telegram: ${label}, ${date}"><span class="row-link-label" data-player-caption>Архив · ${date}</span>${arrow}</a>${captions?`<button class="row-caption-toggle" type="button" data-captions aria-label="Субтитры: ${label}" aria-description="Автоматическая расшифровка с редакторской правкой" aria-controls="${id}-captions" aria-pressed="true" hidden><span class="row-caption-label">Субтитры</span><span class="row-caption-state" data-caption-state aria-hidden="true">вкл.</span></button>`:''}</figcaption>
-      ${captions?`<p class="row-player-subtitles" id="${id}-captions" data-subtitles aria-live="off" hidden></p>`:''}
+      ${captions?`<div class="row-caption-frame"><p class="row-player-subtitles" id="${id}-captions" data-subtitles aria-live="off" hidden></p><div class="row-caption-reserve" data-caption-reserve aria-hidden="true">${captionSizing(id)}</div></div>`:''}
     </figure>`;
   const stories = {
     hello:{duration:59.585521,round:true,source:'https://t.me/ikrabov/148',date:'17.10.2025',title:'Рыба, икра и крабы'},
@@ -86,9 +99,9 @@ function tokyoRow({products, contactUrl}) {
         <p class="dialogue-question">Начнём со вкуса.</p>
         <div class="row-lots" id="caviar-guide">
           <table class="caviar-table" role="table" aria-labelledby="caviar-title">
-            <colgroup><col class="caviar-kind-col"><col class="caviar-grain-col"><col class="caviar-flavor-col"></colgroup>
-            <thead><tr><th scope="col">Рыба</th><th scope="col">Зерно</th><th scope="col">Вкус</th></tr></thead>
-            <tbody>${products.map(p=>`<tr class="row-lot"><th scope="row"><div class="row-lot-identity"><h3>${lettering(p.id,p.name)}</h3><div class="row-lot-fish-wrap" style="--fish-scale:${p.imageScale||1};--fish-inset:${p.imageInset||0}%"><img class="row-lot-fish" src="assets/${p.illustration}" width="${p.imageWidth}" height="${p.imageHeight}" loading="lazy" alt=""></div></div></th><td><span class="row-lot-cell-label" aria-hidden="true">Зерно</span><p>${p.grain}</p>${p.noteLabel==='Цвет'?`<p class="row-lot-note"><span>${p.noteLabel}</span>${p.note}</p>`:''}</td><td><span class="row-lot-cell-label" aria-hidden="true">Вкус</span><p>${p.flavor}</p>${p.noteLabel==='Подача'?`<p class="row-lot-note"><span>${p.noteLabel}</span>${p.note}</p>`:''}</td></tr>`).join('')}</tbody>
+            <colgroup><col class="caviar-kind-col"><col class="caviar-grain-col"><col class="caviar-color-col"><col class="caviar-flavor-col"><col class="caviar-serving-col"></colgroup>
+            <thead><tr><th scope="col">Рыба</th><th scope="col">Зерно</th><th scope="col">Цвет</th><th scope="col">Вкус</th><th scope="col">Подача</th></tr></thead>
+            <tbody>${products.map(p=>`<tr class="row-lot"><th scope="row"><div class="row-lot-identity"><h3>${lettering(p.id,p.name)}</h3><div class="row-lot-fish-wrap" style="--fish-scale:${p.imageScale||1};--fish-inset:${p.imageInset||0}%"><img class="row-lot-fish" src="assets/${p.illustration}" width="${p.imageWidth}" height="${p.imageHeight}" loading="lazy" alt=""></div></div></th>${[['grain','Зерно'],['color','Цвет'],['flavor','Вкус'],['serving','Подача']].map(([field,label])=>`<td><span class="row-lot-cell-label" aria-hidden="true">${label}</span><p>${p[field]}</p></td>`).join('')}</tr>`).join('')}</tbody>
           </table>
         </div>
         <div class="dialogue-stories">${story('caviar-choice')}${story('caviar-tasting')}</div>

@@ -35,7 +35,12 @@
     const originalCaptionLabel = captionButton && captionButton.getAttribute('aria-label');
     const subtitleText = player.querySelector('[data-subtitles]');
     const metadata = player.querySelector('.row-player-meta');
-    const voiceReserve = hero && greeting ? document.createElement('div') : null;
+    const captionFrame = player.querySelector('.row-caption-frame');
+    const captionReserve = player.querySelector('[data-caption-reserve]');
+    const preparedCaptionTexts = (typeof captionLayout === 'undefined' ? [] :
+      captionLayout[video.id]?.texts || []).map(value => rowTypograph(value.replace(/\s+/g,' ')));
+    const voiceReserve = hero && greeting ? captionReserve || document.createElement('div') : null;
+    const sharedVoice = () => Boolean(hero && hero.dataset.sharedVoice === 'true');
     const captionHistory = hero && greeting ? document.createElement('div') : null;
     const previousCaption = captionHistory ? document.createElement('span') : null;
     let captionAnimation = null;
@@ -43,7 +48,7 @@
     let visibleCueText = '';
     let visibleCueTime = 0;
     if(voiceReserve) {
-      voiceReserve.className = 'hero-voice-reserve';
+      voiceReserve.classList.add('hero-voice-reserve');
       voiceReserve.setAttribute('aria-hidden', 'true');
       voiceReserve.hidden = true;
       captionHistory.className = 'hero-caption-history';
@@ -52,6 +57,9 @@
       previousCaption.className = 'hero-caption-previous';
       captionHistory.append(previousCaption);
       metadata.append(status, captionHistory, subtitleText, voiceReserve);
+      if(captionFrame && !captionFrame.children.length) captionFrame.remove();
+    } else if(captionFrame) {
+      captionFrame.append(status);
     }
 
     const clearCaptionHistory = () => {
@@ -129,7 +137,7 @@
       if(text && engaged && video.currentTime > 0 && state !== 'ended' && state !== 'error') {
         hasCaptionSession = true;
       }
-      const contextual = Boolean(hero && greeting && narrowHero.matches);
+      const contextual = Boolean(hero && greeting && (narrowHero.matches || sharedVoice()));
       const heroCaption = contextual && captionsEnabled && trackAvailable &&
         hasCaptionSession && state !== 'ended' && state !== 'error';
       const captionVisible = captionsEnabled && trackAvailable &&
@@ -151,19 +159,22 @@
         subtitleText.hidden = !captionVisible;
         subtitleText.setAttribute('aria-hidden', String(!captionVisible));
       }
-      if(voiceReserve) {
-        const reserveTexts = engaged && track ?
+      const reserve = voiceReserve || captionReserve;
+      if(reserve) {
+        const reserveTexts = preparedCaptionTexts.length ? preparedCaptionTexts : track ?
           [...(track.cues || [])].map(cue => rowTypograph(cue.text.replace(/\s+/g,' '))) : [];
-        const children = [...voiceReserve.children];
+        const children = [...reserve.querySelectorAll('[data-reserve-cue]')];
         if(children.length !== reserveTexts.length || reserveTexts.some((value, index) => children[index].textContent !== value)) {
-          voiceReserve.replaceChildren(...reserveTexts.map(value => {
+          children.forEach(child => child.remove());
+          reserve.prepend(...reserveTexts.map(value => {
             const line = document.createElement('span');
+            line.dataset.reserveCue = '';
             line.textContent = value;
             return line;
           }));
         }
-        voiceReserve.hidden = reserveTexts.length === 0;
-        captionHistory.hidden = reserveTexts.length === 0;
+        reserve.hidden = reserveTexts.length === 0;
+        if(captionHistory) captionHistory.hidden = reserveTexts.length === 0;
       }
       if(captionButton) {
         captionButton.hidden = false;
@@ -174,13 +185,15 @@
       }
 
       // A source remains a source while feedback has its own status row.
-      const sourceText = contextual ? 'Архив' : originalCaption;
+      const sourceText = hero && narrowHero.matches ? 'Архив' : originalCaption;
       if(caption.textContent !== sourceText) caption.textContent = sourceText;
       const feedback = [];
-      if(video.error || sourceFailed) feedback.push('Видео не загрузилось. Повторите запуск или откройте архив в Telegram.');
-      else if(playRejected) feedback.push('Видео не удалось запустить. Повторите запуск или откройте архив в Telegram.');
-      else if(state === 'loading') feedback.push('Загрузка видео.');
-      if(captionFailed) feedback.push('Субтитры не загрузились. Видео можно смотреть без них или открыть архив в Telegram.');
+      if(video.error || sourceFailed) feedback.push(marketPlayerMessages.mediaError);
+      else if(playRejected) feedback.push(marketPlayerMessages.playError);
+      else if(captionFailed) feedback.push(marketPlayerMessages.captionsError);
+      // A buffered cue stays readable; loading uses this field only before
+      // there is a current caption, so two messages never overlap.
+      else if(state === 'loading' && !(captionVisible && text)) feedback.push(marketPlayerMessages.loading);
       const feedbackText = feedback.join(' ');
       if(status.textContent !== feedbackText) status.textContent = feedbackText;
 
@@ -392,7 +405,7 @@
           }
         }
         if((sourceMoved && focused === sourceLink) || (captionMoved && focused === captionButton)) {
-          const target = narrowHero.matches && !engaged && focused === captionButton ? play : focused;
+          const target = narrowHero.matches && !sharedVoice() && !engaged && focused === captionButton ? play : focused;
           target.focus({preventScroll:true});
         }
       };
@@ -403,7 +416,7 @@
           const current = document.activeElement;
           const focusWasDropped = !current || current === document.body ||
             current === document.documentElement || current === previous;
-          if(narrowHero.matches && !engaged && focusWasDropped &&
+          if(narrowHero.matches && !sharedVoice() && !engaged && focusWasDropped &&
             getComputedStyle(previous).display === 'none') {
             play.focus({preventScroll:true});
           }
@@ -411,7 +424,7 @@
       });
       narrowHero.addEventListener('change', () => {
         clearCaptionHistory();
-        if(narrowHero.matches && !engaged && secondaryControls.includes(document.activeElement)) {
+        if(narrowHero.matches && !sharedVoice() && !engaged && secondaryControls.includes(document.activeElement)) {
           play.focus({preventScroll:true});
         }
         syncControlOrder();

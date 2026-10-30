@@ -76,8 +76,97 @@
     "prompt": "Локальная запись редакторской обработки сохранена; в публичный пакет не входит.",
     "surroundings": {
       "approval": "2026-10-30: user approved adding kitchen context and surroundings after seeing the seasonal hand-drawn oval.",
-      "method": "Separate editorial SVG: wide shallow frying pan supporting the lower portion of the raw steaks, dish with a small salt/pepper/dill group, pot around head and trimmings. Original PNGs, crop and scale preserved. Pan SVG uses a 0.88 horizontal projection only in the single-column layout, retaining its full contour and stroke.",
-      "boundary": "Drawn cooking context, not a photograph of prepared dishes or evidence of Yuri’s actual cookware."
+      "method": "Built-in image_gen line layers based on inspected real fish-in-pan and stockpot photographs. Transparent line masks inherit the seasonal token. The real source PNGs are unchanged; steaks rotate90 degrees and scale proportionally into a high-angle pan, stockpot carries the raw broth set as a collage. Salt and pepper are a separate editorial SVG; dill regions come from the generated thin ink layer.",
+      "boundary": "Editorial kitchen context, not documentary cookware or a recipe/seasoning dose from Yuri. Photographs used as structural references and complete book spreads remain local research only.",
+      "reference_pages": [
+        "https://cuisiland.ca/products/cuisiland-12-nitrided-cast-iron-frying-pan-large-size-skillet-rust-resistant-naturally-non-stick-removable-beechwood-long-handle-classic-cast-iron-heat-retention",
+        "https://www.cookwarebrands.com.au/products/essteele-per-amore-clad-stainless-steel-induction-2-piece-set",
+        "https://healthyrecipesblogs.com/salmon-steaks-recipe/",
+        "https://www.hachettebookgroup.com/titles/rene-redzepi/the-noma-guide-to-fermentation/9781579657185/?lens=artisan",
+        "https://www.phaidon.com/en-gb/products/bras-the-tastes-of-aubrac"
+      ],
+      "assets": {
+        "pan": {
+          "file": "assets/kitchen/pan.36d5911b7913.webp",
+          "sha256": "36d5911b79132e96b9657cda90616756a5e81778c26d7f5f2b30b1719fe7ad81",
+          "bytes": 243164,
+          "size": [
+            1254,
+            1254
+          ],
+          "method": "Lossless WebP encoding only; decoded RGBA matches the local image_gen master."
+        },
+        "pot": {
+          "file": "assets/kitchen/pot.2c54830a1cb7.webp",
+          "sha256": "2c54830a1cb748cad6bd6925c2f5f9a5855c630f25c61e6ad9386dec7c4ccf55",
+          "bytes": 287062,
+          "size": [
+            1254,
+            1254
+          ],
+          "method": "Lossless WebP encoding only; decoded RGBA matches the local image_gen master."
+        },
+        "dill": {
+          "file": "assets/kitchen/dill.27fe15d89660.webp",
+          "sha256": "27fe15d896601b96d10c0c59ab93ff06d1f9f192269f3fef032d4ca1686c54e6",
+          "bytes": 178864,
+          "size": [
+            800,
+            1967
+          ],
+          "method": "Lossless WebP encoding only; decoded RGBA matches the local image_gen master."
+        },
+        "crystals": {
+          "file": "assets/kitchen/curing-crystals.496269980f9b.svg",
+          "sha256": "496269980f9b22650101f5f5bf6df3e268c780716f516d558020c623e3d2422e",
+          "bytes": 2689,
+          "method": "Separate hand-authored SVG seasoning, original path data unchanged."
+        },
+        "curing_dish": {
+          "file": "assets/kitchen/curing-dish.6020aaca9683.webp",
+          "sha256": "6020aaca968349122f5c3dac98381b561890853fef81e0501461b808bfa4677a",
+          "size": [
+            867,
+            1815
+          ],
+          "bytes": 383640,
+          "method": "Lossless format conversion only; decoded RGBA exactly matches generated master."
+        }
+      },
+      "presentation": "The complete pan composition grows uniformly to125% in a wide fish-scene field; phones retain100%. Original fish files and original-size links are preserved. The user later requested a smaller curing group: it is at most224px wide (about552px tall), with image and seasoning scaled together without cropping.",
+      "curing_dish": {
+        "basis": [
+          {
+            "role": "structural subject",
+            "author": "Natalie Perry",
+            "title": "How to Make Gravlax",
+            "page": "https://www.thepioneerwoman.com/food-cooking/recipes/a99035/how-to-make-gravlax/",
+            "image": "https://hips.hearstapps.com/thepioneerwoman/wp-content/uploads/2018/09/homemade-gravlax-06.jpg?resize=1600%3A%2A",
+            "local": "references/pioneer-gravlax-loaf-pan-after.jpg",
+            "observed": "Actual salmon wrapped for curing inside a normal long rectangular metal pan. Rolled rim, rounded corners, straight sloping walls and a real recessed floor are visible. The illustration uses this ordinary vessel construction; its camera is raised for the existing near-top-down product photograph. This reprojection is an illustration, not a trace claiming identical photographed perspective."
+          },
+          {
+            "role": "same-vessel confirmation",
+            "author": "Natalie Perry",
+            "page": "https://www.thepioneerwoman.com/food-cooking/recipes/a99035/how-to-make-gravlax/",
+            "image": "https://hips.hearstapps.com/thepioneerwoman/wp-content/uploads/2018/09/homemade-gravlax-04.jpg?resize=1600%3A%2A",
+            "local": "references/pioneer-gravlax-loaf-pan.jpg",
+            "observed": "Second real photo of the pan with salmon inside, confirming the walls, corners and rim. The upper pressing pan, hand, film and food are excluded from the illustration."
+          },
+          {
+            "role": "high-angle physical relationship",
+            "title": "My Mom’s Gravlax Recipe",
+            "publisher": "Slipstream Sockeye",
+            "page": "https://slipstreamsockeye.com/blogs/recipes/my-mom-s-gravlax-recipe",
+            "image": "https://slipstreamsockeye.com/cdn/shop/files/IMG_9828.jpg?v=1771869815&width=1800",
+            "local": "references/slipstream-gravlax-pyrex.jpg",
+            "observed": "Real near-top-down photo of two fillets and seasonings inside a rectangular glass Pyrex. Shows the physical relationship between fish, flat floor, rim and low walls. Used to raise the illustration's camera for the accepted product cutout, not to copy its wider dish proportions or ingredients."
+          }
+        ],
+        "method": "Built-in image_gen draws a real long rectangular gravlax pan from primary cooking photographs, with an illustrative higher camera for the original near-top-down fish cutout. Separate token-coloured line mask; original fish and seasoning unchanged.",
+        "presentation": "Outer vessel at most320x670px; food224x552px. Real floor, rolled rim, sloping walls and near end remain visible.",
+        "boundary": "Not a recipe or actual cookware attributed to Yuri. Noma salt-on-plums was not the source for this vessel."
+      }
     }
   },
   "yura_stories_2026_10_22": {
@@ -317,10 +406,10 @@
     "source": "https://t.me/ikrabov/190",
     "published": "2026-06-02",
     "checked": "2026-10-30",
-    "use": "Пять равноправных строк: нерка, горбуша, кета, кижуч, форель. Общие оси зерна и вкуса; известный цвет включён в зерно нерки и кеты. Для кижуча неизвестные размер и вкус явно обозначены; указан описанный в посте насыщенный цвет.",
-    "boundary": "Оценочные титулы, заявления об исключительной пользе и редкости не перенесены. Размер и вкус кижуча не дополнены. Описание вида не подтверждает соль, консистенцию или наличие сегодняшней партии.",
+    "use": "Все пять рыб из поста190 сопоставлены по четырём общим осям: зерно, цвет, вкус, подача. Недостающие общие признаки исследованы по Роскачеству и таблице Управления Роспотребнадзора по Камчатскому краю; идеи подачи редакционные.",
+    "boundary": "Общие свойства видов не подтверждают конкретную партию, посол или наличие. Размер передан относительно этой пятёрки без спорной миллиметровой точности. Способы подачи не исключительны для отдельных видов и не приписаны Юре. Цвет форели дан диапазоном.",
     "illustrations": {
-      "method": "Built-in image_gen: three independently generated silver marine salmon profiles in one editorial drawing style. Proportional 640px sips web derivatives, alpha retained; lossless WebP encoding.",
+      "method": "Built-in image_gen: five independently generated silver marine salmon profiles in one editorial drawing style. Proportional 640px sips web derivatives, alpha retained; lossless WebP encoding.",
       "basis": [
         "https://www.adfg.alaska.gov/index.cfm?adfg=sockeyesalmon.main",
         "https://www.adfg.alaska.gov/index.cfm?adfg=pinksalmon.main",
@@ -362,6 +451,431 @@
         }
       ],
       "presentation": "All five editorial profiles face right toward the comparison values. CSS reflection only; optical inset recomputed from the reflected alpha>=128 bounding box. Web assets and master pixels unchanged."
+    },
+    "field_sources": {
+      "schema": "caviar-field-ledger-v1",
+      "reviewedOn": "2026-10-30",
+      "scope": "Общие признаки пяти видов солёной зернистой икры и редакторские идеи подачи; не свойства измеренных партий Юры.",
+      "facts": [
+        {
+          "fish": "Нерка",
+          "field": "Зерно",
+          "copy": "Мелкое, мягкая оболочка",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Роскачество сопоставляет размер с горбушей; в таблице РПН оболочка мягкая. Миллиметры опущены из-за расхождения справочных значений.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Нерка»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 4 «Нерка», столбец Диаметр (мм); Оболочка икринки. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Нерка",
+          "field": "Цвет",
+          "copy": "Ярко-красный",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/"
+          ],
+          "basis": "Видовой профиль нерки в разделе о различиях икры.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Нерка»."
+            }
+          ]
+        },
+        {
+          "fish": "Нерка",
+          "field": "Вкус",
+          "copy": "Пикантный, с лёгкой горчинкой",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Оба источника указывают горчинку; РПН описывает пикантный вкус, Роскачество — лёгкую степень горчинки.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Нерка»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 4 «Нерка», столбец Вкус; Горчинка. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Нерка",
+          "field": "Подача",
+          "copy": "На белом хлебе со сливочным маслом",
+          "kind": "editorial-serving-idea-directly-supported",
+          "urls": [
+            "https://osetr.com/catalog/section/krasnaya-ikra/ikra_nerki/"
+          ],
+          "basis": "Производитель перечисляет хлеб и масло среди спокойных сочетаний именно для нерки. Из сочетаний выбрано одно, без претензии на исключительность.",
+          "sourceLocations": [
+            {
+              "sourceId": "S3",
+              "location": "«Как выбрать фасовку и подать к столу», абзац о спокойных сочетаниях."
+            }
+          ]
+        },
+        {
+          "fish": "Горбуша",
+          "field": "Зерно",
+          "copy": "Среднее, мягкая оболочка",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "В Роскачестве размер средний; в РПН дана мягкая оболочка. Число 3–5 или около 5 мм в UI не требуется.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Горбуша»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 1 «Горбуша», столбец Диаметр (мм); Оболочка икринки. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Горбуша",
+          "field": "Цвет",
+          "copy": "Ярко-оранжевый",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Оба видовых описания согласуются по оранжевому оттенку.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Горбуша»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 1 «Горбуша», столбец Цвет. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Горбуша",
+          "field": "Вкус",
+          "copy": "Мягкий, без горчинки",
+          "kind": "species-description-editorial-paraphrase",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Нейтральность у Роскачества, универсальный вкус и отсутствие видовой горчинки в РПН переданы коротко. Это не гарантия любой конкретной партии.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Горбуша»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 1 «Горбуша», столбец Вкус; Горчинка. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Горбуша",
+          "field": "Подача",
+          "copy": "На овощных оладьях с творожным сыром",
+          "kind": "editorial-serving-idea-recipe-supported",
+          "urls": [
+            "https://osetr.com/info/retsepty/ovoshchnye-oladi-s-ikroy/"
+          ],
+          "basis": "Собственный рецепт производителя использует овощные оладьи, творожный сыр и красную икру; рядом указан собственный продукт из горбуши. Способ подходит и другим видам.",
+          "sourceLocations": [
+            {
+              "sourceId": "S4",
+              "location": "«Способ приготовления», последнее предложение; связанный товар горбуши ниже рецепта."
+            }
+          ]
+        },
+        {
+          "fish": "Кета",
+          "field": "Зерно",
+          "copy": "Крупное, мягкая оболочка",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Крупный размер в сравнении пяти выбранных видов; оболочка мягкая по РПН. Утверждение о крупнейшей икре всех существующих лососёвых не делается.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Кета»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 3 «Кета», столбец Диаметр (мм); Оболочка икринки. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Кета",
+          "field": "Цвет",
+          "copy": "Янтарно-оранжевый",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/"
+          ],
+          "basis": "Янтарный оранжевый оттенок в видовом профиле кеты; не замер конкретного образца.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Кета»."
+            }
+          ]
+        },
+        {
+          "fish": "Кета",
+          "field": "Вкус",
+          "copy": "Нежный, сливочный",
+          "kind": "species-description",
+          "urls": [
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Оба вкусовых определения даны в строке кеты; в графе горчинки стоит отсутствие.",
+          "sourceLocations": [
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 3 «Кета», столбец Вкус; Горчинка. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Кета",
+          "field": "Подача",
+          "copy": "На блинах",
+          "kind": "editorial-transfer-of-generic-serving",
+          "urls": [
+            "https://osetr.com/catalog/section/krasnaya-ikra/ikra_nerki/"
+          ],
+          "basis": "Блины перечислены производителем среди нейтральных основ для красной икры. Перенос способа в строку кеты — явное редакторское решение, не утверждение источника об исключительном преимуществе кеты.",
+          "sourceLocations": [
+            {
+              "sourceId": "S3",
+              "location": "«Как выбрать фасовку и подать к столу», абзац о спокойных сочетаниях."
+            }
+          ]
+        },
+        {
+          "fish": "Кижуч",
+          "field": "Зерно",
+          "copy": "Мелкое, упругая оболочка",
+          "kind": "species-description-editorial-paraphrase",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Роскачество: зерно мельче горбуши. РПН: средняя жёсткость оболочки; слово «упругая» — редакционная передача отличия от мягких оболочек.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Кижуч»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 5 «Кижуч», столбец Диаметр (мм); Оболочка икринки. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Кижуч",
+          "field": "Цвет",
+          "copy": "Тёмно-красный, бордовый",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Оба источника сходятся на тёмном красном оттенке с бордовым.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Кижуч»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 5 «Кижуч», столбец Цвет. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Кижуч",
+          "field": "Вкус",
+          "copy": "Горьковатый",
+          "kind": "species-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Горчинка прямо отмечена обоими источниками; интенсивность, превосходство и оценка качества не добавлены.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Кижуч»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 5 «Кижуч», столбец Вкус; Горчинка. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Кижуч",
+          "field": "Подача",
+          "copy": "С яйцом",
+          "kind": "editorial-transfer-of-generic-serving",
+          "urls": [
+            "https://osetr.com/catalog/section/krasnaya-ikra/ikra_nerki/"
+          ],
+          "basis": "Яйцо перечислено среди спокойных основ. Распределение этой общей идеи в строку кижуча редакторское; это не видовой факт и не рецепт Юры.",
+          "sourceLocations": [
+            {
+              "sourceId": "S3",
+              "location": "«Как выбрать фасовку и подать к столу», абзац о спокойных сочетаниях."
+            }
+          ]
+        },
+        {
+          "fish": "Форель",
+          "field": "Зерно",
+          "copy": "Очень мелкое, упругая оболочка",
+          "kind": "species-description-editorial-paraphrase",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Роскачество называет икру самой мелкой среди этих видов. Средняя жёсткость оболочки в РПН передана словом «упругая»; обязательная хрусткость не заявляется.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Форель»."
+            },
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 2 «Форель», столбец Диаметр (мм); Оболочка икринки. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Форель",
+          "field": "Цвет",
+          "copy": "От жёлтого до красного",
+          "kind": "species-description-range",
+          "urls": [
+            "https://41.rospotrebnadzor.ru/node/9660"
+          ],
+          "basis": "Таблица задаёт широкий жёлто-красный диапазон. Оранжевый находится внутри него. Один точный цвет для всех партий не выбирался.",
+          "sourceLocations": [
+            {
+              "sourceId": "S2",
+              "location": "Таблица под заголовком «Отличительные черты различных видов красной икры», строка данных 2 «Форель», столбец Цвет. Номер строки добавлен исследователем."
+            }
+          ]
+        },
+        {
+          "fish": "Форель",
+          "field": "Вкус",
+          "copy": "Солоноватый",
+          "kind": "processed-product-description",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/"
+          ],
+          "basis": "Роскачество прямо указывает солёность форелевой икры. Из-за расхождения иных вкусовых описаний обязательная горчинка или яркий рыбный вкус не заявлены. Соль — также свойство посола.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Форель»."
+            }
+          ]
+        },
+        {
+          "fish": "Форель",
+          "field": "Подача",
+          "copy": "На канапе или бутербродах",
+          "kind": "serving-directly-supported",
+          "urls": [
+            "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/"
+          ],
+          "basis": "Оба способа непосредственно названы в видовом описании форели. Не утверждается, что другие виды нельзя подать так же.",
+          "sourceLocations": [
+            {
+              "sourceId": "S1",
+              "location": "Раздел «Горбуша, нерка или кета?», абзац «Форель»."
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": {
+        "S1": {
+          "url": "https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/",
+          "location": "Раздел «Горбуша, нерка или кета?», пять абзацев с названиями видов.",
+          "verbatimFragments": [
+            "Икра кижуча имеет характерный горьковатый вкус.",
+            "Форелевую икру принято подавать на канапе и бутербродах",
+            "икринки липкие и достаточно соленые"
+          ],
+          "verbatimWordCount": 19
+        },
+        "S2": {
+          "url": "https://41.rospotrebnadzor.ru/node/9660",
+          "location": "Единственная таблица под заголовком «Отличительные черты различных видов красной икры». Для ledger строки данных пронумерованы исследователем: 1 горбуша, 2 форель, 3 кета, 4 нерка, 5 кижуч, 6 чавыча. Это не авторские номера таблицы или строк.",
+          "columns": [
+            "Виды рыб",
+            "Диаметр (мм)",
+            "Цвет",
+            "Вкус",
+            "Горчинка",
+            "Оболочка икринки"
+          ],
+          "verbatimFragments": [
+            "мягкая",
+            "средней жесткости",
+            "темно-желтый, ярко-красный",
+            "нежный, сливочный",
+            "пикантный, с горчинкой"
+          ],
+          "verbatimWordCount": 10
+        },
+        "S3": {
+          "url": "https://osetr.com/catalog/section/krasnaya-ikra/ikra_nerki/",
+          "location": "Раздел «Как выбрать фасовку и подать к столу», абзац о спокойных сочетаниях.",
+          "verbatimFragments": [
+            "Для нерки лучше подбирать спокойные сочетания: белый хлеб, блины, сливочное масло, яйцо, мягкие тарталетки или нейтральные закуски."
+          ],
+          "verbatimWordCount": 17
+        },
+        "S4": {
+          "url": "https://osetr.com/info/retsepty/ovoshchnye-oladi-s-ikroy/",
+          "location": "Раздел «Способ приготовления», последнее предложение.",
+          "verbatimFragments": [
+            "На готовые оладьи выкладываем творожный сыр и ложку красной или черной икры."
+          ],
+          "verbatimWordCount": 12
+        }
+      }
     }
   }
 }

@@ -21,6 +21,7 @@ jobs:
       - name: Check JavaScript and prepare the third version
         run: |
           node --check app.js
+          node --check caption-layout.js
           node --check tokyo-row.js
           node --check composition.js
           node --check market-light.js
@@ -34,9 +35,30 @@ jobs:
           python3 - <<'PY'
           import os, shutil, json, hashlib, re
           from pathlib import Path
+          # Canonical VTT owns the words. This generated derivative reserves their
+          # actual wrapping before the first Play and is never maintained by hand.
+          caption_layout = {}
+          for source in sorted(Path('assets/dialogue').glob('*.ru.vtt')):
+              cues = []
+              for block in re.split(r'\n\s*\n', source.read_text().replace('\r', '')):
+                  lines = block.splitlines()
+                  timing = next((i for i, line in enumerate(lines)
+                                 if re.match(r'^\d{2}:\d{2}(?::\d{2})?\.\d{3}\s+-->', line)), None)
+                  if timing is not None:
+                      cues.append(re.sub(r'\s+', ' ', ' '.join(lines[timing + 1:])).strip())
+              assert cues, f'No cues in {source}'
+              caption_layout['story-' + source.name.removesuffix('.ru.vtt')] = {
+                  'source': str(source), 'sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+                  'texts': cues,
+              }
+          Path('caption-layout.js').write_text(
+              '// Generated from canonical VTT by the Pages build; local preview: scripts/prepare-public.py --captions-only.\n'
+              '// Aria-hidden layout text only; native metadata owns timed captions.\n'
+              'const captionLayout = ' + json.dumps(caption_layout, ensure_ascii=False, separators=(',', ':')) + ';\n'
+          )
           output = Path('_site')
           output.mkdir(exist_ok=True)
-          names = ['index.html', 'styles.css', 'tokyo-row.css', 'composition.css', 'app.js', 'tokyo-row.js', 'composition.js', 'market-light.js', 'oks-lettering.js', 'market-player.js', 'seasonal.js', 'seasonal.css', 'interface.css', 'seasonal-light.js', 'season-lettering.js', 'player-refinement.js', 'site-navigation.css', 'site-navigation.js', '.nojekyll']
+          names = ['index.html', 'styles.css', 'tokyo-row.css', 'composition.css', 'app.js', 'caption-layout.js', 'tokyo-row.js', 'composition.js', 'market-light.js', 'oks-lettering.js', 'market-player.js', 'seasonal.js', 'seasonal.css', 'interface.css', 'seasonal-light.js', 'season-lettering.js', 'player-refinement.js', 'site-navigation.css', 'site-navigation.js', '.nojekyll']
           for name in names:
               shutil.copyfile(name, output / name)
           shutil.copytree('assets', output / 'assets', dirs_exist_ok=True)

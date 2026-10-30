@@ -22,8 +22,8 @@
     const question=text=>`<p class="cp-question">${prose(text)}</p>`;
     const paragraph=(text,style='cp-copy')=>`<p class="${style}">${prose(text)}</p>`;
     const voice=(key,text)=>`<div class="cp-voice${['caviar-choice','with-yakov'].includes(key)?' cp-voice-secondary':''}">${paragraph(text,'cp-voice-answer')}${player(key)}</div>`;
-    // Supplementary footage remains here in full. Its short, visible note lets
-    // a reader follow the story without walking through another tall player.
+    // Full supplementary recordings are open on first visit. Their summaries
+    // keep the subject and source meaningful when a visitor collapses one.
     const videoNote=(key,label,description)=>{
       const original=root.querySelector(`#story-${key}`).closest('.row-player');
       const video=original.querySelector('video');
@@ -32,7 +32,7 @@
       const date=original.querySelector('[data-player-caption]').textContent.replace(/^Архив · /,'');
       const isoDate=date.split('.').reverse().join('-');
       const preview=key==='urchin'?'assets/dialogue/urchin-preview.jpg':video.getAttribute('poster');
-      return `<details class="cp-video-note${original.classList.contains('row-player-round')?' cp-video-note-round':''}" data-story="${key}">
+      return `<details class="cp-video-note${original.classList.contains('row-player-round')?' cp-video-note-round':''}" data-story="${key}" open>
         <summary><span class="cp-video-note-copy"><span class="cp-video-note-title">${prose(label)}</span><span class="cp-video-note-description">${prose(description)}</span><span class="cp-video-note-meta"><time datetime="${isoDate}">${date}</time><span>${duration}</span></span><span class="cp-video-note-action"><span class="cp-note-closed">Открыть видео</span><span class="cp-note-open">Свернуть видео</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 10 5 5 5-5"/></svg></span></span><img class="cp-video-note-poster" src="${preview}" width="${video.getAttribute('width')}" height="${video.getAttribute('height')}" loading="lazy" alt=""></summary>
         <div class="cp-video-note-body">${player(key)}</div>
       </details>`;
@@ -49,7 +49,10 @@
           ${title('caviar')}
           ${paragraph('Начнём со вкуса.','cp-answer')}
           ${lots}
-          <a class="row-reference cp-source" href="https://t.me/ikrabov/190" target="_blank" rel="noopener"><span class="row-link-label">Разбор Юры · 02.06.2026</span> <span aria-hidden="true">↗</span></a>
+          <div class="cp-source caviar-sources">
+            <p>Общие свойства видов. Вкус и консистенция зависят от партии и посола. Подача — идеи для стола.</p>
+            <div class="caviar-source-links">${reference('https://t.me/ikrabov/190','Разбор Юры · 02.06.2026')}${reference('https://rskrf.ru/tips/eksperty-obyasnyayut/kak-vybrat-krasnuyu-ikru/','Роскачество')}${reference('https://41.rospotrebnadzor.ru/node/9660','Роспотребнадзор')}${reference('https://osetr.com/catalog/section/krasnaya-ikra/ikra_nerki/','Идеи подачи')}${reference('https://osetr.com/info/retsepty/ovoshchnye-oladi-s-ikroy/','Оладьи с икрой')}</div>
+          </div>
         </div>
         <div class="cp-caviar-conversation">
           <div class="cp-exchange">
